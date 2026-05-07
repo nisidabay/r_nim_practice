@@ -1,2 +1,0 @@
-[START][2025-11-06 23:52:27] LSP logging initiated
-[INFO][2025-11-06 23:52:27] .../lua/vim/lsp.lua:1192	"exit_handler"	{}

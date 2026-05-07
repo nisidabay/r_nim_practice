@@ -1,14 +1,15 @@
 # Binary search function in Nim
-proc binarySearch(arr: seq[int], target: int): int =
+
+proc binarySearch(data: seq[int], target: int): int =
   var left, right: int
   left = 0
-  right = arr.len - 1
+  right = data.len - 1
 
   while left <= right:
     var mid = (left + right) div 2
-    if arr[mid] == target:
+    if data[mid] == target:
       return mid
-    elif arr[mid] < target:
+    elif data[mid] < target:
       left = mid + 1
     else:
       right = mid - 1
@@ -16,11 +17,19 @@ proc binarySearch(arr: seq[int], target: int): int =
   return -1
 
 # Example usage
-var sortedArray = @[1, 3, 5, 7, 9, 11, 13]
-let result = binarySearch(sortedArray, 7)
-echo "Index of 7: " & $result
+var sortedata = @[1, 3, 5, 7, 9, 11, 13]
+let result = binarySearch(sortedata, 7)
 
-# Test with a value not in array
-let result2 = binarySearch(sortedArray, 6)
-echo "Index of 6: " & $result2
+if result != -1:
+  echo "7 found at index: " & $result
+else:
+  echo "Number not found"
+
+# Test with a value not in data
+let result2 = binarySearch(sortedata, 6)
+
+if result2 != -1:
+  echo "6 found at index: " & $result2
+else:
+  echo "Number not found"
 

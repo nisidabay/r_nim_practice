@@ -1,6 +1,0 @@
-# Nim build artifacts
-nimcache/
-*.out
-
-# Compiled binaries
-calc
