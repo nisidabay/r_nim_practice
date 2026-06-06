@@ -1,0 +1,188 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2025-12-28 06:43:19",
+    "topic": "Nim",
+    "body": "Fixing journal"
+  },
+  {
+    "id": 2,
+    "timestamp": "2025-12-29 01:26:18",
+    "topic": "dwm",
+    "body": "Fixing dwm and dwmblocks"
+  },
+  {
+    "id": 3,
+    "timestamp": "2025-12-30 23:13:52",
+    "topic": "Dwm",
+    "body": "Update dwmblocks and scripts"
+  },
+  {
+    "id": 4,
+    "timestamp": "2025-13-02 22:46:36",
+    "topic": "Nim",
+    "body": "Reviewing Nim projects"
+  },
+  {
+    "id": 5,
+    "timestamp": "2025-13-03 07:48:58",
+    "topic": "dwm",
+    "body": "Optimizing .xinitrc"
+  },
+  {
+    "id": 6,
+    "timestamp": "2025-13-03 07:49:42",
+    "topic": "dwm",
+    "body": "Optimizing config.h"
+  },
+  {
+    "id": 7,
+    "timestamp": "2025-13-03 07:50:06",
+    "topic": "system",
+    "body": "Removed rofi scripts"
+  },
+  {
+    "id": 8,
+    "timestamp": "2025-13-03 07:50:40",
+    "topic": "dwm",
+    "body": "Optimized dwm keymaps script"
+  },
+  {
+    "id": 9,
+    "timestamp": "2025-13-03 21:38:35",
+    "topic": "dwm",
+    "body": "applied attachside patch"
+  },
+  {
+    "id": 10,
+    "timestamp": "2025-13-06 22:59:07",
+    "topic": "Neovim",
+    "body": "Create txt2mp3 plugin"
+  },
+  {
+    "id": 11,
+    "timestamp": "2025-13-06 22:59:45",
+    "topic": "Bash",
+    "body": "Create txt2mp3.sh script"
+  },
+  {
+    "id": 12,
+    "timestamp": "2025-13-07 01:37:11",
+    "topic": "Nim",
+    "body": "Reading files"
+  },
+  {
+    "id": 13,
+    "timestamp": "2025-13-07 19:51:42",
+    "topic": "Vim",
+    "body": "Refactor vim_config/"
+  },
+  {
+    "id": 14,
+    "timestamp": "2025-13-13 00:49:36",
+    "topic": "Bash",
+    "body": "Refactoring sh-snippets"
+  },
+  {
+    "id": 15,
+    "timestamp": "2025-13-19 22:44:08",
+    "topic": "Cleaning ~/bin",
+    "body": "Cleaning unused scripts"
+  },
+  {
+    "id": 16,
+    "timestamp": "2026-02-04 23:18:58",
+    "topic": "Awk",
+    "body": "Reviewing Awk"
+  },
+  {
+    "id": 17,
+    "timestamp": "2026-02-11 08:12:24",
+    "topic": "Rust",
+    "body": "Learning Rust with Boris(Udemy)"
+  },
+  {
+    "id": 18,
+    "timestamp": "2026-02-12 16:50:49",
+    "topic": "Vimwiki",
+    "body": "Refactoring Bash"
+  },
+  {
+    "id": 19,
+    "timestamp": "2026-02-12 17:01:48",
+    "topic": "Bash",
+    "body": "Convert emoji_insert.sh to wayland"
+  },
+  {
+    "id": 20,
+    "timestamp": "2026-02-12 17:46:56",
+    "topic": "Bash",
+    "body": "Modify shellcheck_finder.sh"
+  },
+  {
+    "id": 21,
+    "timestamp": "2026-02-17 08:38:57",
+    "topic": "Rust",
+    "body": "Watching Youtube Rust course"
+  },
+  {
+    "id": 22,
+    "timestamp": "2026-02-24 09:56:03",
+    "topic": "Bash",
+    "body": "Create desktop entry script (Bash)"
+  },
+  {
+    "id": 23,
+    "timestamp": "2026-02-27 13:46:26",
+    "topic": "Fix script",
+    "body": "Fix zathura_browse.sh"
+  },
+  {
+    "id": 24,
+    "timestamp": "2026-02-27 13:47:02",
+    "topic": "Fix script",
+    "body": "Fix zathura-keys.sh"
+  },
+  {
+    "id": 25,
+    "timestamp": "2026-02-27 13:47:48",
+    "topic": "Fix script",
+    "body": "Fix txt2mp3.sh"
+  },
+  {
+    "id": 26,
+    "timestamp": "2026-03-14 05:25:19",
+    "topic": "Ruby",
+    "body": "Head-First Ruby"
+  },
+  {
+    "id": 27,
+    "timestamp": "2026-03-25 22:43:47",
+    "topic": "Ruby",
+    "body": "Udemy Ruby Course"
+  },
+  {
+    "id": 28,
+    "timestamp": "2026-04-06 21:52:12",
+    "topic": "dwm",
+    "body": "Refactored/Renamed dmenu_mpv.sh"
+  },
+  {
+    "id": 29,
+    "timestamp": "2026-06-06 01:03:56",
+    "topic": "Algebra",
+    "body": "khanacademy"
+  },
+  {
+    "id": 30,
+    "timestamp": "2026-06-06 01:10:30",
+    "topic": "Ruby",
+    "body": "Add ruby journal"
+  },
+  {
+    "id": 31,
+    "timestamp": "2026-06-06 23:39:41",
+    "topic": "Go",
+    "body": "Udemy Course"
+  }
+]
