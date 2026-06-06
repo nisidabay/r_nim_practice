@@ -59,7 +59,7 @@ group's concepts. Everything here solves an actual problem on a Linux machine.
 
 | Group | Project | What it does |
 |---|---|---|
-| 01 | `todo.nim` | Todo.txt manager — add, list, done, remove |
+| 01 | `todo.nim` | Full CLI todo manager — enums, JSON persistence, at scheduling with sound |
 | 02 | `unitconv.nim` | Unit converter — km/miles, kg/lbs, °C/°F |
 | 03 | `filesize.nim` | Disk usage like `du -sh` for any path |
 | 04 | `stats.nim` | Statistics calculator — mean, median, min, max |
@@ -108,7 +108,7 @@ Quick-lookup files in `reference/`:
 | 04 | Sequences | 3 | 4 | seq[T], slicing, sequtils, enums, tuples |
 | 05 | Strings | 4 | 3 | strutils, format, parsing, regex |
 | 06 | Collections | 3 | 3 | Table, HashSet, CountTable |
-| 07 | Filesystem | 4 | 3 | Files, dirs, walkDir, FFI |
+| 07 | Filesystem | 2 | 3 | Files, dirs, walkDir, FFI |
 | 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
 | 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
