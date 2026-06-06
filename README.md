@@ -113,15 +113,16 @@ Quick-lookup files in `reference/`:
 | 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
 
-## Projects
+## Apps
 
-Standalone Nim CLI tools — each a real, working program.
+Standalone Nim CLI tools — real programs, not exercises.
 
-| Project | Description |
+| App | Description |
 |---|---|
-| `fortune/` | Fortune-like random quote picker — reads a quotes file, picks one via `randomize()` |
-| `journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
-| `nim_nuggets/` | Spaced repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
+| `apps/fortune/` | Fortune-like random quote picker — reads `Computer_Quotes.txt`, picks one via `randomize()` |
+| `apps/journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
+| `apps/nim_nuggets/` | Spaced repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
+| `apps/todo/` | Full CLI todo manager — enums, JSON persistence, `at` scheduling with sound |
 
 ## References
 
