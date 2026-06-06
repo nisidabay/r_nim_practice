@@ -113,6 +113,16 @@ Quick-lookup files in `reference/`:
 | 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
 
+## Projects
+
+Standalone Nim CLI tools — each a real, working program.
+
+| Project | Description |
+|---|---|
+| `fortune/` | Fortune-like random quote picker — reads a quotes file, picks one via `randomize()` |
+| `journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
+| `nim_nuggets/` | Spaced repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
+
 ## References
 
 See [`REFERENCES.md`](REFERENCES.md) for books, official docs, and community resources.

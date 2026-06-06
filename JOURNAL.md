@@ -1,12 +1,12 @@
 # Journal — `r_nim_practice`
 
-> Deep dive snapshot: 2026-06-07. Nim 2.2.6.
+> Final snapshot: 2026-06-07. Nim 2.2.6.
 
 ## Overview
 
-**71 `.nim` files, 12 concept READMEs, 10 exercise Makefiles, 11 project tools.**
-3,578 lines of concept code. 10 progressive groups from zero to async I/O.
-Structure mirrors `r_ruby_practice`: `concept/`, `exercises/`, `project/` per group.
+**75 `.nim` files** across 10 progressive groups (basics → concurrency), plus
+**4 standalone projects** recovered from git history, **2 FFI reference files**,
+and **1 companion data file** (quotes). Total: 3,752 lines of Nim code.
 
 ```
 01_basics           → 3 concept + 2 exercises + 1 project
@@ -19,27 +19,47 @@ Structure mirrors `r_ruby_practice`: `concept/`, `exercises/`, `project/` per gr
 08_error_handling   → 2 concept + 3 exercises + 1 project
 09_type_system      → 4 concept + 3 exercises + 2 projects
 10_concurrency      → 3 concept + 1 exercise  + 1 project
+fortune/            → 1 nim + 1 data file (quotes)
+journal/            → 1 nim + 1 json (activity log)
+nim_nuggets/        → 1 nim + 8 topic files (snippet refresher)
 reference/          → 2 FFI reference files (call C, export to C)
 ```
+
+## Standalone projects (recovered from git history)
+
+### `fortune/quotes.nim` (32 lines)
+Fortune-like random quote picker. Reads `Computer_Quotes.txt` via `sample()`
+from `std/random`. Minimal, single-purpose. Recovered from commit `1e18a77`.
+
+### `journal/nim_journal.nim` (280 lines)
+Full CLI activity journal. fzf integration for browsing/searching entries.
+Colored panels (╭╮╰╯ borders). JSON persistence with atomic writes (`.tmp` →
+move). EDITOR integration for composing entries. Recovered from commit `145d84f`.
+
+### `nim_nuggets/nim_nuggets.nim` (418 lines)
+Spaced repetition snippet refresher. fzf topic browsing with symlink-based
+active topic. Cross-topic search. Weekly rotation reminder. 8 topic files
+with Nim-specific snippets (os, strutils, tables, terminal, times, sequences,
+set, code). Recovered from commit `b509c73`.
 
 ## Top 10 files by size
 
 | Lines | File | What |
 |--------|------|------|
 | 458 | `01_basics/project/todo.nim` | Full CLI w/ enums, JSON persistence, at scheduling, sound |
+| 418 | `nim_nuggets/nim_nuggets.nim` | Snippet refresher with fzf, search, weekly reminders |
 | 350 | `07_filesystem/project/usb_mounter.nim` | Interactive TUI, mount/unmount USB, filesystem detection |
 | 302 | `07_filesystem/project/usb_tui.nim` | Companion TUI for USB mounter |
+| 280 | `journal/nim_journal.nim` | Activity journal: add/search/delete via fzf |
 | 208 | `09_type_system/project/banking.nim` | Banking app: ref objects, SHA1 auth, in-memory DB |
 | 170 | `05_strings/project/password.nim` | Password gen/manager: clipboard, urandom, chmod 0600 |
 | 115 | `06_collections/concept/tables.nim` | Hash maps, ordered maps, counters |
 | 105 | `05_strings/concept/strutils.nim` | String manipulation tour |
 | 101 | `10_concurrency/concept/threads.nim` | Thread pool, channels, file processing |
-| 93 | `03_procedures/concept/time_tour.nim` | Time module tour |
-| 75 | `10_concurrency/concept/async.nim` | Async HTTP server — 4 routes, coroutines |
 
 ## Project toolkit — real CLI tools
 
-Every group ships a working tool. Here's what stands out:
+Every group ships a working tool:
 
 ### 01 — `todo.nim` (458 lines)
 Enums for Priority and Category. JSON persistence. `at` scheduling with mpv + notify-send.
@@ -61,9 +81,6 @@ password input masking. Demonstrates type-safe mutable state without a database.
 Clipboard read via xclip/xsel/wl-paste chain (Wayland/X11 compatible). Hidden input
 via `readPasswordFromStdin()`. Files saved to `~/Documents/Passwords/` with `chmod 0600`.
 `parseopt` for CLI flags (`-l:32 -c:very_strong github`). Production-quality tool.
-
-### 10 — `downloader.nim` (29 lines)
-Small but demonstrates async HTTP client with `std/httpclient`.
 
 ## Concept files that teach well
 
@@ -111,23 +128,24 @@ Small but demonstrates async HTTP client with `std/httpclient`.
 
 - Originally `r_nim_projects` → renamed to `r_nim_practice`.
 - Commits from Nov 2025 through Jun 2026.
-- `todo.nim` was lost at some point (recovered from commit `28fe6f6` via git history, not Timeshift).
-- Two earlier variants found: `todo_early.nim` (string-based) and `todo_enum.nim` (enum-based, the keeper).
+- **Recovered from git history:** `todo.nim` (enum-based), `nim_journal`, `nim_nuggets`, `fortune`.
 - `andreas/` content (book examples) was present pre-restructure, not in current tree.
+- `reference/` tours were redistributed into concept/ files per group.
 
 ## Numbers
 
 | Category | Count |
 |----------|-------|
-| Total `.nim` files | 71 |
+| Total `.nim` files | 75 |
 | Concept files | 34 |
 | Exercise files | 28 |
-| Project files | 11 |
+| Project files (groups) | 11 |
+| Standalone projects | 3 |
+| Reference files | 2 |
+| Data files | 9 (journal.json + 8 nugget topics + quotes) |
 | README.md files | 12 |
 | Makefile files | 10 |
-| Reference files | 2 |
-| Total code lines | 3,578 |
+| Total code lines | 3,752 |
 | Max single file | 458 lines (`todo.nim`) |
 | Smallest concept | 13 lines (`01_basics/concept/hello.nim`) |
 | Groups with 3+ exercises | 8 of 10 |
-| FFI files | 2 (call + export) |
