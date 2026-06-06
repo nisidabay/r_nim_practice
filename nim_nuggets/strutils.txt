@@ -1,0 +1,96 @@
+••• find method
+import strutils
+
+let s = "The quick brown fox"
+echo s.find("quick") #Returns the index 4
+echo s.find("lazy") #Returns -1 (not found)
+echo s.rfind("o") #Returns index of last occurrence 17
+if s.contains("brown"):
+  echo "Found brown!"
+
+••• escape / unescape methods
+import strutils
+
+let raw = "She said \"Hello!\""
+let escaped = raw.escape()
+echo "Raw string will give errors: ", raw
+echo "Escaped string compiles: ", escaped
+
+let dangerous = "rm -rf file"
+let safe = dangerous.escape()
+echo "Raw string will give errors: ", dangerous
+echo "Escaped string compiles: ", safe
+
+# Back to the original string
+let unescaped = safe.unescape()
+echo "Unescaped string: ", unescaped
+
+••• commonly used ASCII characters
+import strutils
+
+echo Whitespace # {' ', '\t', '\v', '\r', '\l', '\f'}
+echo Letters # {'A'..'Z', 'a'..'z'}
+echo Digits # {'0'..'9'}
+echo HexDigits # {'0'..'9', 'A'..'F', 'a'..'f'}
+echo IdentChars # Letters + Digits + {'_'}
+echo IdentStartChars # Letters + {'_'}
+echo Newlines # {'\r', '\n'}
+echo PrintableChars # Letters + Digits + Punctuation + Whitespace
+echo AllChars # {'\x00'..'\xFF'}
+
+••• join method
+import strutils
+
+let items = @["red", "green", "blue"]
+let list = items.join(", ")
+echo list # red, green, blue
+
+••• normalize / nimIdentNormalize methods
+import strutils
+
+echo normalize("Foo_Bar") # foobar
+echo nimIdentNormalize("Foo_ Bar") # Foo bar
+
+••• string alignment methods
+import strutils
+
+let word = "Nim"
+
+echo word.alignLeft(10) # left-aligned
+echo word.align(10) # right-aligned
+echo word.center(10)
+
+echo word.repeat(3)
+
+echo word.align(8, '.')
+echo word.alignLeft(8, '!')
+
+••• strip method
+import strutils
+
+let messy = "  \t Hello \n "
+echo messy.strip() # "Hello"
+echo messy.strip(leading = true) # "Hello \n "
+echo messy.strip(trailing = true) # "  \t Hello"
+
+••• replace method
+import strutils
+
+let original = "one fish, two fish"
+let changed = original.replace("fish", "cat")
+echo changed # "one cat, two cat"
+
+let once = original.replaceWord("fish", "cat")
+echo once # "one cat, two cat"
+
+let text = "I like apples and bananas"
+let mapping = @[("apples", "oranges"), ("bananas", "grapes")]
+let result = text.multiReplace(mapping)
+echo result
+
+••• split method
+import strutils
+
+let text = "apple, banana, cherry"
+let fruits = text.split(',')
+echo fruits

@@ -1,0 +1,37 @@
+••• Deduplicate characters
+# No need to import anything
+proc deduplicate(s: string): string =
+  if s.len == 0: return ""
+  result = newStringOfCap(s.len)
+  result.add(s[0])
+  for i in 1 ..< s.len:
+    if s[i] != s[i - 1]:
+      result.add(s[i])
+
+echo deduplicate("cacaaddellavaacaa")
+
+••• Tuple creation
+let person = (Name: "Charles", Age: 60, City: "Madrid")
+
+proc getPersonDetails(): void =
+  for detail in person.fields:
+    echo detail
+
+getPersonDetails()
+
+••• Object creation
+type Player = object
+  name: string
+  level: int
+  is_online: bool
+
+var p1: Player
+p1.name = "NimMaster"
+p1.level = 1
+p1.is_online = true
+
+for field_name, field_value in p1.fieldPairs:
+  echo "Field Name: ", field_name, ", Value: ", field_value
+
+
+

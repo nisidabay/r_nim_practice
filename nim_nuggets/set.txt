@@ -1,0 +1,36 @@
+••• Initialize Empty HashSet (Integers)
+import std/sets
+
+# We use initHashSet[type]() to create an empty set
+var numbers = initHashSet[int]()      
+
+numbers.incl(10)                     
+numbers.incl(20)
+
+echo numbers  # Output: {10, 20} (order may vary)
+
+••• Define & Modify String Set 
+import std/sets
+
+# correct: use toHashSet(["a", "b"]) for strings
+var fruits = toHashSet(["apple", "banana"])   
+
+fruits.incl("cherry")              # Add new fruit
+fruits.excl("banana")              # Remove fruit
+
+# Check membership
+echo "apple" in fruits             # Output: true
+echo "banana" in fruits            # Output: false
+
+••• Set Math (Union & Intersection)
+import std/sets
+
+var A = toHashSet(["apple", "pear"])
+var B = toHashSet(["pear", "kiwi"])
+echo intersection(A, B)            # Output: {"pear"}
+
+# Union: Combine all unique items
+echo union(A, B)                   # Output: {"apple", "pear", "kiwi"}
+
+# Difference: What is in A but not B?
+echo difference(A, B)              # Output: {"apple"}

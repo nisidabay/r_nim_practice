@@ -1,0 +1,36 @@
+••• Initialize Sequences
+# 1. Literal Notation (using @[])
+#  infers this is a seq[int]
+var fib = @[1, 1, 2, 3, 5]
+
+# 2. Empty Sequence (Explicit Type)
+var names = newSeq[string]()
+
+# 3. Pre-allocated (size 3, initialized to 0)
+var grid = newSeq[int](3) 
+echo grid   # Output: @[0, 0, 0]
+
+••• Add, Access & Modify
+var tasks = @["Write code", "Drink coffee"]
+
+# Add to the end
+tasks.add("Fix bugs")
+
+# Modify by index (0-based)
+tasks[0] = "Write tests"
+
+# Get length
+echo "Count: ", tasks.len
+
+# Remove last item
+let done = tasks.pop()
+
+echo tasks  # Output: @["Write tests", "Drink coffee"]
+
+••• Iteration & Filtering
+import std/sequtils 
+
+var nums = @[10, 20, 33, 40]
+
+let evens = nums.filterIt(it mod 2 == 0)
+echo evens  # Output: @[10, 20, 40]

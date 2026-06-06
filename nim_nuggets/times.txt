@@ -1,0 +1,42 @@
+•••• now()
+# Use for: Human display (Local Time)
+let displayTime = now()
+echo "Readable local time: ", displayTime
+
+••• getTime()
+# Use for: Storage and Logic (UTC)
+let storageTime = getTime()
+echo "Unix Timestamp: ", storageTime.toUnix()
+
+••• format()
+# DateTime -> String
+echo now().format("yyyy-MM-dd HH:mm:ss")
+
+••• parse()
+# String -> DateTime
+try:
+  let p = parse("2026-01-04", "yyyy-MM-dd")
+except TimeParseError:
+  echo "Invalid date format"
+
+••• local() & utc()
+# Convert machine Time to human DateTime
+let t = getTime()
+let localTime = t.local()
+let universalTime = t.utc()
+
+••• initDuration()
+# Math for exact time (Hours, Minutes, Seconds)
+let later = getTime() + initDuration(hours = 2)
+
+••• initInterval()
+# Math for calendar dates (Months, Years)
+let nextMonth = now() + initInterval(months = 1)
+
+••• getMonoTime()
+# Use for: Measuring code speed (Stopwatch)
+import std/monotimes
+let start = getMonoTime()
+# ... code to measure ...
+let elapsed = getMonoTime() - start
+echo "Process took: ", elapsed.inMilliseconds, "ms"

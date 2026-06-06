@@ -1,0 +1,35 @@
+••• Terminal style
+import std/terminal
+
+stdout.styledWrite(fgBlue, styleBright, "INFO:", resetStyle, "Backup complete\n")
+stdout.styledWrite(fgGreen, styleBright, "DEBUG:", resetStyle, "Time up\n")
+stdout.styledWrite(fgRed, styleItalic, "WARNING:", resetStyle, "Alert\n")
+stdout.styledWrite(fgMagenta, styleUnderscore, "ERROR:", resetStyle, "Error\n")
+
+••• Change foreground color
+import std/terminal
+
+stdout.setForegroundColor(fgYellow)
+echo "Warning: disk space low"
+stdout.resetAttributes()
+
+••• Replace line at position
+import std/terminal
+
+let startRow = 3
+setCursorPos(0, startRow)
+stdout.write "Processing item 1" 
+setCursorPos(0, startRow) 
+eraseLine()
+stdout.write "✅ Item 1 complete\n" # Overwrites the line
+
+••• Move cursor Up 
+import std/terminal
+
+echo "Step 1: Downloading..." # Line 1
+echo "Step 2: Processing..." # Line 2
+cursorUp() # Now at Line 2
+stdout.write "\r" # Start of Line 2
+eraseLine()
+stdout.write "Step 2: ✅ Processed" # Update Line 2
+

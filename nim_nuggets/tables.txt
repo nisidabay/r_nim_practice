@@ -1,0 +1,51 @@
+••• Initialize Empty Table
+import std/tables
+# Define a table mapping Strings (keys) to Integers (values)
+var scores = initTable[string, int]()
+
+# Add key-value pairs
+scores["Alice"] = 100
+scores["Bob"] = 45
+
+echo scores["Alice"]      # Output: 100
+echo len(scores)          # Output: 2
+
+••• Literal Definition & Modification
+import std/tables
+
+# Use .toTable to convert a collection of tuples into a Table
+var inventory = {"apple": 5, "banana": 12, "pear": 0}.toTable
+
+# Update a value
+inventory["apple"] = 4
+
+# Remove a key
+inventory.del("pear")
+
+echo inventory            # Output: {"apple": 4, "banana": 12}
+
+••• Safe Access & Iteration
+import std/tables
+
+var userConfig = {"theme": "dark", "lang": "en"}.toTable
+
+# Safe check before access prevents crashing
+if userConfig.hasKey("theme"):
+    echo "Theme is: ", userConfig["theme"]
+
+# Or use getOrDefault (returns default if key missing)
+echo userConfig.getOrDefault("font", "Arial") 
+
+# Loop through keys and values
+for key, val in userConfig:
+    echo key, ": ", val
+
+••• Assigning tables creates a deep copy
+import std/tables
+
+var t1 = {"a": 1}.toTable
+var t2 = t1 
+t2["a"] = 999
+
+echo t1["a"] # Output: 1 (t1 was NOT modified)
+echo t2["a"] # Output: 999

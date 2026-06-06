@@ -1,0 +1,146 @@
+••• joinPath()
+let 
+  baseDir = "/usr/local"
+  subDir = "bin"
+  app = "executable"
+let fullPath = joinPath(baseDir, subDir, app)
+
+••• splitFile()
+let (dir, name, ext) = splitFile(fullPath)
+
+••• normalizedPath()
+let messyPath = "folder/./subfolder/../final"
+echo normalizedPath(messyPath)
+
+••• absolutePath()
+echo absolutePath("data.txt")
+
+••• createDir()
+createDir("data/logs/current"
+
+••• walkdir()
+echo "Scanning directory..."
+for kind, path in walkdir("data"):
+  case kind
+  of pcFile: echo "File: ", path
+  of pcDir: echo "Dir: ", path
+  else: discard
+
+••• removeDirRec() # Dangerous
+if dirExists("temp_cache"):
+  removeDirRec("temp_cache")
+
+••• removeFile()
+if fileExists("legacy.conf"):
+  removeFile("legacy.conf")
+
+••• setFilePermissions()
+setFilePermissions("script.sh",
+{
+  fpUserExec,
+  fpUserRead,
+  fpUserWrite,
+  fpGroupRead
+})
+
+••• putEnv()
+putEnv("API_MODE", "production")
+
+••• getEnv()
+let mode = getEnv("API_MODE", "debug")
+echo "Running in mode: ", mode
+
+••• paramCount()
+if paramCount() > 0:
+  echo "Input file: ", paramStr(1)
+
+••• commandLineParams()
+let args = commandLineParams()
+echo "Number of arguments:", args.len
+  for i, arg in args:
+    echo "Argument ", i, ": ", arg
+
+••• getAppDir()
+let appDir = getAppDir()
+echo "The application directory is: ", appDir
+
+••• execShellCmd()
+let status = execShellCmd("git status")
+if status !=0:
+  echo "Error: Command failed with code: ", status
+
+••• getcwd()
+echo "Current Working Directory:", getcwd()
+
+••• chdir()
+let oldDir = getcwd()
+chdir("data/logs")
+echo "Changed to directory: ", getcwd()
+chdir(oldDir)  # Return to original directory
+
+••• renameFile()
+if fileExists("old_name.txt"):
+  renameFile("old_name.txt", "new_name.txt")
+# Check if the file has been renamed
+if fileExists("new_name.txt") and not fileExists("old_name.txt"):
+  echo "File renamed successfully"
+
+••• copyFile()
+copyFile("source.txt", "destination.txt")
+# Check if the file has been copied
+if fileExists("destination.txt"):
+  echo "File copied successfully"
+
+••• moveFile()
+moveFile("source_folder/", "destination_folder/")
+# Check if the file has been moved
+if dirExists("destination_folder") and not dirExists("source_folder"):
+  echo "File moved successfully"
+
+••• listDir()
+let files = listDir("data")
+for f in files:
+  echo f
+
+••• isFile()
+let filePath = "test.txt"
+echo "Is file: ", isFile(filePath)  # Output: True if it's a file, False otherwise
+
+••• isDir()
+let dirPath = "data/logs"
+echo "Is directory: ", isDir(dirPath)  # Output: True if it's a directory, False otherwise
+
+••• getFileSize()
+let fileSize = getFileSize("test.txt")
+echo "File size: ", fileSize, " bytes"
+
+••• getmtime()
+let lastModified = getmtime("test.txt")
+echo "Last modified: ", lastModified.dateStr()
+
+••• fileExists()
+if fileExists("test.txt"):
+  echo "File exists"
+else:
+  echo "File does not exist"
+
+••• dirExists()
+if dirExists("data/logs"):
+  echo "Directory exists"
+else:
+  echo "Directory does not exist"
+
+••• createSymbolicLink()
+createSymbolicLink("link", "target")
+# Check if the symbolic link has been created
+if fileExists("link") and getFileSize("link") == 0:
+  echo "Symbolic link created successfully"
+
+••• removeSymbolicLink()
+if fileExists("link"):
+  removeSymbolicLink("link")
+# Check if the symbolic link has been removed
+if not fileExists("link"):
+  echo "Symbolic link removed successfully"
+
+
