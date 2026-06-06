@@ -54,14 +54,21 @@ Then keep going: `01_basics` → `02_control_flow` → `03_procedures` →
 
 ## The Toolbox
 
-`projects/` contains real CLI tools built with the concepts above.
-Everything here was built to solve an actual problem on a Linux machine.
+Each group has a `project/` directory with a real CLI tool built from that
+group's concepts. Everything here solves an actual problem on a Linux machine.
 
-| Project | What it does | Nim features used |
+| Group | Project | What it does |
 |---|---|---|
-| `banking_app/` | Terminal banking interface | Objects, error handling, terminal UI |
-| `password_project/` | Password generator/manager | Random, strutils, CLI args |
-| `usb_mounter/` | USB device mounter with TUI | Processes, os, error handling |
+| 01 | `todo.nim` | Todo.txt manager — add, list, done, remove |
+| 02 | `unitconv.nim` | Unit converter — km/miles, kg/lbs, °C/°F |
+| 03 | `filesize.nim` | Disk usage like `du -sh` for any path |
+| 04 | `stats.nim` | Statistics calculator — mean, median, min, max |
+| 05 | `password.nim` | Password generator/manager with clipboard support |
+| 06 | `counter.nim` | Word frequency counter — top 10 from any file |
+| 07 | `usb_mounter.nim` | USB device mounter with interactive TUI |
+| 08 | `fallback.nim` | URL fetcher with fallback chain — try until one works |
+| 09 | `banking.nim` | Terminal banking app with ref objects and accounts |
+| 10 | `downloader.nim` | Multi-file HTTP downloader with error recovery |
 
 ## Running a File
 
@@ -77,7 +84,19 @@ nim c -r --threads:on 10_concurrency/concept/async.nim
 
 # With specific memory model
 nim c --mm:arc -r 09_type_system/concept/memory.nim
+
+# FFI examples (calling C from Nim)
+nim c -r --passL:"-lm" reference/ffi_calling.nim
 ```
+
+## Reference
+
+Quick-lookup files in `reference/`:
+
+| File | Covers |
+|---|---|
+| `ffi_calling.nim` | Calling C functions from Nim with zero overhead |
+| `ffi_exporting.nim` | Exporting Nim code as a shared library (callable from C/Python) |
 
 ## Group Overview
 
