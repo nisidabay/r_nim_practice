@@ -1,0 +1,119 @@
+# Stack: It's your backpack. It's small, light, and you have immediate access to
+everything in it. But you can only carry so much, and when you go home (the
+function returns), you empty it out. 
+- Gemini AI
+
+# Heap: It's a storage locker you rent. You can get one as big as you need and
+keep stuff there for as long as you want. But it's your responsibility to go
+there, put things in, take them out, and remember to stop paying the rent and
+empty it when you're done. 
+- Gemini AI
+
+# Lua is an interpreted, lightweight, multi-paradigm programming language. It was
+created in Brazil in 1993 by Roberto Ierusalimschy, Luiz Henrique de
+Figueiredo, and Waldemar Celes. 
+- Lua
+
+# nil represent the absence of value. It's the default value for uninitialized
+variables. 
+- Lua
+
+# Lua, **anything that isn't `nil` or `false` is considered true**. Even `0` and
+`""` are true! 
+- Lua
+
+# Ruby, **anything that isn't `nil` or `false` is considered true**. Even `0` and
+`""` are true! 
+- Ruby
+
+# May your scripts compile on the first try, and your binaries run like lightning
+- Qwen
+
+# Awk is a Turing-complete, data-driven scripting language designed
+specifically for text processing and data extraction. Included in POSIX and
+present on virtually all Unix-like systems, it operates on a `pattern { action
+}` paradigm, automatically parsing input into records (lines) and fields
+(columns).
+
+# func = proc with enforced {.noSideEffect.}; otherwise identical.
+- Nim
+
+# C makes it easy to shoot yourself in the foot. C++ makes it harder, but
+when you do, it blows away your whole leg.
+- Bjourn Stroustrup
+
+# Every parameter is Nim is immutable unless it is declare as a var parameter.
+- Nim
+
+# The Irony of "Digital Nature"
+You've touched on a philosophical conflict. We name our software after the
+natural world—Linux (Tux the Penguin), Docker (the whale), Swift (the
+bird)—often while the hardware that runs this software relies on mining and
+energy consumption that can harm those very creatures.
+- Gemini
+
+# Rust is paranoid. Nim is pragmatic.
+- Gemini
+
+# Rust name, logo, mascot
+Name: Rust Fungus - Chosen for being robust and biological.
+Logo: Gear - Represents industrial-strength system coding.
+Mascot: Ferris the Crab - A pun on "Rustacean" and "Ferrous" (iron).
+- Gemini
+
+# Garbage collector
+Nim has ARC/ORC that can be disabled.
+Rust does not have garbage collector.
+- Gemini
+
+# Nim gives you the speed of C with the elegance of Python.
+- Gemini
+
+# Rust ownership and borrowing rules In Rust, String is an owned, growable
+string on the heap, while &str is a borrowed, immutable view into string data;
+ownership ensures each value has one owner (moved on assignment), and borrowing
+rules allow either many read-only references or one mutable reference—but never
+both at once—to guarantee memory safety at compile time.
+- Qwen3
+
+# Clarity over cleverness. Always.
+- Qwen3
+
+# Nim encourages readability and simplicity in code. 
+Naming: Use camelCase for variables and procedures, PascalCase for types.
+Indentation: Nim uses indentation to denote block structures, similar to
+Python. The standard practice is to use spaces, not tabs, with 2 spaces being a
+common choice. 
+Spacing: Use spaces around operators and after commas for better readability.
+- Nim
+
+# Object Variants in Nim
+Are struct types that can change their internal layout based of a "tag" field.
+- Nim
+
+# Idempotent
+In programming, an idempotent operation is one that can be repeated without
+changing the outcome or state of the system. In other words, performing the
+same operation multiple times has the same effect as performing it once.
+- Ollama
+
+# Syntactic sugar
+Describes a language feature that makes code easier to read and write,
+though there are alternative ways to express the same code.
+- Seven languages in Seven weeks
+
+# There are two types of programming languages: Those that people rant about
+and those that nobody uses.
+- Bjourn Stroustrup
+
+# Go is often touted as the language with the speed of C and the productivity of Python.
+- Go Programming language for dummies
+
+# The problem with object-oriented languages is they’ve got all this implicit
+environment that they carry around with them. You wanted a banana but what you
+got was a gorilla holding the banana and the entire jungle.
+- Joe Armstrong (Creator of Erlang)
+
+# Sometimes the best workflow improvement is the confirmation that none is
+needed.
+- Hermes (deepseek v4 pro:cloud high)
