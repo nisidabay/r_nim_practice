@@ -1,96 +1,99 @@
-# Nim Practice Reference
+# Nim — From Zero to Real Tools
 
-A progressive, concept-driven Nim learning path. Each file answers one
-question: *"What problem does this solve that other languages make hard?"*
+A progressive, code-first curriculum for learning Nim through CLI scripting
+and systems programming. No frameworks, no heavy dependencies — just the
+standard library and real problems.
 
-## How to use this
+## Who This Is For
 
-Three sessions. Each builds on the last. Run every file. Read the comments.
+- You program in Python, Ruby, or Go and want a fast compiled language
+- You write Bash scripts and want something more maintainable and portable
+- You're curious about a language that compiles to C with zero overhead
 
-### Session 1: Why Nim (the type system tricks)
+## Getting Started
 
-| File | Question it answers |
-|---|---|
-| [`01_why_nim/hello_world.nim`](01_why_nim/hello_world.nim) | How is Nim different from Python/JS? Compile vs interpret. |
-| [`01_why_nim/ufcs.nim`](01_why_nim/ufcs.nim) | How do I chain operations left to right like a pipeline? |
-| [`01_why_nim/distinct_currency.nim`](01_why_nim/distinct_currency.nim) | How do I prevent mixing dollars and euros? |
-| [`01_why_nim/variant_parser.nim`](01_why_nim/variant_parser.nim) | How do I represent "this value is one of several shapes"? |
-| [`01_why_nim/option_chaining.nim`](01_why_nim/option_chaining.nim) | How do I stop nil checks from polluting my code? |
+```bash
+# One command to check Nim is installed (2.2.6+)
+nim --version
 
-### Session 2: Under the hood (what Nim actually does)
+# Compile and run any concept file
+nim c -r 01_basics/concept/hello.nim
+```
 
-| File | Question it answers |
-|---|---|
-| [`02_under_the_hood/compile_time.nim`](02_under_the_hood/compile_time.nim) | Can I run code during compilation, not at runtime? |
-| [`02_under_the_hood/ffi_calling.nim`](02_under_the_hood/ffi_calling.nim) | How do I call C libraries with zero overhead? |
-| [`02_under_the_hood/ffi_exporting.nim`](02_under_the_hood/ffi_exporting.nim) | How do I make my Nim code callable from C/Python/Go? |
-| [`02_under_the_hood/arc_memory.nim`](02_under_the_hood/arc_memory.nim) | Where does my memory go, and when? |
-| [`02_under_the_hood/template_macro.nim`](02_under_the_hood/template_macro.nim) | How do I write code that writes code? |
+## Two Paths In
 
-### Session 3: Concurrency (doing multiple things)
+### Path A: The Sampler (~20 min)
 
-| File | Question it answers |
-|---|---|
-| [`03_concurrency/async_http.nim`](03_concurrency/async_http.nim) | How do I handle thousands of connections without threads? |
-| [`03_concurrency/threads_channels.nim`](03_concurrency/threads_channels.nim) | How do I process 1000 files in parallel? |
-| [`03_concurrency/process_pipes.nim`](03_concurrency/process_pipes.nim) | How do I pipe data through external programs like bash? |
+Read the concept READMEs. Each group has a **Now Build Your Own** challenge
+at the bottom. Pick one that interests you and build it:
 
-### Reference: Quick lookup
+```bash
+cat 01_basics/concept/README.md     # → "Write a greeting program"
+cat 05_strings/concept/README.md    # → "Write a CSV parser"
+cat 09_type_system/concept/README.md   # → "Celsius ↔ Fahrenheit distinct types"
+```
 
-Fast syntax reference, organized by module:
+### Path B: Systematic (~several weeks)
 
-| File | Covers |
-|---|---|
-| [`reference/strutils_tour.nim`](reference/strutils_tour.nim) | String manipulation: split, join, replace, validate, pad, parse |
-| [`reference/tables_tour.nim`](reference/tables_tour.nim) | Table, OrderedTable, CountTable — key-value storage patterns |
-| [`reference/sequtils_tour.nim`](reference/sequtils_tour.nim) | map, filter, fold, zip, concat — functional sequence operations |
-| [`reference/sets_tour.nim`](reference/sets_tour.nim) | set[T] (bitsets) and HashSet[T] — mathematical set operations |
-| [`reference/re_tour.nim`](reference/re_tour.nim) | Regular expressions: find, match, replace, capture groups |
-| [`reference/time_tour.nim`](reference/time_tour.nim) | DateTime, Time, Duration, MonoTime — dates, times, intervals |
+Work through the numbered groups in order. Each has:
 
-### Projects: Real programs
+- **concept/README.md** — quick-start table + learning path
+- **concept/*.nim** — one concept per file, code-first, runnable standalone
+- **exercises/** — 3 solved practice problems + Makefile
+- **project/** — a real CLI tool using the group's concepts
 
-Full applications that use everything above. Each has its own README.
+```bash
+cd 01_basics/concept
+cat README.md                   # see the map
+nim c -r hello.nim              # first concept
+```
+
+Then keep going: `01_basics` → `02_control_flow` → `03_procedures` →
+`04_sequences` → `05_strings` → `06_collections` → `07_filesystem` →
+`08_error_handling` → `09_type_system` → `10_concurrency`.
+
+## The Toolbox
+
+`projects/` contains real CLI tools built with the concepts above.
+Everything here was built to solve an actual problem on a Linux machine.
 
 | Project | What it does | Nim features used |
 |---|---|---|
-| [`projects/app_launcher/`](projects/app_launcher/) | Desktop app launcher with FZF | Processes, parsecfg, os, streams |
-| [`projects/banking_app/`](projects/banking_app/) | Banking terminal app | Objects, error handling, terminal UI |
-| [`projects/usb_mounter/`](projects/usb_mounter/) | USB device mounter with TUI | TUI, processes, os, error handling |
-| [`projects/password_project/`](projects/password_project/) | Password generator/manager | Random, strutils, CLI |
-| [`projects/ollama_chat/`](projects/ollama_chat/) | Local LLM chat client | HTTP client, JSON, CLI, processes |
+| `banking_app/` | Terminal banking interface | Objects, error handling, terminal UI |
+| `password_project/` | Password generator/manager | Random, strutils, CLI args |
+| `usb_mounter/` | USB device mounter with TUI | Processes, os, error handling |
 
----
-
-## Running a file
+## Running a File
 
 ```bash
-# Compile and run (debug)
-nim c -r 01_why_nim/hello_world.nim
+# Standard compile + run
+nim c -r 01_basics/concept/hello.nim
 
-# Compile and run (optimized)
-nim c -d:release -r 01_why_nim/hello_world.nim
+# Optimized (release mode)
+nim c -d:release -r 01_basics/concept/hello.nim
 
-# Specific memory model
-nim c --mm:arc -r 02_under_the_hood/arc_memory.nim
+# With threads (required for concurrency)
+nim c -r --threads:on 10_concurrency/concept/async.nim
 
-# Async needs threads enabled
-nim c -r --threads:on 03_concurrency/async_http.nim
-
-# FFI linking C math library
-nim c -r --passL:"-lm" 02_under_the_hood/ffi_calling.nim
-
-# Build shared library
-nim c --app:lib --out:libnimmath.so 02_under_the_hood/ffi_exporting.nim
+# With specific memory model
+nim c --mm:arc -r 09_type_system/concept/memory.nim
 ```
 
-## Philosophy
+## Group Overview
 
-Each file follows a pattern:
-1. **The Problem** — a real situation, no abstract "foo/bar"
-2. **The Pain** — what goes wrong without Nim's solution
-3. **The Fix** — Nim's approach, with line-by-line commentary
-4. **The Takeaway** — one sentence you'll remember
+| # | Group | Concept files | Exercises | What you learn |
+|---|---|---|---|---|
+| 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
+| 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
+| 03 | Procedures | 4 | 3 | proc, result, UFCS, templates, time |
+| 04 | Sequences | 3 | 4 | seq[T], slicing, sequtils, enums, tuples |
+| 05 | Strings | 4 | 3 | strutils, format, parsing, regex |
+| 06 | Collections | 3 | 3 | Table, HashSet, CountTable |
+| 07 | Filesystem | 4 | 3 | Files, dirs, walkDir, FFI |
+| 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
+| 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
+| 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
 
-No autogenerated boilerplate. No placeholder comments. Every line exists
-because it teaches something.
+## References
+
+See [`REFERENCES.md`](REFERENCES.md) for books, official docs, and community resources.

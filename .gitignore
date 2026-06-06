@@ -1,1 +1,3 @@
-.aider*
+nimcache/
+*.exe
+*.out
