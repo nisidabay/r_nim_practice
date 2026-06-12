@@ -1,18 +1,20 @@
 # Journal — `r_nim_practice`
 
-> Final snapshot: 2026-06-07. Nim 2.2.6.
+> Updated: 2026-06-12. Nim 2.2.6. 13 groups + 7 standalone apps.
 
 ## Structure
 
 ```
 r_nim_practice/
-├── 01_basics/ ... 10_concurrency/    ← 10-group curriculum (concept → exercises → project)
-├── reference/                          ← FFI calling + exporting
-├── apps/                               ← 4 standalone CLI tools
-│   ├── fortune/      (quote picker)
-│   ├── journal/      (fzf activity log)
-│   ├── nim_nuggets/  (snippet refresher)
-│   └── todo/         (full CLI manager)
+├── 01_basics/ ... 13_niche_modules/    ← 13-group curriculum (concept → exercises → project)
+├── reference/                            ← FFI calling + exporting
+├── apps/                                 ← 7 standalone CLI tools
+│   ├── fortune/        (quote picker)
+│   ├── journal/        (fzf activity log)
+│   ├── nim_nuggets/    (snippet refresher)
+│   ├── password/       (password generator/manager)
+│   ├── todo/           (full CLI manager)
+│   └── usb_mounter/    (USB mounter + TUI)
 ├── README.md
 ├── REFERENCES.md
 └── JOURNAL.md
@@ -20,60 +22,51 @@ r_nim_practice/
 
 ## Overview
 
-**75 `.nim` files** across 10 progressive groups + 4 standalone apps + 2 FFI reference files.
-Total: 3,752 lines of Nim code.
-
-## Apps — standalone tools
-
-### `apps/todo/` (458 lines)
-The feature flagship. Enums for Priority and Category. JSON persistence. `at` scheduling
-with mpv + notify-send. Environment variable forwarding (DISPLAY, DBUS, PULSE).
-Shell-safe quoting throughout. Recovered from git history after being lost to deletion.
-
-### `apps/journal/` (280 lines)
-Full CLI activity journal. fzf integration for browsing/searching entries.
-Colored panels (╭╮╰╯ borders). JSON persistence with atomic writes (`.tmp` → move).
-EDITOR integration for composing entries. Recovered from commit `145d84f`.
-
-### `apps/nim_nuggets/` (418 lines)
-Spaced repetition snippet refresher. fzf topic browsing with symlink-based
-active topic. Cross-topic search. Weekly rotation reminder. 8 topic files
-with Nim-specific snippets (os, strutils, tables, terminal, times, sequences,
-set, code). Recovered from commit `b509c73`.
-
-### `apps/fortune/` (32 lines)
-Fortune-like random quote picker. Reads `Computer_Quotes.txt` via `sample()`
-from `std/random`. Minimal, single-purpose. Recovered from commit `1e18a77`.
+**13 progressive groups** covering Nim from zero to real tools. Each group has concept files, exercises, and a project that ONLY uses concepts taught up to that point. Advanced projects live in `apps/` as standalone tools.
 
 ## Curriculum — what each group covers
 
 | # | Group | Concept files | Exercises | Project | What you learn |
 |---|---|---|---|---|---|
-| 01 | Basics | 3 | 2 | `todo.nim` | Compilation, types, input, CLI args |
+| 01 | Basics | 3 | 2 | `greeting.nim` | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | `unitconv.nim` | if/case, for/while, iterators |
 | 03 | Procedures | 4 | 3 | `filesize.nim` | proc, result, UFCS, templates, time |
 | 04 | Sequences | 3 | 4 | `stats.nim` | seq[T], slicing, sequtils, enums, tuples |
-| 05 | Strings | 4 | 3 | `password.nim` | strutils, format, parsing, regex |
+| 05 | Strings | 4 | 3 | `csv_parser.nim` | strutils, format, parsing, regex |
 | 06 | Collections | 3 | 3 | `counter.nim` | Table, HashSet, CountTable |
-| 07 | Filesystem | 2 | 3 | `usb_mounter.nim` | Files, dirs, walkDir, FFI |
+| 07 | Filesystem | 2 | 3 | `tree.nim` | Files, dirs, walkDir, FFI |
 | 08 | Error Handling | 2 | 3 | `fallback.nim` | try/except, Option[T], fallbacks |
 | 09 | Type System | 4 | 3 | `banking.nim` | Distinct types, variants, compile-time, memory |
-| 10 | Concurrency | 3 | 1 | `downloader.nim` | Async, threads, process pipes |
+| 10 | Concurrency | 3 | 1 | `parallel_downloader.nim` | Async, threads, process pipes |
+| 11 | Stdlib Essentials | 6 | 3 | `sysinfo.nim` | Math, OS, JSON, Algorithm, Modules, Arrays |
+| 12 | Ecosystem & Tooling | 8 | 3 | `log_analyzer.nim` | Terminal, logging, parsecfg, parsecsv, URI, pragmas, Nimble, OOP |
+| 13 | Niche Modules | 7 | 3 | `data_analyzer.nim` | Rationals, ropes, XML, scanf, stats, colors, sugar |
 
-## Top 10 files by size
+## Apps — standalone tools (use concepts from multiple groups)
 
-| Lines | File | What |
-|--------|------|------|
-| 458 | `apps/todo/todo.nim` | Full CLI w/ enums, JSON persistence, at scheduling, sound |
-| 418 | `apps/nim_nuggets/nim_nuggets.nim` | Snippet refresher with fzf, search, weekly reminders |
-| 350 | `07_filesystem/project/usb_mounter.nim` | Interactive TUI, mount/unmount USB, filesystem detection |
-| 302 | `07_filesystem/project/usb_tui.nim` | Companion TUI for USB mounter |
-| 280 | `apps/journal/nim_journal.nim` | Activity journal: add/search/delete via fzf |
-| 208 | `09_type_system/project/banking.nim` | Banking app: ref objects, SHA1 auth, in-memory DB |
-| 170 | `05_strings/project/password.nim` | Password gen/manager: clipboard, urandom, chmod 0600 |
-| 115 | `06_collections/concept/tables.nim` | Hash maps, ordered maps, counters |
-| 105 | `05_strings/concept/strutils.nim` | String manipulation tour |
-| 101 | `10_concurrency/concept/threads.nim` | Thread pool, channels, file processing |
+### `apps/todo/` (458 lines)
+Full CLI todo manager. Enums for Priority and Category. JSON persistence. `at` scheduling
+with mpv + notify-send. Environment variable forwarding. Shell-safe quoting.
+
+### `apps/nim_nuggets/` (418 lines)
+Spaced repetition snippet refresher. fzf topic browsing with symlink-based
+active topic. Cross-topic search. Weekly rotation reminder. 8 topic files.
+
+### `apps/usb_mounter/` (652 lines total)
+USB device mounter (`usb_mounter.nim` 350 lines) with interactive TUI frontend
+(`usb_tui.nim` 302 lines). Mount/unmount, filesystem detection, ncurses interface.
+
+### `apps/journal/` (280 lines)
+Activity journal. fzf integration for browsing/searching. Colored panels.
+JSON persistence with atomic writes. EDITOR integration.
+
+### `apps/password/` (171 lines)
+Password generator/manager. `/dev/urandom` entropy, clipboard support,
+`chmod 0600` permissions, 4 complexity levels.
+
+### `apps/fortune/` (32 lines)
+Fortune-like random quote picker. Reads `Computer_Quotes.txt` via `sample()`
+from `std/random`. Minimal, single-purpose.
 
 ## Concept highlights
 
@@ -92,20 +85,16 @@ from `std/random`. Minimal, single-purpose. Recovered from commit `1e18a77`.
 - `ffi_calling.nim` — Zero-cost C interop. `{.importc, header.}` declares C functions directly.
 - `ffi_exporting.nim` — Export Nim code as `.so` callable from C/Python.
 
-## Numbers
+## Design principle
 
-| Category | Count |
-|----------|-------|
-| Total `.nim` files | 75 |
-| Concept files | 34 |
-| Exercise files | 28 |
-| Curriculum project files | 11 |
-| Standalone app files | 4 |
-| Reference files | 2 |
-| Data files | 10 (journal.json + 8 nugget topics + quotes) |
-| README.md files | 12 |
-| Makefile files | 10 |
-| Total code lines | 3,752 |
-| Max single file | 458 lines (`apps/todo/todo.nim`) |
-| Smallest concept | 13 lines (`01_basics/concept/hello.nim`) |
-| Groups with 3+ exercises | 8 of 10 |
+Each group's project is a **natural culmination** of only what's been taught up to that point.
+Advanced projects that use concepts from future groups live in `apps/` as standalone tools.
+This keeps the learning path progressive — no jumping from "hello world" to a 458-line todo manager.
+
+## Restructuring (2026-06-12)
+
+Moved 4 mismatched projects to `apps/` and created 4 replacement projects:
+- G01: `todo.nim` → `apps/todo/` (already there), replaced with `greeting.nim`
+- G05: `password.nim` → `apps/password/`, replaced with `csv_parser.nim`
+- G07: `usb_mounter.nim` + `usb_tui.nim` → `apps/usb_mounter/`, replaced with `tree.nim`
+- G10: `downloader.nim` (sequential) → replaced with `parallel_downloader.nim` (actual concurrency)

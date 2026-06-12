@@ -59,16 +59,16 @@ group's concepts. Everything here solves an actual problem on a Linux machine.
 
 | Group | Project | What it does |
 |---|---|---|
-| 01 | `todo.nim` | Full CLI todo manager — enums, JSON persistence, at scheduling with sound |
+| 01 | `greeting.nim` | CLI greeting that prints your age from birth year |
 | 02 | `unitconv.nim` | Unit converter — km/miles, kg/lbs, °C/°F |
 | 03 | `filesize.nim` | Disk usage like `du -sh` for any path |
 | 04 | `stats.nim` | Statistics calculator — mean, median, min, max |
-| 05 | `password.nim` | Password generator/manager with clipboard support |
+| 05 | `csv_parser.nim` | CSV file reader — splits lines, trims fields, aligns columns |
 | 06 | `counter.nim` | Word frequency counter — top 10 from any file |
-| 07 | `usb_mounter.nim` | USB device mounter with interactive TUI |
+| 07 | `tree.nim` | Directory tree viewer — recursive walk with indented output |
 | 08 | `fallback.nim` | URL fetcher with fallback chain — try until one works |
 | 09 | `banking.nim` | Terminal banking app with ref objects and accounts |
-| 10 | `downloader.nim` | Multi-file HTTP downloader with error recovery |
+| 10 | `parallel_downloader.nim` | Multi-file HTTP downloader with concurrent threads |
 | 11 | `sysinfo.nim` | JSON-config-driven system info reporter — OS, CPU, math stats |
 | 12 | `log_analyzer.nim` | Log analyzer — CSV logs with colored severity levels, config-driven themes |
 | 13 | `data_analyzer.nim` | XML data → rational arithmetic → color-coded stats report |
@@ -124,11 +124,13 @@ Quick-lookup files in `reference/`:
 Standalone Nim CLI tools — real programs, not exercises.
 
 | App | Description |
-|---|---|
+|---|---|---|
 | `apps/fortune/` | Fortune-like random quote picker — reads `Computer_Quotes.txt`, picks one via `randomize()` |
 | `apps/journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
-| `apps/nim_nuggets/` | Spaced repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
+| `apps/nim_nuggets/` | Spaced-repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
+| `apps/password/` | Password generator/manager with clipboard support and complexity options |
 | `apps/todo/` | Full CLI todo manager — enums, JSON persistence, `at` scheduling with sound |
+| `apps/usb_mounter/` | USB device mounter with interactive TUI (usb_mounter.nim + usb_tui.nim) |
 
 ## References
 
