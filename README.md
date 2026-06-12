@@ -50,7 +50,7 @@ nim c -r hello.nim              # first concept
 
 Then keep going: `01_basics` → `02_control_flow` → `03_procedures` →
 `04_sequences` → `05_strings` → `06_collections` → `07_filesystem` →
-`08_error_handling` → `09_type_system` → `10_concurrency`.
+`08_error_handling` → `09_type_system` → `10_concurrency` → `11_stdlib` → `12_ecosystem_tooling` → `13_niche_modules`.
 
 ## The Toolbox
 
@@ -69,6 +69,9 @@ group's concepts. Everything here solves an actual problem on a Linux machine.
 | 08 | `fallback.nim` | URL fetcher with fallback chain — try until one works |
 | 09 | `banking.nim` | Terminal banking app with ref objects and accounts |
 | 10 | `downloader.nim` | Multi-file HTTP downloader with error recovery |
+| 11 | `sysinfo.nim` | JSON-config-driven system info reporter — OS, CPU, math stats |
+| 12 | `log_analyzer.nim` | Log analyzer — CSV logs with colored severity levels, config-driven themes |
+| 13 | `data_analyzer.nim` | XML data → rational arithmetic → color-coded stats report |
 
 ## Running a File
 
@@ -112,6 +115,9 @@ Quick-lookup files in `reference/`:
 | 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
 | 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
+| 11 | Stdlib Essentials | 6 | 3 | Math, OS, JSON, Algorithm, Modules, Arrays |
+| 12 | Ecosystem & Tooling | 8 | 3 | Terminal, logging, parsecfg, parsecsv, URI, pragmas, Nimble, OOP |
+| 13 | Niche Modules | 7 | 3 | Rationals, ropes, XML, scanf, stats, colors, sugar |
 
 ## Apps
 
