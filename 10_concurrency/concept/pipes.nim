@@ -85,3 +85,26 @@ proc safeExec(cmd: string, args: varargs[string]): string =
 # This is how app_launcher.nim runs FZF — it spawns an interactive process
 # and reads the selection. Nim makes stdin/stdout streams first-class objects.
 # No subprocess.PIPE, no manual fd handling, no shell escaping issues.
+
+
+# ── Simpler API: execCmd / execCmdEx ────────────────────────────────────
+#
+# For the common case ("run this command, give me the output"), `startProcess`
+# is overkill. Nim has one-liners:
+#
+#   execCmd("ls -la")               # → int (exit code)
+#   execCmdEx("ls -la")             # → (string, int) — output + exit code
+
+let (lsOut, lsCode) = execCmdEx("ls -la /tmp")
+echo "exit code: ", lsCode
+echo "files in /tmp:\n", lsOut
+
+# Capture stderr too (merge streams):
+let (result, code) = execCmdEx("gcc --version", options = {poStdErrToStdOut})
+echo "exit: ", code, "\n", result
+
+# When you only care about success/failure:
+if execCmd("which fzf") == 0:
+  echo "fzf is installed"
+else:
+  echo "fzf not found — install with: sudo pacman -S fzf"

@@ -1,6 +1,6 @@
 # nim c -r greeting.nim <name> <birth_year>
 # CLI that greets you and prints your age.
-import std/[os, strutils]
+import std/[os, strutils, times]
 
 if paramCount() < 2:
   echo "Usage: greeting <name> <birth_year>"
@@ -11,7 +11,7 @@ let
   name = paramStr(1)
   birthYear = parseInt(paramStr(2))
 
-let currentYear = 2026
+let currentYear = now().year
 let age = currentYear - birthYear
 
 echo "Hello, ", name, "!"

@@ -1,23 +1,25 @@
-# data_analyzer.nim — XML data → rational arithmetic → stats → color report
-#   nim c -r project/data_analyzer.nim [--input path/to/data.xml]
+# data_analyzer.nim — Read text data → stats → color-coded report
+#   nim c -r project/data_analyzer.nim [--input path/to/data.txt]
 #
-# Pipeline: parseXml → Rational[int] → RunningStat → color-coded Rope report
-# Integrates: xmlparser, rationals, stats, colors, ropes, sugar, lenientops
+# Pipeline: readFile → float → RunningStat → color-coded report
+# Integrates: stats, colors, math, strutils, os
+#
+# Data file format: one number per line, plain text. Fractions like 1/3 accepted.
 
-import std/[parsexml, streams, rationals, stats, colors, ropes, math,
-            strutils, os]
+import std/[stats, colors, math, strutils, os]
+
+# ── Default data (inline, no file needed to run) ──────────────────────────
+
+const defaultData = """
+1/3
+1/3
+1/3
+1/2
+1/4
+3/4
+"""
 
 # ── CLI flag handling ───────────────────────────────────────────────────
-
-let defaultXml = """<?xml version="1.0"?>
-<data>
-  <record><value>1/3</value></record>
-  <record><value>1/3</value></record>
-  <record><value>1/3</value></record>
-  <record><value>1/2</value></record>
-  <record><value>1/4</value></record>
-  <record><value>3/4</value></record>
-</data>"""
 
 proc getInputPath(): string =
   for i in 1..paramCount():
@@ -25,53 +27,28 @@ proc getInputPath(): string =
       return paramStr(i + 1)
   ""
 
-proc loadXmlData(path: string): string =
+# ── Read data file or use default ───────────────────────────────────────
+
+proc loadData(path: string): string =
   if path.len > 0 and fileExists(path):
     readFile(path)
   else:
-    defaultXml
+    defaultData
 
-# ── XML parsing — extract numeric fractions ────────────────────────────
+# ── Parse each line → float ─────────────────────────────────────────────
 
-proc extractFractions(xml: string): seq[string] =
-  var s = newStringStream(xml)
-  var p: XmlParser
-  open(p, s, "data.xml")
-
-  var inValue = false
-
-  while true:
-    p.next()
-    case p.kind
-    of xmlElementStart:
-      if p.elementName == "value":
-        inValue = true
-    of xmlCharData:
-      if inValue:
-        result.add(p.charData)
-        inValue = false
-    of xmlEof:
-      break
-    else:
-      discard
-
-  close(p)
-
-# ── Parse fractions → Rational[int] ────────────────────────────────────
-
-proc parseRational(s: string): Rational[int] =
+proc parseLine(s: string): float =
   let parts = s.strip().split('/')
   if parts.len == 2:
-    result = initRational(parseInt(parts[0]), parseInt(parts[1]))
+    result = parseFloat(parts[0]) / parseFloat(parts[1])
   elif parts.len == 1:
-    result = initRational(parseInt(parts[0]), 1)
+    result = parseFloat(parts[0])
   else:
-    result = initRational(0, 1)
+    result = 0.0
 
 # ── ANSI color helpers ──────────────────────────────────────────────────
 
 proc ansiColor(col: Color): string =
-  ## Build ANSI 24-bit color escape sequence from a Color value.
   let (r, g, b) = extractRGB(col)
   "\e[38;2;" & $r & ";" & $g & ";" & $b & "m"
 
@@ -82,67 +59,64 @@ proc colorText(text: string, col: Color): string =
 
 proc main() =
   let inputPath = getInputPath()
-  let xml = loadXmlData(inputPath)
+  let raw = loadData(inputPath)
 
-  # Step 1: Parse XML → fraction strings
-  let fractionStrs = xml.extractFractions()
-  echo "Loaded ", fractionStrs.len, " values from XML"
+  # Parse lines → floats (skip blanks)
+  var values: seq[float]
+  for line in raw.splitLines():
+    let trimmed = line.strip()
+    if trimmed.len > 0:
+      values.add(parseLine(trimmed))
 
-  # Step 2: Parse → Rational[int] for exact arithmetic
-  var values: seq[Rational[int]]
-  for fs in fractionStrs:
-    values.add(parseRational(fs))
+  echo "Loaded ", values.len, " values"
 
-  # Compute exact sum and mean
-  var sumRat = 0 // 1
+  # Compute sum and mean
+  var sumF: float = 0.0
   for v in values:
-    sumRat = sumRat + v
+    sumF = sumF + v
 
   let count = values.len
-  let meanRat = sumRat / count
+  let meanF = sumF / count.float
 
-  echo "Exact sum:  ", $sumRat
-  echo "Exact mean: ", $meanRat
+  echo "Sum:  ", sumF
+  echo "Mean: ", meanF
 
-  # Step 3: Convert to float → RunningStat
+  # Feed into RunningStat
   var rs: RunningStat
   for v in values:
-    rs.push(toFloat(v))
+    rs.push(v)
 
   let mn = round(rs.mean, 2)
   let vr = round(rs.variance, 2)
   let sd = round(rs.standardDeviation, 2)
 
-  # Step 4: Build color-coded report via Ropes
+  # Build color-coded report
   let green  = parseColor("green")
   let yellow = parseColor("yellow")
   let red    = parseColor("red")
   let cyan   = parseColor("cyan")
   let white  = parseColor("white")
 
-  var report = rope("")
-  report = report & rope(colorText("╔════════════════════════════╗\n", cyan))
-  report = report & rope(colorText("║    Data Analysis Report    ║\n", cyan))
-  report = report & rope(colorText("╚════════════════════════════╝\n", cyan))
-  report = report & rope("\n")
-  report = report & rope("Samples: ") & rope($count) & rope("\n")
-  report = report & rope(colorText("Mean:    ", green)) &
-           rope(colorText($mn, white)) & rope("\n")
-  report = report & rope(colorText("Variance:", yellow)) &
-           rope(colorText($vr, white)) & rope("\n")
-  report = report & rope(colorText("StdDev:  ", red)) &
-           rope(colorText($sd, white)) & rope("\n")
-  report = report & rope("Min:     ") & rope($toFloat(min(values))) & rope("\n")
-  report = report & rope("Max:     ") & rope($toFloat(max(values))) & rope("\n")
+  var report = ""
+  report &= colorText("╔════════════════════════════╗\n", cyan)
+  report &= colorText("║    Data Analysis Report    ║\n", cyan)
+  report &= colorText("╚════════════════════════════╝\n", cyan)
+  report &= "\n"
+  report &= "Samples: " & $count & "\n"
+  report &= colorText("Mean:    ", green) & colorText($mn, white) & "\n"
+  report &= colorText("Variance:", yellow) & colorText($vr, white) & "\n"
+  report &= colorText("StdDev:  ", red) & colorText($sd, white) & "\n"
+  report &= "Min:     " & $min(values) & "\n"
+  report &= "Max:     " & $max(values) & "\n"
 
-  # Step 5: Validation
-  assert count == fractionStrs.len
-  assert meanRat == sumRat / count
-  assert abs(rs.mean - toFloat(meanRat)) < 1e-10
+  # Validation
+  assert count == values.len
+  assert abs(meanF - sumF / count.float) < 1e-10
+  assert abs(rs.mean - meanF) < 1e-10
 
   # Print report
   echo ""
-  echo $report
+  echo report
 
 when isMainModule:
   main()

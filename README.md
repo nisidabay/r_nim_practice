@@ -1,7 +1,7 @@
 # Nim — From Zero to Real Tools
 
 A progressive, code-first curriculum for learning Nim through CLI scripting
-and systems programming. No frameworks, no heavy dependencies — just the
+and task automation. No frameworks, no heavy dependencies — just the
 standard library and real problems.
 
 ## Who This Is For
@@ -9,6 +9,24 @@ standard library and real problems.
 - You program in Python, Ruby, or Go and want a fast compiled language
 - You write Bash scripts and want something more maintainable and portable
 - You're curious about a language that compiles to C with zero overhead
+
+## Installation
+
+```bash
+# Arch Linux (package en repos oficiales)
+sudo pacman -S nim nimble
+
+# Cualquier distro — choosenim (version manager oficial)
+# curl -sS https://nim-lang.org/choosenim/init.sh | sh
+
+# macOS
+# brew install nim
+
+# Verificar
+nim --version
+```
+
+Nim 2.2.6+. No necesitás runtime, no necesitás intérprete — compila a binario nativo.
 
 ## Getting Started
 
@@ -71,7 +89,7 @@ group's concepts. Everything here solves an actual problem on a Linux machine.
 | 10 | `parallel_downloader.nim` | Multi-file HTTP downloader with concurrent threads |
 | 11 | `sysinfo.nim` | JSON-config-driven system info reporter — OS, CPU, math stats |
 | 12 | `log_analyzer.nim` | Log analyzer — CSV logs with colored severity levels, config-driven themes |
-| 13 | `data_analyzer.nim` | XML data → rational arithmetic → color-coded stats report |
+| 13 | `data_analyzer.nim` | Text file stats — reads numbers, computes stats, color report |
 
 ## Running a File
 
@@ -84,22 +102,7 @@ nim c -d:release -r 01_basics/concept/hello.nim
 
 # With threads (required for concurrency)
 nim c -r --threads:on 10_concurrency/concept/async.nim
-
-# With specific memory model
-nim c --mm:arc -r 09_type_system/concept/memory.nim
-
-# FFI examples (calling C from Nim)
-nim c -r --passL:"-lm" reference/ffi_calling.nim
 ```
-
-## Reference
-
-Quick-lookup files in `reference/`:
-
-| File | Covers |
-|---|---|
-| `ffi_calling.nim` | Calling C functions from Nim with zero overhead |
-| `ffi_exporting.nim` | Exporting Nim code as a shared library (callable from C/Python) |
 
 ## Group Overview
 
@@ -107,17 +110,33 @@ Quick-lookup files in `reference/`:
 |---|---|---|---|---|
 | 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
-| 03 | Procedures | 4 | 3 | proc, result, UFCS, templates, time |
+| 03 | Procedures | 4 | 3 | proc, result, UFCS, time |
 | 04 | Sequences | 3 | 4 | seq[T], slicing, sequtils, enums, tuples |
 | 05 | Strings | 4 | 3 | strutils, format, parsing, regex |
 | 06 | Collections | 3 | 3 | Table, HashSet, CountTable |
-| 07 | Filesystem | 2 | 3 | Files, dirs, walkDir, FFI |
+| 07 | Filesystem | 2 | 3 | Files, dirs, walkDir |
 | 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
-| 09 | Type System | 4 | 3 | Distinct types, variants, compile-time, memory |
+| 09 | Type System | 3 | 3 | Distinct types, variants, compile-time |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
 | 11 | Stdlib Essentials | 6 | 3 | Math, OS, JSON, Algorithm, Modules, Arrays |
 | 12 | Ecosystem & Tooling | 8 | 3 | Terminal, logging, parsecfg, parsecsv, URI, pragmas, Nimble, OOP |
-| 13 | Niche Modules | 7 | 3 | Rationals, ropes, XML, scanf, stats, colors, sugar |
+| 13 | Niche Modules | 3 | 1 | stats, colors, sugar, lenientops, enumutils |
+
+## Scripts
+
+Three real-world scripts showing how Nim replaces Bash for common tasks:
+
+| Script | What it does | Concepts used |
+|--------|-------------|---------------|
+| `bulk_rename.nim` | Rename files by regex pattern in any directory | `walkDir`, `moveFile`, `strutils.replace` |
+| `log_tail.nim` | Read a log file, filter by severity, print summary | `readFile`, `splitLines`, `CountTable` |
+| `disk_usage.nim` | Walk a directory tree, compute total size, show largest file | `walkDirRec`, `getFileSize`, formatting |
+
+```bash
+nim c -r scripts/bulk_rename.nim ".tmp$" ".backup" ~/Downloads
+nim c -r scripts/log_tail.nim /var/log/syslog ERROR
+nim c -r scripts/disk_usage.nim ~/projects
+```
 
 ## Apps
 

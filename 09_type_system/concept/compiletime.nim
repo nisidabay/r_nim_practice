@@ -14,20 +14,6 @@ const STATUS = slowSetup()    # runs once, during compilation
 echo STATUS                    # "ready" — zero cost at runtime
 
 
-# ── static[T]: force an argument to be known at compile time ──────────
-
-proc tableSize(T: typedesc, maxSize: static[int]): int = maxSize * 2
-
-const size = tableSize(int, 100)      # OK — 100 is literal
-# const s2 = tableSize(int, myVar)    # ERROR — myVar is runtime value
-
-
-# ── staticRead: embed any file into the binary ────────────────────────
-
-const HOSTNAME = staticRead("/etc/hostname")
-echo HOSTNAME.strip()          # contents baked in — no fopen at runtime
-
-
 # ── when: compile-time if — dead branches NEVER compile ───────────────
 
 when defined(release):

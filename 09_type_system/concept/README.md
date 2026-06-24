@@ -1,4 +1,4 @@
-# 09 Type System — Distinct Types, Variants, and Metaprogramming
+# 09 Type System — Distinct Types, Variants, and Compile-Time
 
 ## Quick Start
 
@@ -6,7 +6,6 @@
 nim c -r 09_type_system/concept/distinct.nim
 nim c -r 09_type_system/concept/variants.nim
 nim c -r 09_type_system/concept/compiletime.nim
-nim c -r --mm:arc 09_type_system/concept/memory.nim
 ```
 
 ## Learning Path
@@ -15,8 +14,7 @@ nim c -r --mm:arc 09_type_system/concept/memory.nim
 |---|---|---|
 | `distinct.nim` | Distinct types: compiler-enforced type safety | `Euros = distinct float64` — can't mix with `Dollars` |
 | `variants.nim` | Variant objects: value is one of several shapes | `case kind` inside an object — tagged unions |
-| `compiletime.nim` | Compile-time execution: `static`, `when`, `const` | Run code DURING compilation, not at runtime |
-| `memory.nim` | ARC/ORC memory model | `--mm:arc`, move semantics, no GC pauses |
+| `compiletime.nim` | Compile-time execution: `when`, `const` | Run code DURING compilation, not at runtime |
 
 ## Common Patterns
 

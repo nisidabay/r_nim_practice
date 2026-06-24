@@ -10,10 +10,11 @@ type
 
 var
   price: Euros = 19.99.Euros
-  wallet: Dollars = 50.0.Dollars
+  wallet: Dollars = 50.0.Dollars    # will be used in examples below
 
 # price + wallet   # compile ERROR: can't mix Euros and Dollars
 # wallet * 2       # compile ERROR: Dollars have no arithmetic yet
+discard wallet  # keep for the commented-out examples
 
 # Give distinct types only the operations you want:
 proc `$`(e: Euros): string = "€" & $float64(e)
@@ -34,7 +35,6 @@ echo price * 3               # €59.97 — three items
 const Rate = 1.09            # 1 Euro = 1.09 Dollars
 
 proc toDollars(e: Euros): Dollars = Dollars(float64(e) * Rate)
-proc toEuros(d: Dollars): Euros = Euros(float64(d) / Rate)
 
 echo "€", float64(price), " = $", float64(price.toDollars())
 
@@ -44,18 +44,16 @@ echo "€", float64(price), " = $", float64(price.toDollars())
 type
   UserId = distinct int
   PostId = distinct int
-  Password = distinct string
-  SessionToken = distinct string
 
 var
   user: UserId = 42.UserId
   post: PostId = 10.PostId
 
 # user == post                    # ERROR — comparing UserId to PostId
-# let token: SessionToken = "abc" # ERROR — must be explicit conversion
+discard user
+discard post
 
 # This prevents:
-#   - Logging a password to stdout instead of a session token
 #   - Fetching a post with a user ID (wrong row, right type)
-#   - Passing raw strings between security contexts
+#   - Passing raw values between security contexts
 # The compiler becomes your guardrail.

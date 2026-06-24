@@ -1,13 +1,12 @@
 # Journal — `r_nim_practice`
 
-> Updated: 2026-06-12. Nim 2.2.6. 13 groups + 7 standalone apps.
+> Updated: 2026-06-24. Nim 2.2.6. 13 groups + 7 standalone apps.
 
 ## Structure
 
 ```
 r_nim_practice/
 ├── 01_basics/ ... 13_niche_modules/    ← 13-group curriculum (concept → exercises → project)
-├── reference/                            ← FFI calling + exporting
 ├── apps/                                 ← 7 standalone CLI tools
 │   ├── fortune/        (quote picker)
 │   ├── journal/        (fzf activity log)
@@ -34,13 +33,13 @@ r_nim_practice/
 | 04 | Sequences | 3 | 4 | `stats.nim` | seq[T], slicing, sequtils, enums, tuples |
 | 05 | Strings | 4 | 3 | `csv_parser.nim` | strutils, format, parsing, regex |
 | 06 | Collections | 3 | 3 | `counter.nim` | Table, HashSet, CountTable |
-| 07 | Filesystem | 2 | 3 | `tree.nim` | Files, dirs, walkDir, FFI |
+| 07 | Filesystem | 2 | 3 | `tree.nim` | Files, dirs, walkDir |
 | 08 | Error Handling | 2 | 3 | `fallback.nim` | try/except, Option[T], fallbacks |
-| 09 | Type System | 4 | 3 | `banking.nim` | Distinct types, variants, compile-time, memory |
+| 09 | Type System | 3 | 3 | `banking.nim` | Distinct types, variants, compile-time |
 | 10 | Concurrency | 3 | 1 | `parallel_downloader.nim` | Async, threads, process pipes |
 | 11 | Stdlib Essentials | 6 | 3 | `sysinfo.nim` | Math, OS, JSON, Algorithm, Modules, Arrays |
 | 12 | Ecosystem & Tooling | 8 | 3 | `log_analyzer.nim` | Terminal, logging, parsecfg, parsecsv, URI, pragmas, Nimble, OOP |
-| 13 | Niche Modules | 7 | 3 | `data_analyzer.nim` | Rationals, ropes, XML, scanf, stats, colors, sugar |
+| 13 | Niche Modules | 3 | 1 | `data_analyzer.nim` | stats, colors, sugar, lenientops, enumutils |
 
 ## Apps — standalone tools (use concepts from multiple groups)
 
@@ -73,17 +72,13 @@ from `std/random`. Minimal, single-purpose.
 ### Type system (09)
 - `variants.nim` — Variant objects (sum types). Exhaustive `case` checks. Compile-time safe.
 - `distinct.nim` — Distinct types prevent mixing meters/feet. Zero runtime cost.
-- `compiletime.nim` — Nim's superpower: `static`, `const`, `when` — compile-time computation.
-- `memory.nim` — ARC/ORC memory models. `--mm:arc` compilation flag.
+- `compiletime.nim` — Compile-time execution: `const` and `when`. Zero-cost abstractions.
 
 ### Concurrency (10)
 - `async.nim` — `{.async.}` pragma rewrites procs into state machines. `asyncdispatch` event loop.
 - `threads.nim` — `spawn()` with thread pool. `Channel[T]` for message passing. `sync()` barrier.
 - `pipes.nim` — Process pipes (`startProcess`, `inputStream`, `outputStream`).
 
-### FFI (reference/)
-- `ffi_calling.nim` — Zero-cost C interop. `{.importc, header.}` declares C functions directly.
-- `ffi_exporting.nim` — Export Nim code as `.so` callable from C/Python.
 
 ## Design principle
 

@@ -42,14 +42,6 @@ proc onStartup() {.used.} =
 
 onStartup()  # actually call it to show it works
 
-# ── experimental: enable experimental features ─────────────────────────
-
-{.experimental: "strictFuncs".}
-# This enables stricter checking of side effects in functions.
-# Typically used at the top of a module.
-
-echo "All pragmas demonstrated successfully"
-
 # ── deprecated: mark a symbol as deprecated ────────────────────────────
 
 proc oldFunction() {.used, deprecated: "use newFunction instead".} =

@@ -2,7 +2,10 @@
 #
 # Uses ref object and sequences to fake a database
 
-import std/[strutils, strformat, sha1]
+import std/[strutils, strformat]
+{.push warning[Deprecated]: off.}
+import std/sha1
+{.pop.}
 import mask_entry
 
 # --- Data Structures ---
@@ -52,6 +55,9 @@ proc createAccount() =
     return
 
   # Create new user with 0.00 initial balance
+  # NOTE: SHA-1 is cryptographically broken (collision attacks since 2017).
+  # This is a DEMO for teaching Nim types — do NOT use SHA-1 for real auth.
+  # Use bcrypt/argon2 via a Nimble package in production.
   let newUser = User(username: username, passwordHash: $sha1.secureHash(
       password), balance: 0.0)
   userDB.add(newUser)

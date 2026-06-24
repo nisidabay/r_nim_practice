@@ -21,10 +21,12 @@ echo "π = ", PI
 var score = 0              # int
 let greeting = "Hello"     # string
 var active = true          # bool
+echo score, " ", greeting, " active=", active
 
 # Explicit when clarity demands:
 let price: float = 9.99
 var buffer: seq[int] = @[]   # seq = dynamic array, @[] = empty
+echo "price=", price, " buffer.len=", buffer.len
 
 
 # ── Release build: optimized, standalone binary ───────────────────────
