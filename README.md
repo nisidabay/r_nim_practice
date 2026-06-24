@@ -1,8 +1,6 @@
 # Nim — From Zero to Real Tools
 
-A progressive, code-first curriculum for learning Nim through CLI scripting
-and task automation. No frameworks, no heavy dependencies — just the
-standard library and real problems.
+A progressive, code-first curriculum for learning Nim through CLI scripting and task automation. No frameworks, no heavy dependencies — just the standard library and real problems.
 
 ## Who This Is For
 
@@ -13,20 +11,20 @@ standard library and real problems.
 ## Installation
 
 ```bash
-# Arch Linux (package en repos oficiales)
+# Arch Linux (package in official repos)
 sudo pacman -S nim nimble
 
-# Cualquier distro — choosenim (version manager oficial)
+# Any distro — choosenim (official version manager)
 # curl -sS https://nim-lang.org/choosenim/init.sh | sh
 
 # macOS
 # brew install nim
 
-# Verificar
+# Verify
 nim --version
 ```
 
-Nim 2.2.6+. No necesitás runtime, no necesitás intérprete — compila a binario nativo.
+Nim 2.2.6+. No runtime needed, no interpreter needed — compiles to native binary.
 
 ## Getting Started
 
@@ -42,8 +40,7 @@ nim c -r 01_basics/concept/hello.nim
 
 ### Path A: The Sampler (~20 min)
 
-Read the concept READMEs. Each group has a **Now Build Your Own** challenge
-at the bottom. Pick one that interests you and build it:
+Read the concept READMEs. Each group has a **Now Build Your Own** challenge at the bottom. Pick one that interests you and build it:
 
 ```bash
 cat 01_basics/concept/README.md     # → "Write a greeting program"
@@ -66,14 +63,11 @@ cat README.md                   # see the map
 nim c -r hello.nim              # first concept
 ```
 
-Then keep going: `01_basics` → `02_control_flow` → `03_procedures` →
-`04_sequences` → `05_strings` → `06_collections` → `07_filesystem` →
-`08_error_handling` → `09_type_system` → `10_concurrency` → `11_stdlib` → `12_ecosystem_tooling` → `13_niche_modules`.
+Then keep going: `01_basics` → `02_control_flow` → `03_procedures` → `04_sequences` → `05_strings` → `06_collections` → `07_filesystem` → `08_error_handling` → `09_type_system` → `10_concurrency` → `11_stdlib` → `12_ecosystem_tooling` → `13_niche_modules`.
 
 ## The Toolbox
 
-Each group has a `project/` directory with a real CLI tool built from that
-group's concepts. Everything here solves an actual problem on a Linux machine.
+Each group has a `project/` directory with a real CLI tool built from that group's concepts. Everything here solves an actual problem on a Linux machine.
 
 | Group | Project | What it does |
 |---|---|---|
@@ -143,7 +137,7 @@ nim c -r scripts/disk_usage.nim ~/projects
 Standalone Nim CLI tools — real programs, not exercises.
 
 | App | Description |
-|---|---|---|
+|---|---|
 | `apps/fortune/` | Fortune-like random quote picker — reads `Computer_Quotes.txt`, picks one via `randomize()` |
 | `apps/journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
 | `apps/nim_nuggets/` | Spaced-repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
@@ -154,3 +148,4 @@ Standalone Nim CLI tools — real programs, not exercises.
 ## References
 
 See [`REFERENCES.md`](REFERENCES.md) for books, official docs, and community resources.
+
