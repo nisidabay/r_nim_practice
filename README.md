@@ -77,8 +77,7 @@ Each group has a `project/` directory with a real CLI tool built from that group
 | 03 | `filesize.nim` | CLI calculator — sum, rest, mul, div, potencias |
 | 04 | `stats.nim` | Statistics calculator — mean, median, min, max |
 | 05 | `csv_parser.nim` | CSV line parser — stdin, split, tabla alineada |
-| 06 | `counter.nim` | Word frequency counter — top 10 from any file |
-| 07 | `tree.nim` | Directory tree viewer — recursive walk with indented output |
+| 07 | `tree.nim`, `counter.nim`, `file_stats.nim` | Directory tree viewer + word frequency counter + line/word/char stats |
 | 08 | `fallback.nim` | URL fetcher with fallback chain — try until one works |
 | 09 | `banking.nim` | Terminal banking app with ref objects and accounts |
 | 10 | `parallel_downloader.nim` | Multi-file HTTP downloader with concurrent threads |
@@ -106,16 +105,16 @@ nim c -r --threads:on 10_concurrency/concept/async.nim
 | 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
 | 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates |
-| 04 | Sequences | 3 | 4 | seq[T], slicing, sequtils, enums, tuples |
-| 05 | Strings | 4 | 3 | strutils, format, parsing, regex |
-| 06 | Collections | 2 | 3 | Table, HashSet, bit sets |
-| 07 | Filesystem | 1 | 3 | File I/O, dir traversal, env vars |
-| 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
+| 04 | Sequences | 4 | 4 | seq[T], slicing, sequtils, enums, tuples, stats |
+| 05 | Strings | 4 | 2 | strutils, format, parsing, regex |
+| 06 | Collections | 2 | 4 | Table, HashSet, bit sets, CountTable |
+| 07 | Filesystem | 2 | 3 | File I/O, dir traversal, env vars, debugging |
+| 08 | Error Handling | 3 | 3 | try/except, Option[T], fallbacks, unittest |
 | 09 | Type System | 4 | 3 | Distinct types, variants, generics, compile-time |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
 | 11 | Stdlib Essentials | 5 | 3 | JSON, Algorithm, Modules, Arrays, Random |
-| 12 | Ecosystem & Tooling | 6 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, OOP |
-| 13 | Niche Modules | 2 | 1 | stats, sugar, lenientops, enumutils |
+| 12 | Ecosystem & Tooling | 7 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, OOP, performance |
+| 13 | Niche Modules | 0 | 1 | no concept files (exercises and project only) |
 
 ## Scripts
 

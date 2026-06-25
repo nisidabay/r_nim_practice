@@ -1,13 +1,12 @@
 # ex03_stats_report.nim — stats → color-coded report
 #   nim c -r exercises/ex03_stats_report.nim
 
-import std/stats, std/colors, std/math, std/strutils
+import std/stats, std/math, std/strutils
 
 # ── ANSI color helpers ──────────────────────────────────────────────────
 
-proc colorize(text: string, col: Color): string =
-  let (r, g, b) = extractRGB(col)
-  "\e[38;2;" & $r & ";" & $g & ";" & $b & "m" & text & "\e[0m"
+proc colorize(text: string, code: string): string =
+  code & text & "\e[0m"
 
 # ── Compute stats ───────────────────────────────────────────────────────
 
@@ -24,9 +23,9 @@ let sd = round(s.standardDeviation, 2)
 var report = "Statistics Report\n"
 report &= "=================\n"
 report &= "Count: " & $s.n & "\n"
-report &= "Mean:  " & colorize($mn, parseColor("green")) & "\n"
-report &= "Var:   " & colorize($vr, parseColor("yellow")) & "\n"
-report &= "Std:   " & colorize($sd, parseColor("red")) & "\n"
+report &= "Mean:  " & colorize($mn, "\e[32m") & "\n"
+report &= "Var:   " & colorize($vr, "\e[33m") & "\n"
+report &= "Std:   " & colorize($sd, "\e[31m") & "\n"
 report &= "=================\n"
 
 echo report

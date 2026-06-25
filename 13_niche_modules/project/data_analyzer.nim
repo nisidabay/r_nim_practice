@@ -6,7 +6,7 @@
 #
 # Data file format: one number per line, plain text. Fractions like 1/3 accepted.
 
-import std/[stats, colors, math, strutils, os]
+import std/[stats, math, strutils, os]
 
 # ── Default data (inline, no file needed to run) ──────────────────────────
 
@@ -48,12 +48,17 @@ proc parseLine(s: string): float =
 
 # ── ANSI color helpers ──────────────────────────────────────────────────
 
-proc ansiColor(col: Color): string =
-  let (r, g, b) = extractRGB(col)
-  "\e[38;2;" & $r & ";" & $g & ";" & $b & "m"
+proc ansiCode(name: string): string =
+  case name
+  of "green": "\e[32m"
+  of "yellow": "\e[33m"
+  of "red": "\e[31m"
+  of "cyan": "\e[36m"
+  of "white": "\e[37m"
+  else: "\e[0m"
 
-proc colorText(text: string, col: Color): string =
-  ansiColor(col) & text & "\e[0m"
+proc colorText(text: string, ansi: string): string =
+  ansi & text & "\e[0m"
 
 # ── Main ────────────────────────────────────────────────────────────────
 
@@ -91,11 +96,11 @@ proc main() =
   let sd = round(rs.standardDeviation, 2)
 
   # Build color-coded report
-  let green  = parseColor("green")
-  let yellow = parseColor("yellow")
-  let red    = parseColor("red")
-  let cyan   = parseColor("cyan")
-  let white  = parseColor("white")
+  let green  = ansiCode("green")
+  let yellow = ansiCode("yellow")
+  let red    = ansiCode("red")
+  let cyan   = ansiCode("cyan")
+  let white  = ansiCode("white")
 
   var report = ""
   report &= colorText("╔════════════════════════════╗\n", cyan)

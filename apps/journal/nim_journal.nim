@@ -58,7 +58,7 @@ proc saveEntries(es: seq[JournalEntry]) =
   except: raise
 
 proc nextId(es: seq[JournalEntry]): int =
-  if es.len == 0: 1 else: es.mapIt(it.id).max() + 1
+  if es.len == 0: 1 else: es.map(proc(x: JournalEntry): int = x.id).max() + 1
 
 proc longestLineLength(t: string): int =
   for line in t.splitLines():
@@ -120,7 +120,7 @@ proc truncateLine(s: string, maxLen = 30): string =
 
 proc formatOption(i: int, e: JournalEntry): string =
   let lines = e.body.splitLines()
-  let nonEmpty = lines.filterIt(it.strip() != "")
+  let nonEmpty = lines.filter(proc(x: string): bool = x.strip() != "")
   let preview = if nonEmpty.len > 0: truncateLine(nonEmpty[0]) else: "(empty)"
   fmt"{i:03} | {e.id:03} | {e.topic} | {preview}"
 
@@ -143,7 +143,7 @@ proc addEntry() =
     if execCmd(cmd) != 0:
       printError("Editor failed"); return
     body = readFile(tmp).splitLines()
-      .filterIt(not it.strip().startsWith('#'))
+      .filter(proc(x: string): bool = not x.strip().startsWith('#'))
       .join("\n")
       .strip()
   else:

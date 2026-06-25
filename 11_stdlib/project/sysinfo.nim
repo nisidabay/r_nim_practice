@@ -7,6 +7,7 @@
 # Reads ~/.nimrinfo config to select which sections to display.
 
 import std/[os, parseopt, strutils, json]
+# Uses std/parseopt for argument parsing — see module 11
 import configreader, formatter
 
 # ── Configuration ────────────────────────────────────────────────────────

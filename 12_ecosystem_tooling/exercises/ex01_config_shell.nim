@@ -6,8 +6,6 @@
 
 import std/parsecfg
 import std/os
-import std/terminal
-import std/strutils
 
 # ── Create a theme INI file ─────────────────────────────────────────────
 
@@ -31,20 +29,38 @@ let title  = cfg.getSectionValue("theme", "title", "Untitled")
 
 # ── Parse color names into terminal enums ───────────────────────────────
 
-let fgColor = parseEnum[ForegroundColor](fgName)
-let bgColor = parseEnum[BackgroundColor](bgName)
+let fgCode = case fgName
+  of "fgGreen": "\e[32m"
+  of "fgWhite": "\e[37m"
+  of "fgRed": "\e[31m"
+  of "fgBlue": "\e[34m"
+  of "fgYellow": "\e[33m"
+  of "fgCyan": "\e[36m"
+  of "fgMagenta": "\e[35m"
+  of "fgBlack": "\e[30m"
+  else: "\e[37m"
+let bgCode = case bgName
+  of "bgBlue": "\e[44m"
+  of "bgBlack": "\e[40m"
+  of "bgWhite": "\e[47m"
+  of "bgRed": "\e[41m"
+  of "bgGreen": "\e[42m"
+  of "bgYellow": "\e[43m"
+  of "bgCyan": "\e[46m"
+  of "bgMagenta": "\e[45m"
+  else: "\e[40m"
 
 # ── Apply colors and display ───────────────────────────────────────────
 
-setForegroundColor(fgColor)
-setBackgroundColor(bgColor)
+stdout.write fgCode
+stdout.write bgCode
 echo title
-resetAttributes()
+stdout.write "\e[0m"
 
 let desc = "This demo loads an INI theme file and applies its colors."
-setForegroundColor(fgColor)
+stdout.write fgCode
 echo desc
-resetAttributes()
+stdout.write "\e[0m"
 
 echo "\nLoaded from: ", themePath
 echo "fg: ", fgName, "  bg: ", bgName

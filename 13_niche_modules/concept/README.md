@@ -1,33 +1,11 @@
-# 13 Niche Modules — Stats and Sugar
+# 13 Niche Modules
 
-## Quick Start
+Concept files previously in this section have been moved to their appropriate sections:
 
-```bash
-nim c -r 13_niche_modules/concept/stats.nim
-nim c -r 13_niche_modules/concept/mini_modules.nim
-```
-
-## Learning Path
-
-| File | Module | Key Pattern |
-|------|--------|-------------|
-| `stats.nim` | std/stats | `RunningStat`, incremental mean/variance/stddev |
-| `mini_modules.nim` | sugar + lenientops + enumutils | `=>` lambda, `dump`, `collect`, implicit int↔float |
-
-## Common Patterns
-
-```nim
-import std/stats
-var s: RunningStat
-s.push([2.0, 4.0, 4.0, 4.0, 5.0, 5.0, 7.0, 9.0])
-echo s.mean, " ± ", s.standardDeviation
-
-import std/sugar
-let square = (x: int) => x * x
-```
+- `stats.nim` → See `04_sequences/concept/stats.nim`
+- `mini_modules.nim` → Removed (sugar, lenientops, enumutils — not taught)
 
 ## Test it
 
 Run `test_it.nim` — it feeds numbers into `RunningStat` and shows how
-mean and standard deviation change when you add extreme values. Try 10
-numbers, then 1000. Combine with `mini_modules.nim` and use `=>` lambdas.
+mean and standard deviation change when you add extreme values.

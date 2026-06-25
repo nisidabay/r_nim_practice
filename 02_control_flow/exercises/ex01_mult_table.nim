@@ -3,6 +3,10 @@
 import std/strutils
 
 for row in 1..5:
+  var line = ""
   for col in 1..5:
-    write(stdout, align($(row * col), 3))
-  echo ""
+    let n = row * col
+    let s = $n
+    if s.len < 2: line.add " "
+    line.add " " & s
+  echo line

@@ -1,6 +1,7 @@
 # Exercise 3: Time Logger
 # Measure how long fibonacci takes.
 import std/times
+# Uses std/times.getTime() — see module 11 for time operations
 
 proc fib(n: int): int =
   if n < 2: n

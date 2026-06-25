@@ -2,7 +2,7 @@
 # CLI calculator using procs, UFCS, and control flow (Modules 01-03).
 import std/[os, strutils]
 
-# parseFloat converts a string to float. See Module 05 for string operations.
+# parseFloat and quit(1) are covered in Section 01 (concepts/input.nim).
 
 proc add(a, b: float): float = a + b
 proc sub(a, b: float): float = a - b

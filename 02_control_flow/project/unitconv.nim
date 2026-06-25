@@ -5,26 +5,28 @@ import std/[os, strutils]
 if paramCount() < 3:
   echo "Usage: unitconv <value> <from> <to>"
   echo "  e.g. unitconv 10 km miles"
-  echo "  km/miles, kg/lbs, C/F"
+  echo "  km/miles, kg/lbs, c/f"
   quit(1)
 
-let
-  val = parseFloat(paramStr(1))
-  fromUnit = paramStr(2).toLowerAscii()
-  toUnit = paramStr(3).toLowerAscii()
+let val = parseFloat(paramStr(1))
+let fromUnit = paramStr(2)
+let toUnit = paramStr(3)
 
-proc convert(value: float, fromU, toU: string): float =
-  case fromU & "→" & toU:
-  of "km→miles": value * 0.621371
-  of "miles→km": value / 0.621371
-  of "kg→lbs": value * 2.20462
-  of "lbs→kg": value / 2.20462
-  of "c→f": value * 9/5 + 32
-  of "f→c": (value - 32) * 5/9
-  else:
-    echo "Unsupported conversion: ", fromU, " → ", toU
-    quit(1)
+var result: float
+if fromUnit == "km" and toUnit == "miles":
+  result = val * 0.621371
+elif fromUnit == "miles" and toUnit == "km":
+  result = val / 0.621371
+elif fromUnit == "kg" and toUnit == "lbs":
+  result = val * 2.20462
+elif fromUnit == "lbs" and toUnit == "kg":
+  result = val / 2.20462
+elif fromUnit == "c" and toUnit == "f":
+  result = val * 9.0 / 5.0 + 32.0
+elif fromUnit == "f" and toUnit == "c":
+  result = (val - 32.0) * 5.0 / 9.0
+else:
+  echo "Unsupported conversion: ", fromUnit, " -> ", toUnit
+  quit(1)
 
-let result = convert(val, fromUnit, toUnit)
-echo val.formatBiggestFloat(ffDecimal), " ", fromUnit,
-     " = ", result.formatBiggestFloat(ffDecimal), " ", toUnit
+echo val, " ", fromUnit, " = ", result, " ", toUnit

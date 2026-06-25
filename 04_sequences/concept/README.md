@@ -6,6 +6,7 @@
 nim c -r 04_sequences/concept/sequences.nim
 nim c -r 04_sequences/concept/enums_tuples.nim
 nim c -r 04_sequences/concept/sequtils.nim
+nim c -r 04_sequences/concept/stats.nim
 ```
 
 ## Learning Path
@@ -15,6 +16,7 @@ nim c -r 04_sequences/concept/sequtils.nim
 | `sequences.nim` | seq[T]: add, slice, insert, delete, multi-dimensional | `@[]` for empty, `@[1,2,3]` literal, `[^1]` from end |
 | `enums_tuples.nim` | Enums, tuples, unpacking | `Color = enum red, green, blue`; `let (x,y) = point` |
 | `sequtils.nim` | map, filter, fold, zip, concat | Functional programming in Nim: pure transforms, pipeline with UFCS |
+| `stats.nim` | std/stats | RunningStat, push, mean, variance, standardDeviation |
 
 ## Common Patterns
 

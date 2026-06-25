@@ -5,6 +5,7 @@
 # Demonstrates: parseUri, ref object with of, method vs proc dispatch
 
 import std/uri
+# Uses std/uri.parseUri() — see module 11 for URI handling
 
 # ── OOP hierarchy ───────────────────────────────────────────────────────
 

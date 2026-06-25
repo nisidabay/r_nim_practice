@@ -95,12 +95,12 @@ let people = @[
   Person(name: "Bob", dept: "eng"),
 ]
 
-import sequtils
 var byDept: Table[string, seq[Person]]
 for p in people:
   byDept.mgetOrPut(p.dept, @[]).add(p)
 
-echo byDept["eng"].mapIt(it.name)  # @["Carlos", "Bob"]
+for p in byDept["eng"]:
+  echo p.name
 
 
 # ── Object keys: needs a hash proc ────────────────────────────────────

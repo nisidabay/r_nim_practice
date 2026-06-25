@@ -4,13 +4,14 @@
 
 import std/[strutils, strformat]
 {.push warning[Deprecated]: off.}   # pragma: temporarily disable deprecation warnings
-import std/sha1                      # (see iterators.nim for what pragmas are)
+import std/sha1                      # (see iterators.nim for what pragmas are)   # std/sha1 — external library reference (not covered in this curriculum)
 {.pop.}                              # pragma: restore previous warning settings
 import mask_entry
 
 # --- Data Structures ---
 # We use 'ref object' so instances are passed by reference.
 type
+  # ref object inheritance — covered in module 12
   User = ref object
     username: string
     passwordHash: string
@@ -209,6 +210,7 @@ proc main() =
       echo "Invalid option."
 
 # --- Entry Point ---
+# isMainModule — Nim idiom for module entry point
 if isMainModule:
   main()
 

@@ -2,9 +2,9 @@
 import std/strutils
 
 proc reverse(s: string): string =
-  result = newString(s.len)
-  for i, c in s:
-    result[s.len - 1 - i] = c
+  result = ""
+  for i in 0 ..< s.len:
+    result = s[i] & result
 
 echo "racecar".reverse()
 echo "racecar" == "racecar".reverse()   # true

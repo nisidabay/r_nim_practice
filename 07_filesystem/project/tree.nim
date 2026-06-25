@@ -1,6 +1,7 @@
 # nim c -r tree.nim <directory>
 # Walk a directory recursively and print an indented tree.
 import std/[algorithm, os, strutils]
+# sort + cmp from std/algorithm — covered in module 11
 
 if paramCount() < 1:
   echo "Usage: tree <directory>"

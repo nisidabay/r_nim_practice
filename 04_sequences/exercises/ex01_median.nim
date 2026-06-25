@@ -1,10 +1,14 @@
-# Exercise 1: Random Median
-import std/random, std/algorithm
-# NOTE: std/random is covered in Module 11 (stdlib).
-randomize()
+# Exercise 1: Median
+var nums: array[5, int] = [42, 17, 88, 3, 65]
 
-var nums = newSeq[int](5)
-for i in 0..<5: nums[i] = rand(1..100)
-nums.sort()
-echo nums
+# Manual insertion sort (loops only — taught in Sections 01-04)
+for i in 1 ..< nums.len:
+  let key = nums[i]
+  var j = i - 1
+  while j >= 0 and nums[j] > key:
+    nums[j + 1] = nums[j]
+    dec j
+  nums[j + 1] = key
+
+echo "Sorted: ", nums
 echo "Median: ", nums[2]
