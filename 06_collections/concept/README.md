@@ -29,8 +29,8 @@ var ct = @["nim", "rust", "nim"].toCountTable()
 echo ct["nim"]                  # 2
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge un texto, pásalo a `toCountTable()`, saca las 5 palabras más
-frecuentes. Cambia el texto, prueba con `sortedBy` en vez de `sort`,
-filtra palabras cortas. Dale vueltas.
+Run `test_it.nim` — it takes a text, runs `toCountTable()`, and prints
+the 5 most frequent words. Change the text, try `sortedBy` instead of
+`sort`, filter out short words. Spin it around.

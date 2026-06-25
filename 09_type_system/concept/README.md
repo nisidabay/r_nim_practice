@@ -25,8 +25,8 @@ var price: Euros = 19.99.Euros
 # price + 5.0  # compile error — distinct types refuse to mix
 ```
 
-## Pónlo a prueba
+## Test it
 
-Define `type Celsius = distinct float` y `Fahrenheit = distinct float`.
-Escribe conversiones entre ellas. Intenta sumar Celsius + Fahrenheit
-— el compilador te frena. Eso es la seguridad de tipos en acción.
+Run `test_it.nim` — it defines `type Celsius = distinct float` and
+`Fahrenheit = distinct float`, with conversions between them. Try adding
+Celsius + Fahrenheit — the compiler stops you. That's type safety in action.

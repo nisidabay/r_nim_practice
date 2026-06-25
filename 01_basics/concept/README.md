@@ -25,8 +25,8 @@ const PI = 3.14159         # compile-time
 echo name, " is ", age      # comma-separated output
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `hello.nim` y `input.nim`, combínalos: pide un nombre y año de
-nacimiento, calcula la edad. Cambia el mensaje, cambia el formato.
-Sin presión — solo prueba y ve qué pasa.
+Run `test_it.nim` — it combines `hello.nim` and `input.nim`: asks for a
+name and birth year, then calculates the age. Change the message, change
+the format, break it and see what happens.

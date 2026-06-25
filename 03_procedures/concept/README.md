@@ -27,8 +27,8 @@ proc greet(name: string = "Carlos") = echo "Hola, " & name
 toUpperAscii("hello world")
 ```
 
-## Pónlo a prueba
+## Test it
 
-Escribe un `proc formatCurrency(amount: float, symbol: string): string`
-que devuelva `"$19.99"`. Pruébalo con UFCS: `19.99.formatCurrency("$")`.
-Cambia el símbolo, cambia los decimales, añade separadores de miles.
+Run `test_it.nim` — it implements `formatCurrency(amount: float, symbol: string): string`
+that returns `"$19.99"`. Try it with UFCS: `19.99.formatCurrency("$")`.
+Change the symbol, change the decimals, add thousands separators.

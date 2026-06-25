@@ -25,8 +25,8 @@ for kind, path in walkDir("."):
 echo getEnv("PATH")
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `walkDirRec`, imprime los archivos con indentación según la
-profundidad. Añade un contador de archivos, filtra por extensión,
-mide el tamaño total. Juega con las rutas.
+Run `test_it.nim` — it uses `walkDirRec` to print files indented by
+depth. It adds a file counter, filters by extension, and measures total
+size. Play with the paths.

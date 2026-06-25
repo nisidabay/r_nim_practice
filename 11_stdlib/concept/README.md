@@ -31,8 +31,8 @@ import std/random; randomize()
 let pick = sample(@["a", "b", "c"])
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `json.nim` y `algorithm.nim`, combínalos: parsea un JSON, ordénalo,
-imprime un resumen. Cambia los datos, cambia el criterio de ordenación,
-añade un campo nuevo. Sin presión — solo juega con los módulos.
+Run `test_it.nim` — it combines JSON parsing with sorting: parse JSON
+data, sort it, print a summary. Change the data, change the sort key,
+add a new field. No pressure — just play with the modules.

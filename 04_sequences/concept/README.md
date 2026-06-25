@@ -32,8 +32,8 @@ var named = (x: 5, y: 12)       # named tuple
 # odds → squares → sum = 35
 ```
 
-## Pónlo a prueba
+## Test it
 
-Crea una secuencia de números, ordénala con `sort`, calcula la mediana.
-Cambia los números, cambia el tamaño, usa `map` para transformarlos.
-Mete un `filter` antes de ordenar. Experimenta.
+Run `test_it.nim` — it creates a sequence of numbers, sorts with `sort`,
+and calculates the median. Change the numbers, change the size, use `map`
+to transform them. Add a `filter` before sorting. Experiment.

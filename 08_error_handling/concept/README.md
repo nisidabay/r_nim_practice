@@ -26,8 +26,8 @@ let maybe = some("found")
 if maybe.isSome: echo maybe.get()
 ```
 
-## Pónlo a prueba
+## Test it
 
-Escribe un `safeDivide` que devuelva `Option[float]` y `none` si b es 0.
-Encadénalo: `safeDivide(10, 2).flatMap(safeDivide(it, 5))`.
-Cambia los valores, prueba con cero, combínalo con `try/except`.
+Run `test_it.nim` — it implements `safeDivide` that returns `Option[float]`
+and `none` when b is 0. Chain it: `safeDivide(10, 2).flatMap(safeDivide(it, 5))`.
+Change the values, test with zero, combine with `try/except`.

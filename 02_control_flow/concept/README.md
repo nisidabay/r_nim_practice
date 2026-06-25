@@ -27,8 +27,8 @@ for i in 1..5: echo i
 while x < 3: x += 1
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `loops.nim`, mete un for dentro de otro for. Imprime una tabla de
-multiplicar del 1 al 5. Cambia el rango, cambia el formato, usa `while`
-en vez de `for`. Juega con ello.
+Run `test_it.nim` — it nests a `for` inside another `for` to print a
+multiplication table from 1 to 5. Change the range, change the format,
+swap `for` for `while`. Play with it.

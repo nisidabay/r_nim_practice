@@ -45,9 +45,9 @@ method speak(a: Animal): string {.base.}
 method speak(d: Dog): string = "Woof!"
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `parsecfg.nim`, `parsecsv.nim`, `logging.nim` y `oop.nim`.
-Combínalos: un config file define colores, un CSV tiene datos,
-logging los imprime, OOP modela las entradas. Cambia los colores,
-añade un nivel de log nuevo, mete otro tipo de entrada.
+Run `test_it.nim` — it combines config (parsecfg), CSV data, structured
+logging, and OOP models. A config file defines colors, a CSV holds data,
+logging prints it out, OOP models the entries. Change the colors, add a
+new log level, add another entry type.

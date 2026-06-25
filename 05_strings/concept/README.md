@@ -28,8 +28,8 @@ echo parseInt("42")                   # 42
 echo fmt"{3.14159:.2f}"              # 3.14
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge una línea CSV ("nombre,edad,ciudad"), haz `split(",")`, recorta
-con `strip`, imprímela alineada. Cambia el separador, añade más columnas,
-ponle cabecera. Sin presión — solo prueba.
+Run `test_it.nim` — it takes a CSV line ("name,age,city"), splits with
+`split(",")`, strips whitespace with `strip`, and prints it aligned.
+Change the separator, add more columns, add a header. No pressure — just try.

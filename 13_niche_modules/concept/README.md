@@ -26,8 +26,8 @@ import std/sugar
 let square = (x: int) => x * x
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `stats.nim`: métete números, mira cómo cambian la media y la
-desviación al añadir valores extremos. Prueba con 10 números, luego
-con 1000. Combínalo con `mini_modules.nim` y usa `=>` para las funciones.
+Run `test_it.nim` — it feeds numbers into `RunningStat` and shows how
+mean and standard deviation change when you add extreme values. Try 10
+numbers, then 1000. Combine with `mini_modules.nim` and use `=>` lambdas.

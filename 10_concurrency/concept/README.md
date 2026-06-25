@@ -31,8 +31,8 @@ let p = startProcess("ls", args = ["-la"])
 for line in p.outputStream.lines: echo line
 ```
 
-## Pónlo a prueba
+## Test it
 
-Coge `threads.nim`, lanza 3 hilos que cada uno haga un cálculo,
-recoge los resultados con un `Channel`. Cambia el número de hilos,
-prueba con tareas más pesadas. Mira cómo se acelera.
+Run `test_it.nim` — it spawns 3 threads, each doing a calculation, and
+collects results with a `Channel`. Change the number of threads, try
+heavier tasks, see how it speeds up.
