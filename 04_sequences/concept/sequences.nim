@@ -1,5 +1,7 @@
 # nim c -r sequences.nim
 # seq[T] is Nim's dynamic array — growable, sliceable, iterable.
+# NOTE: That [T] means "generic" — seq works with any type.
+# You write seq[int], seq[string], seq[YourType]. See Module 09.
 
 var nums: seq[int] = @[]        # empty sequence
 nums.add(1)

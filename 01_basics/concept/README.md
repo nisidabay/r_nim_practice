@@ -25,7 +25,8 @@ const PI = 3.14159         # compile-time
 echo name, " is ", age      # comma-separated output
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a program that asks for a name and birth year, then prints:
-"Hello, [name]. You are [age] years old."
+Coge `hello.nim` y `input.nim`, combínalos: pide un nombre y año de
+nacimiento, calcula la edad. Cambia el mensaje, cambia el formato.
+Sin presión — solo prueba y ve qué pasa.

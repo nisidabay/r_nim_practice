@@ -83,6 +83,8 @@ refTable["answer"] = 42
 
 # ── Grouping by key ───────────────────────────────────────────────────
 
+# NOTE: `object` is a structured type with named fields (like a struct in C).
+# Objects are covered in depth in Module 09.
 type Person = object
   name: string
   dept: string

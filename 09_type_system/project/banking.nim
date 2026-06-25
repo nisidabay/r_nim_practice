@@ -3,9 +3,9 @@
 # Uses ref object and sequences to fake a database
 
 import std/[strutils, strformat]
-{.push warning[Deprecated]: off.}
-import std/sha1
-{.pop.}
+{.push warning[Deprecated]: off.}   # pragma: temporarily disable deprecation warnings
+import std/sha1                      # (see iterators.nim for what pragmas are)
+{.pop.}                              # pragma: restore previous warning settings
 import mask_entry
 
 # --- Data Structures ---

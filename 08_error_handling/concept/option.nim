@@ -1,5 +1,6 @@
 # Option[T] is either some(value) or none(T). The compiler forces you to
 # check before unwrapping. No null dereference, no forgotten nil check.
+# NOTE: Option[T] uses generics — that [T] means "any type". See Module 09.
 
 import std/options
 
@@ -47,3 +48,8 @@ proc getPermissions(u: User): Option[string] =
 
 echo findUser(1).flatMap(getPermissions)   # some("full_access")
 # Without flatMap: Option[Option[string]] — nested mess
+
+# Option[T] vs exceptions:
+#   Option[T] — use when "no value" is a normal possibility (e.g., not found, empty)
+#   try/except — use when failure is exceptional (e.g., network error, invalid data)
+# Both are valid; prefer Option for expected absences, exceptions for surprises.

@@ -4,6 +4,9 @@
 import std/strutils
 
 # parseInt with exception handling
+# try/except is Nim's error-handling mechanism. It's covered properly in
+# Module 08 — for now, just know that try attempts an operation that might
+# fail, and except catches the error.
 let raw = "42"
 try:
   let n = parseInt(raw)

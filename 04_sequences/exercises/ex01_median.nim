@@ -1,5 +1,6 @@
 # Exercise 1: Random Median
 import std/random, std/algorithm
+# NOTE: std/random is covered in Module 11 (stdlib).
 randomize()
 
 var nums = newSeq[int](5)

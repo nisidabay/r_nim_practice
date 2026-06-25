@@ -8,6 +8,8 @@ proc expensiveCalc(): int =
   echo "EXPENSIVE: this runs!"
   42
 
+# `when` runs at compile-time (not runtime). It's like `if` but evaluated during
+# compilation — dead branches are removed from the binary. More in Module 09.
 template debugLog(msg: string, value: int) =
   when defined(debug):
     echo "[DEBUG] ", msg, ": ", value

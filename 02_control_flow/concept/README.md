@@ -14,7 +14,7 @@ nim c -r 02_control_flow/concept/iterators.nim
 |---|---|---|
 | `control_flow.nim` | if/elif/else, case/of | No parens, indentation is the block |
 | `loops.nim` | for, while, break, continue | `1..5` inclusive, `0..<5` exclusive, `countdown(5,1)` |
-| `iterators.nim` | Custom iterators, yield | `yield` returns one value at a time; `{.inline.}` for speed |
+| `iterators.nim` | Custom iterators, yield | `iterator name(params): type = body`; `yield` returns one value at a time; `{.inline.}` pragma for speed |
 
 ## Common Patterns
 
@@ -27,6 +27,8 @@ for i in 1..5: echo i
 while x < 3: x += 1
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a program that prints a multiplication table (1×1 through 5×5) using nested for loops. Format the output as a grid.
+Coge `loops.nim`, mete un for dentro de otro for. Imprime una tabla de
+multiplicar del 1 al 5. Cambia el rango, cambia el formato, usa `while`
+en vez de `for`. Juega con ello.

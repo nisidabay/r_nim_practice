@@ -1,36 +1,37 @@
-# nim c -r filesize.nim <directory | file>
-# Show disk usage like `du -sh` for a given path.
-import std/[os, strutils, strformat]
+# nim c -r filesize.nim <num1> <op> <num2>
+# CLI calculator using procs, UFCS, and control flow (Modules 01-03).
+import std/[os, strutils]
 
-proc formatSize(bytes: int64): string =
-  const units = ["B", "KB", "MB", "GB"]
-  var size = float(bytes)
-  var unitIdx = 0
-  while size >= 1024 and unitIdx < units.high:
-    size = size / 1024
-    inc unitIdx
-  fmt"{size:.1f} {units[unitIdx]}"
+# parseFloat converts a string to float. See Module 05 for string operations.
 
-proc dirSize(path: string): int64 =
-  for kind, subpath in walkDir(path):
-    case kind
-    of pcFile: result += getFileSize(subpath)
-    of pcDir: result += dirSize(subpath)
-    else: discard
+proc add(a, b: float): float = a + b
+proc sub(a, b: float): float = a - b
+proc mul(a, b: float): float = a * b
+proc divide(a, b: float): float = a / b
 
-if paramCount() < 1:
-  echo "Usage: filesize <path>"
+proc power(a, b: float): float =
+  result = 1.0
+  for _ in 1 .. int(b):
+    result *= a
+
+proc calculate(a: float, op: string, b: float): string =
+  case op
+  of "+": result = $(a.add(b))
+  of "-": result = $(a.sub(b))
+  of "*": result = $(a.mul(b))
+  of "/":
+    if b == 0.0: result = "Error: division by zero"
+    else: result = $(a.divide(b))
+  of "^": result = $(a.power(b))
+  else: result = "Error: unknown operator '" & op & "'"
+
+if paramCount() != 3:
+  echo "Usage: filesize <num1> <op> <num2>"
+  echo "Operators: + - * / ^"
   quit(1)
 
-let target = paramStr(1)
-if not existsOrCreateDir(target) and not fileExists(target):
-  echo "Path not found: ", target
-  quit(1)
+let a = parseFloat(paramStr(1))
+let op = paramStr(2)
+let b = parseFloat(paramStr(3))
 
-var size: int64
-if fileExists(target):
-  size = getFileSize(target)
-else:
-  size = dirSize(target)
-
-echo target, "  ", formatSize(size)
+echo paramStr(1), " ", op, " ", paramStr(3), " = ", calculate(a, op, b)

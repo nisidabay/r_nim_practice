@@ -14,10 +14,10 @@ else:
 
 echo "\n=== case/of ==="
 
-let grade = 'B'
+let grade = "B"
 case grade
-of 'A': echo "Excellent"
-of 'B', 'C': echo "Pass"
+of "A": echo "Excellent"
+of "B", "C": echo "Pass"
 else: echo "Retake"
 
 # case works with strings too:

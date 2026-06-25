@@ -28,7 +28,8 @@ echo parseInt("42")                   # 42
 echo fmt"{3.14159:.2f}"              # 3.14
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a CSV parser: read a line of comma-separated values, split, trim each field,
-and print as a table with aligned columns.
+Coge una línea CSV ("nombre,edad,ciudad"), haz `split(",")`, recorta
+con `strip`, imprímela alineada. Cambia el separador, añade más columnas,
+ponle cabecera. Sin presión — solo prueba.

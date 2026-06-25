@@ -1,5 +1,5 @@
 CC = nim
-CFLAGS = c -r
+CFLAGS = c
 
 EXERCISES = ex01_greeting ex02_temperature
 

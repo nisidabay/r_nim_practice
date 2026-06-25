@@ -1,54 +1,58 @@
-# nim c -r csv_parser.nim <filename>
-# Read a CSV file, split lines, trim fields, align columns.
+# nim c -r csv_parser.nim
+# Read CSV data from stdin, split lines, trim fields, align columns.
 import std/[os, strutils]
+# NOTE: For reading real files, see Module 07 (filesystem).
 
-if paramCount() < 1:
-  echo "Usage: csv_parser <filename>"
-  echo "  e.g. csv_parser data.csv"
-  quit(1)
+proc printUsage() =
+  echo "Usage: echo <csv-data> | nim c -r csv_parser.nim"
+  echo "  Reads CSV from stdin and prints an aligned table."
+  echo "  Example: echo \"name,age,city\" | nim c -r csv_parser.nim"
 
-let filename = paramStr(1)
-if not fileExists(filename):
-  echo "File not found: ", filename
-  quit(1)
+proc parseLines(): seq[seq[string]] =
+  result = @[]
+  while not stdin.endOfFile():
+    let line = stdin.readLine().strip()
+    if line.len == 0:
+      continue
+    let fields = line.split(',')
+    var row: seq[string] = @[]
+    for f in fields:
+      row.add(f.strip())
+    result.add(row)
 
-let content = readFile(filename)
-var lines = content.splitLines()
-if lines.len == 0 or (lines.len == 1 and lines[0].len == 0):
-  echo "Empty file."
+proc colWidths(rows: seq[seq[string]]): seq[int] =
+  result = @[]
+  for row in rows:
+    for i, f in row:
+      if i >= result.len:
+        result.add(f.len)
+      elif f.len > result[i]:
+        result[i] = f.len
+
+proc sepLine(widths: seq[int]): string =
+  var parts: seq[string] = @[]
+  for w in widths:
+    parts.add(repeat('-', w))
+  result = parts.join(" + ")
+
+proc display(rows: seq[seq[string]]; widths: seq[int]) =
+  for i, row in rows:
+    var parts: seq[string] = @[]
+    for j, f in row:
+      parts.add(f.alignLeft(widths[j]))
+    echo "  ", parts.join(" | ")
+    if i == 0:
+      echo "  ", sepLine(widths)
+
+# --- Main ---
+if paramCount() > 0 and paramStr(1) in ["--help", "-h"]:
+  printUsage()
   quit(0)
 
-# Remove empty trailing lines
-while lines.len > 0 and lines[^1].strip().len == 0:
-  lines.del(lines.high)
+let rows = parseLines()
+if rows.len == 0:
+  printUsage()
+  quit(0)
 
-# Parse all rows into fields
-var rows: seq[seq[string]] = @[]
-var colWidths: seq[int] = @[]
-
-for line in lines:
-  let stripped = line.strip()
-  if stripped.len == 0:
-    continue
-  let fields = stripped.split(',')
-  var rowFields: seq[string] = @[]
-  for f in fields:
-    rowFields.add(f.strip())
-  rows.add(rowFields)
-
-  # Track max width per column
-  for i, f in rowFields.pairs:
-    if i >= colWidths.len:
-      colWidths.add(f.len)
-    elif f.len > colWidths[i]:
-      colWidths[i] = f.len
-
-# Print aligned rows
-for row in rows:
-  var outLine = ""
-  for i, f in row.pairs:
-    if i > 0:
-      outLine.add("  ")
-    let width = if i < colWidths.len: colWidths[i] else: f.len
-    outLine.add(f.alignLeft(width))
-  echo outLine
+let widths = colWidths(rows)
+display(rows, widths)

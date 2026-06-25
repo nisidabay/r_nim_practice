@@ -1,5 +1,21 @@
 # sequtils — map, filter, fold, zip on sequences
 #   import std/sequtils
+#
+# ── This is functional programming ────────────────────────────────────
+# map / filter / fold come from functional programming. The idea:
+#   • Don't mutate data — transform it
+#   • Pure functions: same input → same output
+#   • Compose operations: pipeline with UFCS (Module 03)
+#
+# Nim supports this via:
+#   • func     — compile-time pure (Module 03)
+#   • let      — immutable bindings (Module 01)
+#   • sequtils — map, filter, foldl, zip
+#   • UFCS     — chain operations: data.map(f).filter(g)
+#
+# You don't NEED to write functional code in Nim. But when you do,
+# it's cleaner, safer, and often shorter.
+# ─────────────────────────────────────────────────────────────────────
 
 import std/sequtils
 
@@ -7,6 +23,9 @@ let numbers = @[1, 2, 3, 4, 5, 6, 7, 8]
 
 # ── map: transform each element ───────────────────────────────────────
 
+# This `proc(x: int): int = x * 2` is an anonymous (inline) proc — a function
+# value passed directly as an argument. Procs are first-class values in Nim.
+# See Module 03 for proc basics.
 echo numbers.map(proc(x: int): int = x * 2)   # @[2, 4, 6, 8, 10, 12, 14, 16]
 echo numbers.mapIt(it * 3)                     # @[3, 6, 9, 12, 15, 18, 21, 24]
 

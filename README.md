@@ -40,12 +40,13 @@ nim c -r 01_basics/concept/hello.nim
 
 ### Path A: The Sampler (~20 min)
 
-Read the concept READMEs. Each group has a **Now Build Your Own** challenge at the bottom. Pick one that interests you and build it:
+Read the concept READMEs. Each group ends with **Pónlo a prueba** — una
+invitación a practicar sin presión. Coge el código, modifícalo, rompe algo:
 
 ```bash
-cat 01_basics/concept/README.md     # → "Write a greeting program"
-cat 05_strings/concept/README.md    # → "Write a CSV parser"
-cat 09_type_system/concept/README.md   # → "Celsius ↔ Fahrenheit distinct types"
+cat 01_basics/concept/README.md     # → combina hello.nim + input.nim
+cat 05_strings/concept/README.md    # → parte un CSV con split()
+cat 09_type_system/concept/README.md   # → prueba tipos distinct
 ```
 
 ### Path B: Systematic (~several weeks)
@@ -73,9 +74,9 @@ Each group has a `project/` directory with a real CLI tool built from that group
 |---|---|---|
 | 01 | `greeting.nim` | CLI greeting that prints your age from birth year |
 | 02 | `unitconv.nim` | Unit converter — km/miles, kg/lbs, °C/°F |
-| 03 | `filesize.nim` | Disk usage like `du -sh` for any path |
+| 03 | `filesize.nim` | CLI calculator — sum, rest, mul, div, potencias |
 | 04 | `stats.nim` | Statistics calculator — mean, median, min, max |
-| 05 | `csv_parser.nim` | CSV file reader — splits lines, trims fields, aligns columns |
+| 05 | `csv_parser.nim` | CSV line parser — stdin, split, tabla alineada |
 | 06 | `counter.nim` | Word frequency counter — top 10 from any file |
 | 07 | `tree.nim` | Directory tree viewer — recursive walk with indented output |
 | 08 | `fallback.nim` | URL fetcher with fallback chain — try until one works |
@@ -104,17 +105,17 @@ nim c -r --threads:on 10_concurrency/concept/async.nim
 |---|---|---|---|---|
 | 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
-| 03 | Procedures | 4 | 3 | proc, result, UFCS, time |
+| 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates |
 | 04 | Sequences | 3 | 4 | seq[T], slicing, sequtils, enums, tuples |
 | 05 | Strings | 4 | 3 | strutils, format, parsing, regex |
-| 06 | Collections | 3 | 3 | Table, HashSet, CountTable |
-| 07 | Filesystem | 2 | 3 | Files, dirs, walkDir |
+| 06 | Collections | 2 | 3 | Table, HashSet, bit sets |
+| 07 | Filesystem | 1 | 3 | File I/O, dir traversal, env vars |
 | 08 | Error Handling | 2 | 3 | try/except, Option[T], fallbacks |
-| 09 | Type System | 3 | 3 | Distinct types, variants, compile-time |
+| 09 | Type System | 4 | 3 | Distinct types, variants, generics, compile-time |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
-| 11 | Stdlib Essentials | 6 | 3 | Math, OS, JSON, Algorithm, Modules, Arrays |
-| 12 | Ecosystem & Tooling | 8 | 3 | Terminal, logging, parsecfg, parsecsv, URI, pragmas, Nimble, OOP |
-| 13 | Niche Modules | 3 | 1 | stats, colors, sugar, lenientops, enumutils |
+| 11 | Stdlib Essentials | 5 | 3 | JSON, Algorithm, Modules, Arrays, Random |
+| 12 | Ecosystem & Tooling | 6 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, OOP |
+| 13 | Niche Modules | 2 | 1 | stats, sugar, lenientops, enumutils |
 
 ## Scripts
 

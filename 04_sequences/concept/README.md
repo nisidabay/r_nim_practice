@@ -14,7 +14,7 @@ nim c -r 04_sequences/concept/sequtils.nim
 |---|---|---|
 | `sequences.nim` | seq[T]: add, slice, insert, delete, multi-dimensional | `@[]` for empty, `@[1,2,3]` literal, `[^1]` from end |
 | `enums_tuples.nim` | Enums, tuples, unpacking | `Color = enum red, green, blue`; `let (x,y) = point` |
-| `sequtils.nim` | map, filter, fold, zip, concat | Functional sequence operations |
+| `sequtils.nim` | map, filter, fold, zip, concat | Functional programming in Nim: pure transforms, pipeline with UFCS |
 
 ## Common Patterns
 
@@ -26,9 +26,14 @@ echo nums[0..<2]                # @[2, 3]
 nums.setLen(1)                  # @[2]
 
 var named = (x: 5, y: 12)       # named tuple
+
+# Functional pipeline (sequtils + UFCS)
+@[1, 2, 3, 4, 5].filterIt(it mod 2 == 1).mapIt(it * it).foldl(a + b)
+# odds → squares → sum = 35
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a program that creates a sequence of 5 random numbers, sorts them,
-and prints the median.
+Crea una secuencia de números, ordénala con `sort`, calcula la mediana.
+Cambia los números, cambia el tamaño, usa `map` para transformarlos.
+Mete un `filter` antes de ordenar. Experimenta.

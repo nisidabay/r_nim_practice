@@ -31,7 +31,8 @@ let p = startProcess("ls", args = ["-la"])
 for line in p.outputStream.lines: echo line
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a concurrent URL fetcher: spawn threads to download multiple URLs in
-parallel, collect results via channels, and print the first byte of each response.
+Coge `threads.nim`, lanza 3 hilos que cada uno haga un cálculo,
+recoge los resultados con un `Channel`. Cambia el número de hilos,
+prueba con tareas más pesadas. Mira cómo se acelera.

@@ -5,7 +5,6 @@
 ```bash
 nim c -r 06_collections/concept/tables.nim
 nim c -r 06_collections/concept/sets.nim
-nim c -r 06_collections/concept/count_table.nim
 ```
 
 ## Learning Path
@@ -14,7 +13,6 @@ nim c -r 06_collections/concept/count_table.nim
 |---|---|---|
 | `tables.nim` | Table, OrderedTable — key-value storage | `t[key] = value`, `hasKey`, `del`, `pairs()` |
 | `sets.nim` | HashSet, OrderedSet, bit set | `incl/excl`, union/intersection/difference |
-| `count_table.nim` | CountTable: frequency counting | `ct.inc(key)`, `ct.largest`, `toCountTable()` |
 
 ## Common Patterns
 
@@ -26,10 +24,13 @@ var s: HashSet[int]
 s.incl(1); s.incl(2)
 echo 1 in s                     # true
 
+# CountTable lives in tables.nim:
 var ct = @["nim", "rust", "nim"].toCountTable()
 echo ct["nim"]                  # 2
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Count word frequencies from a text file. Print the top 5 words by occurrence.
+Coge un texto, pásalo a `toCountTable()`, saca las 5 palabras más
+frecuentes. Cambia el texto, prueba con `sortedBy` en vez de `sort`,
+filtra palabras cortas. Dale vueltas.

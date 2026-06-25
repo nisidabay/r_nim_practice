@@ -1,6 +1,7 @@
 # sets — bitsets and hash sets
 #   import std/sets (for HashSet, OrderedSet)
 #   set[T] is built-in (no import needed)
+#   NOTE: set[T], HashSet[T] use generics — see Module 09.
 
 import std/sets
 

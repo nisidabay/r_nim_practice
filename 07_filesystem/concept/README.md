@@ -4,15 +4,13 @@
 
 ```bash
 nim c -r 07_filesystem/concept/files.nim
-nim c -r 07_filesystem/concept/walk_files.nim
 ```
 
 ## Learning Path
 
 | File | Concept | Key Pattern |
 |---|---|---|
-| `files.nim` | readFile, writeFile, readLines, fileExists, removeFile | Standard I/O — no streams boilerplate |
-| `walk_files.nim` | walkDir, walkDirRec, createDir, removeDir | Recursive directory traversal |
+| `files.nim` | File I/O, directory traversal, environment, shell | `readFile`/`writeFile`, `walkDir`/`walkDirRec`, `getEnv`, `execShellCmd` |
 
 ## Common Patterns
 
@@ -23,9 +21,12 @@ for line in lines("/tmp/test.txt"): echo line
 
 for kind, path in walkDir("."):
   echo kind, " ", path
+
+echo getEnv("PATH")
 ```
 
-## Now Build Your Own
+## Pónlo a prueba
 
-Write a `tree` clone: recursively walk a directory and print it as an
-indented tree structure.
+Coge `walkDirRec`, imprime los archivos con indentación según la
+profundidad. Añade un contador de archivos, filtra por extensión,
+mide el tamaño total. Juega con las rutas.
