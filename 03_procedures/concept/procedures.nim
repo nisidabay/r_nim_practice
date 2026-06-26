@@ -48,6 +48,7 @@ proc maybe(): int {.discardable.} =
   return 42
 
 maybe() # no error even though we ignore result
+echo maybe() # 42
 
 # ── func: a proc with NO side effects ─────────────────────────────────
 # `func` is like `proc` but the compiler ENFORCES purity at compile time.
@@ -64,6 +65,8 @@ maybe() # no error even though we ignore result
 proc greetAndLog(name: string): string =
   echo "logging: " & name # ⚠ side effect
   result = "Hello, " & name
+
+echo greetAndLog("Ana")
 
 # func greetPure(name: string): string =
 #   echo "nope"                    # ❌ COMPILE ERROR: 'echo' has side effects
