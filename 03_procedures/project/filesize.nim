@@ -2,7 +2,7 @@
 # CLI calculator using procs, UFCS, and control flow (Modules 01-03).
 import std/[os, strutils]
 
-# parseFloat and quit(1) are covered in Section 01 (concepts/input.nim).
+# parseFloat covered in concept/input.nim, quit(1) in concept/cliargs.nim (Section 01).
 
 proc add(a, b: float): float = a + b
 proc sub(a, b: float): float = a - b
