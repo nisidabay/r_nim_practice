@@ -3,9 +3,7 @@
 # Uses ref object and sequences to fake a database
 
 import std/[strutils, strformat]
-{.push warning[Deprecated]: off.}   # pragma: temporarily disable deprecation warnings
-import std/sha1                      # (see iterators.nim for what pragmas are)   # std/sha1 — external library reference (not covered in this curriculum)
-{.pop.}                              # pragma: restore previous warning settings
+import std/sha1
 import mask_entry
 
 # --- Data Structures ---
@@ -58,7 +56,9 @@ proc createAccount() =
   # Create new user with 0.00 initial balance
   # NOTE: SHA-1 is cryptographically broken (collision attacks since 2017).
   # This is a DEMO for teaching Nim types — do NOT use SHA-1 for real auth.
-  # Use bcrypt/argon2 via a Nimble package in production.
+  # Nim 2.2.6's stdlib provides std/sha1 but not std/sha2; SHA-1 is the only
+  # built-in hashing option per the project's stdlib-only policy.
+  # For production, install the `checksums` package via Nimble for SHA-2/SHA-3.
   let newUser = User(username: username, passwordHash: $sha1.secureHash(
       password), balance: 0.0)
   userDB.add(newUser)

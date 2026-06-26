@@ -3,3 +3,18 @@ nimcache/
 *.out
 .hermes/
 openspec/
+
+# Compiled Nim binaries (produced by `nim c -r <file>.nim`)
+procedures
+templates
+string_format
+banking
+parallel_downloader
+nim_journal
+nim_nuggets
+password
+test_password
+todo
+usb_mounter
+usb_tui
+quotes

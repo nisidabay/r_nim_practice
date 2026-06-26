@@ -24,7 +24,7 @@ type
 
 # --- Visuals (Simulating Rich Library) ---
 
-proc longestLineLength(text: string): int =
+func longestLineLength(text: string): int =
   var maxLen = 0
   for line in text.splitLines():
     if line.len > maxLen:

@@ -5,6 +5,7 @@
 ```bash
 nim c -r 03_procedures/concept/procedures.nim
 nim c -r 03_procedures/concept/ufcs.nim
+nim c -r 03_procedures/concept/templates.nim
 ```
 
 ## Learning Path
@@ -13,6 +14,7 @@ nim c -r 03_procedures/concept/ufcs.nim
 |---|---|---|
 | `procedures.nim` | proc, func, return, result, defaults | Syntax diagram: `proc name(params): type = body`; `func` = no side effects; `result` is implicit return variable; `{.discardable.}` pragma |
 | `ufcs.nim` | Unified Function Call Syntax | `obj.method()` ≡ `method(obj)` — pipeline style |
+| `templates.nim` | template, lazy argument evaluation | Template defers argument evaluation until used; proc evaluates eagerly |
 
 ## Common Patterns
 

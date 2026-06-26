@@ -24,17 +24,17 @@ type
 # --- Global Todo List ---
 const VERSION = "0.0.1"
 var todos: seq[Todo] = @[]
-let SCRIPTDIR = getHomeDir() / "bin" / "nim_todos"
-let TODO_FILE = SCRIPTDIR / "todos.json"
-let SOUND_FILE = SCRIPTDIR / "bell.mp3"
+let scriptDir = getHomeDir() / "bin" / "nim_todos"
+let TODO_FILE = scriptDir / "todos.json"
+let SOUND_FILE = scriptDir / "bell.mp3"
 
 # --- Procedures ---
 
-# Ensure the SCRIPTDIR exists
+# Ensure the scriptDir exists
 proc checkScriptDir() =
-  if not dirExists(SCRIPTDIR):
+  if not dirExists(scriptDir):
     try:
-      createDir(SCRIPTDIR)
+      createDir(scriptDir)
     except Exception as e:
       echo &"Error: {e.msg}"
 
@@ -58,57 +58,57 @@ proc loadTodos() =
         todos = @[]
         return
 
-      let json_data = parseJson(data)
+      let jsonData = parseJson(data)
       
       # Ensure the root of the JSON is an array
-      if json_data.kind != JArray:
+      if jsonData.kind != JArray:
         echo "Error loading todos: Expected a JSON array in " & TODO_FILE
         return
 
-      var loaded_todos: seq[Todo] = @[]
+      var loadedTodos: seq[Todo] = @[]
 
-      for node in json_data:
-        var todo_item = new(Todo)
+      for node in jsonData:
+        var todoItem = new(Todo)
 
         if node.hasKey("task"):
-          todo_item.task = node["task"].str
+          todoItem.task = node["task"].str
         else:
-          todo_item.task = "no task"
+          todoItem.task = "no task"
         
         if node.hasKey("completed"):
-          todo_item.completed = node["completed"].getBool
+          todoItem.completed = node["completed"].getBool
         else:
-          todo_item.completed = false
+          todoItem.completed = false
         
         if node.hasKey("time"):
-          todo_item.time = node["time"].str
+          todoItem.time = node["time"].str
         else:
-          todo_item.time = ""
+          todoItem.time = ""
           
         if node.hasKey("sound"):
-          todo_item.sound = node["sound"].getBool
+          todoItem.sound = node["sound"].getBool
         else:
-          todo_item.sound = false
+          todoItem.sound = false
 
         if node.hasKey("priority"):
           try:
-            todo_item.priority = parseEnum[Priority](node["priority"].str.toLower())
+            todoItem.priority = parseEnum[Priority](node["priority"].str.toLower())
           except ValueError:
-            todo_item.priority = Priority.low
+            todoItem.priority = Priority.low
         else:
-          todo_item.priority = Priority.low
+          todoItem.priority = Priority.low
 
         if node.hasKey("category"):
           try:
-            todo_item.category = parseEnum[Category](node["category"].str)
+            todoItem.category = parseEnum[Category](node["category"].str)
           except ValueError:
-            todo_item.category = Category.personal
+            todoItem.category = Category.personal
         else:
-          todo_item.category = Category.personal
+          todoItem.category = Category.personal
         
-        loaded_todos.add(todo_item)
+        loadedTodos.add(todoItem)
         
-      todos = loaded_todos
+      todos = loadedTodos
     except Exception as e:
       echo &"Error loading todos: {e.msg}"
   else:
@@ -250,7 +250,7 @@ proc scheduleTodo(index: int, timeStr: string, sound: bool): bool =
   # Verify files exist
   if sound and not fileExists(musicFile):
     echo "❌ Warning: Sound file not found: ", musicFile
-    echo "👉 Place 'bell.mp3' in ", SCRIPTDIR
+    echo "👉 Place 'bell.mp3' in ", scriptDir
     return false
 
   # Environment variables

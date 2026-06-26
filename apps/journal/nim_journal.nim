@@ -57,7 +57,7 @@ proc saveEntries(es: seq[JournalEntry]) =
     moveFile(tmp, JournalFile)
   except: raise
 
-proc nextId(es: seq[JournalEntry]): int =
+func nextId(es: seq[JournalEntry]): int =
   if es.len == 0: 1 else: es.map(proc(x: JournalEntry): int = x.id).max() + 1
 
 proc longestLineLength(t: string): int =
@@ -113,12 +113,12 @@ proc runFzf(opts: seq[string], prompt: string): string =
     for p in [tin, tout]:
       if fileExists(p): discard tryRemoveFile(p)
 
-proc truncateLine(s: string, maxLen = 30): string =
+func truncateLine(s: string, maxLen = 30): string =
   let t = s.strip()
   if t.len == 0: return "(empty)"
   if t.len > maxLen: t[0 .. maxLen-1] & "…" else: t
 
-proc formatOption(i: int, e: JournalEntry): string =
+func formatOption(i: int, e: JournalEntry): string =
   let lines = e.body.splitLines()
   let nonEmpty = lines.filter(proc(x: string): bool = x.strip() != "")
   let preview = if nonEmpty.len > 0: truncateLine(nonEmpty[0]) else: "(empty)"

@@ -15,7 +15,6 @@ echo fmt"{pi:.2f}"               # 3.14
 echo fmt"{pi:.6f}"               # 3.141593
 
 # formatBiggestFloat — shortest representation
-import std/strutils
 echo formatBiggestFloat(1.0e6, ffDecimal)   # 1000000.0
 
 # Multi-line strings

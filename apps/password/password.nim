@@ -1,11 +1,11 @@
 import std/[os, strutils, posix, sysrand, terminal, parseopt, osproc]
 
 type
-  Complexity = enum
+  Complexity* = enum
     cmpWeak, cmpMedium, cmpStrong, cmpVeryStrong
 
 # Return a string based on Complexity
-proc getCharset(level: Complexity): string =
+func getCharset*(level: Complexity): string =
   case level
   of cmpWeak: return "abcdefghijklmnopqrstuvwxyz0123456789"
   of cmpMedium: return "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
@@ -17,10 +17,14 @@ proc generatePassword(len: int, level: Complexity): string =
   let pool = getCharset(level)
   result = newStringOfCap(len)
 
-  let randomBytes = urandom(len)
-  for b in randomBytes:
-    let index = b.int mod pool.len
-    result.add(pool[index])
+  # Rejection sampling avoids modulo bias — each byte maps uniformly to pool indices
+  let maxValid = pool.len * (256 div pool.len)
+  var generated = 0
+  while generated < len:
+    for b in urandom(len - generated):
+      if b.int < maxValid:
+        result.add(pool[b.int mod pool.len])
+        inc generated
 
 # Save the password
 proc saveSecret(name, content: string) =

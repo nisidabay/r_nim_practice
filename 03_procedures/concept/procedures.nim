@@ -68,9 +68,10 @@ proc greetAndLog(name: string): string =
 
 echo greetAndLog("Ana")
 
-# func greetPure(name: string): string =
-#   echo "nope"                    # ❌ COMPILE ERROR: 'echo' has side effects
-#   result = "Hello, " & name
+when false: # change false → true to see the compile error
+  func greetPure(name: string): string =
+    echo "nope"                    # ❌ COMPILE ERROR: 'echo' has side effects
+    result = "Hello, " & name
 
 # ── Same result, different guarantee ───────────────────────────────────
 func double(n: int): int = n * 2 # pure: same input → same output, always

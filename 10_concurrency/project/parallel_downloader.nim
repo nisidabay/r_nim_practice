@@ -36,10 +36,14 @@ for i in 1..paramCount():
 
 let total = urls.len
 
-for url in urls:
-  spawn download(url)
-
-sync()
+# Process in batches of maxConcurrent to limit simultaneous connections.
+# Without this, 1000 URLs would spawn 1000 threads at once.
+const maxConcurrent = 10
+for i in countup(0, urls.high, maxConcurrent):
+  let batch = urls[i .. min(i + maxConcurrent - 1, urls.high)]
+  for url in batch:
+    spawn download(url)
+  sync()
 
 var results: seq[Result] = @[]
 for i in 0 ..< total:

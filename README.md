@@ -96,6 +96,9 @@ nim c -d:release -r 01_basics/concept/hello.nim
 
 # With threads (required for concurrency)
 nim c -r --threads:on 10_concurrency/concept/async.nim
+
+# Run tests (see 08_error_handling/concept/testing.nim for unittest)
+make test
 ```
 
 ## Group Overview
@@ -118,32 +121,40 @@ nim c -r --threads:on 10_concurrency/concept/async.nim
 
 ## Scripts
 
-Three real-world scripts showing how Nim replaces Bash for common tasks:
+Single-file tools that replace Bash scripts — focused, under 60 lines, CLI args only.
 
 | Script | What it does | Concepts used |
 |--------|-------------|---------------|
 | `bulk_rename.nim` | Rename files by regex pattern in any directory | `walkDir`, `moveFile`, `strutils.replace` |
 | `log_tail.nim` | Read a log file, filter by severity, print summary | `readFile`, `splitLines`, `CountTable` |
 | `disk_usage.nim` | Walk a directory tree, compute total size, show largest file | `walkDirRec`, `getFileSize`, formatting |
+| `fortune/quotes.nim` | Random quote picker from a text file | `readFile`, `split`, `sample`, `strip` |
 
 ```bash
 nim c -r scripts/bulk_rename.nim ".tmp$" ".backup" ~/Downloads
 nim c -r scripts/log_tail.nim /var/log/syslog ERROR
 nim c -r scripts/disk_usage.nim ~/projects
+nim c -r scripts/fortune/quotes.nim
 ```
 
 ## Apps
 
-Standalone Nim CLI tools — real programs, not exercises.
+Multi-file or complex interactive tools — menus, TUI, configuration, persistent storage.
 
 | App | Description |
 |---|---|
-| `apps/fortune/` | Fortune-like random quote picker — reads `Computer_Quotes.txt`, picks one via `randomize()` |
 | `apps/journal/` | Activity journal — add, search, delete entries via fzf, JSON storage, colored panels |
 | `apps/nim_nuggets/` | Spaced-repetition snippet refresher — fzf browsing, cross-topic search, 8 topic files |
 | `apps/password/` | Password generator/manager with clipboard support and complexity options |
 | `apps/todo/` | Full CLI todo manager — enums, JSON persistence, `at` scheduling with sound |
 | `apps/usb_mounter/` | USB device mounter with interactive TUI (usb_mounter.nim + usb_tui.nim) |
+
+### Script vs App — The Rule
+
+```
+Script  → single file, ≤ 60 lines, no interactivity, replaces a Bash one-liner
+App     → multi-file or > 60 lines, interactive (menus/TUI), persistent state, real tool
+```
 
 ## References
 

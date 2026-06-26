@@ -1,4 +1,5 @@
-# Fortune like Nim application
+# nim c -r quotes.nim
+# Script: random quote picker — reads Computer_Quotes.txt, picks one.
 import std/random
 import std/strutils
 import std/os
@@ -6,8 +7,8 @@ import std/os
 proc main() =
   randomize()
 
-  let appDir = expandTilde("~/bin/fortune")
-  let filename = joinPath(appDir, "Computer_Quotes.txt")
+  # Find data file relative to this script — portable, no hardcoded paths
+  let filename = parentDir(currentSourcePath()) / "Computer_Quotes.txt"
   let separator = "#"
   var content = ""
 
