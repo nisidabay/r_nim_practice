@@ -38,12 +38,17 @@ for x in countTo(3):
 # You'll see more as we go. Module 12 covers pragmas in detail.
 # ─────────────────────────────────────────────────────────────────────
 # Inline iterator (inlined at compile time for speed)
-iterator oddNumbers(limit: int): int {.inline.} =
-  var i = 1
-  while i <= limit:
-    yield i
-    i += 2
+iterator evenNumbers(limit: int): int {.inline.} =
+  var counter = 1
 
-echo "---"
-for x in oddNumbers(9):
-  echo x
+  while counter < limit:
+    if counter mod 2 != 0:
+      inc counter
+      continue
+
+    yield counter
+    inc counter
+
+for number in evenNumbers(20):
+  echo number
+
