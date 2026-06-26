@@ -1,5 +1,6 @@
 # nim c -r procedures.nim
-# procs: no parens if no args, explicit return type, `result` is the default return variable.
+# procs: no parens if no args, explicit return type, `result` is the default
+# return variable.
 #
 # ── Syntax ───────────────────────────────────────────────────────────
 #   proc name(param: Type, ...): ReturnType = body
@@ -19,9 +20,10 @@ proc hello() =
 
 hello()
 
-# With parameters and return type
-proc add(a, b: int): int =
-  return a + b                     # explicit return
+# With parameters and return type.
+# The body can be a single expression — Nim returns the last expression
+# implicitly. Use `return` for explicit early returns.
+proc add(a, b: int): int = a + b
 
 echo add(3, 4)
 
@@ -45,7 +47,7 @@ echo greet("Ana")
 proc maybe(): int {.discardable.} =
   return 42
 
-maybe()                           # no error even though we ignore result
+maybe() # no error even though we ignore result
 
 # ── func: a proc with NO side effects ─────────────────────────────────
 # `func` is like `proc` but the compiler ENFORCES purity at compile time.
@@ -60,7 +62,7 @@ maybe()                           # no error even though we ignore result
 #
 # ── proc (can do anything)       ── func (pure computation only)
 proc greetAndLog(name: string): string =
-  echo "logging: " & name          # ⚠ side effect
+  echo "logging: " & name # ⚠ side effect
   result = "Hello, " & name
 
 # func greetPure(name: string): string =
@@ -68,10 +70,10 @@ proc greetAndLog(name: string): string =
 #   result = "Hello, " & name
 
 # ── Same result, different guarantee ───────────────────────────────────
-func double(n: int): int = n * 2   # pure: same input → same output, always
+func double(n: int): int = n * 2 # pure: same input → same output, always
 proc doubleAndPrint(n: int): int =
-  echo "doubling ", n              # side effect
+  echo "doubling ", n # side effect
   result = n * 2
 
-echo double(21)                    # 42
-echo doubleAndPrint(21)            # 42 (but also prints)
+echo double(21) # 42
+echo doubleAndPrint(21) # 42 (but also prints)
