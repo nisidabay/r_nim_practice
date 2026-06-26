@@ -1,6 +1,5 @@
 # Exercise 1: Multiplication Table
 # Print a 5×5 multiplication table as a formatted grid.
-import std/strutils
 
 for row in 1..5:
   var line = ""
