@@ -1,11 +1,10 @@
-# 03 Procedures — Functions, UFCS, Templates
+# 03 Procedures — Functions, UFCS
 
 ## Quick Start
 
 ```bash
 nim c -r 03_procedures/concept/procedures.nim
 nim c -r 03_procedures/concept/ufcs.nim
-nim c -r 03_procedures/concept/templates.nim
 ```
 
 ## Learning Path
@@ -14,7 +13,6 @@ nim c -r 03_procedures/concept/templates.nim
 |---|---|---|
 | `procedures.nim` | proc, func, return, result, defaults | Syntax diagram: `proc name(params): type = body`; `func` = no side effects; `result` is implicit return variable; `{.discardable.}` pragma |
 | `ufcs.nim` | Unified Function Call Syntax | `obj.method()` ≡ `method(obj)` — pipeline style |
-| `templates.nim` | Templates: compile-time code substitution | Template body is pasted at call site; no runtime overhead |
 
 ## Common Patterns
 
