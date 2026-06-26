@@ -1,270 +1,277 @@
-# Nim script to mount usbs
+# Fused USB Mounter — CLI mode + Interactive TUI
 #
 # Features:
-# - Mount a block device to `/media/nim_usb` with a usb label
-# - Unmount the device and remove the label
-# - Interactive mode with device listing and user prompts
+# - Mount a block device with a usb label under /media/nim_usb/<label>
+# - Unmount a device and remove the label directory
+# - CLI mode (args provided): mount <device>, umount <device>, list
+# - Interactive mode (no args): terminal menu using std/terminal
 # - Filesystem type detection and troubleshooting hints
 # - Safe use of shell quoting to prevent injection
 #
-# NOTE: This script must be run with root privileges for that reason I created
-# a `usb_mounter.sh` script in ~/bin along with the Nim `usb_mounter` bynary.
+# NOTE: Must run as root. Use the usb_mounter.sh wrapper in ~/bin.
 #
-import os, osproc, strutils, posix, terminal
+import std/[os, osproc, strutils, terminal]
 
-# Default mount point for USB devices
 const MOUNT_POINT = "/media/nim_usb"
 
-# Store the usb labels
-var LABELS: seq[tuple[device, label: string]] = @[]
+var labels: seq[tuple[device, label: string]] = @[]
 
 
-# --- Helper & Validation Procedures ---
+# --- Helpers ---------------------------------------------------------------
 
-# Displays usage instructions and exits the program
-proc showHelp() =
-  stdout.styledWriteLine(fgCyan, styleBright, "\n╔════════════════════════════════════════════════════════════╗")
-  stdout.styledWriteLine(fgCyan, styleBright, "║              USB Mounter - Usage Guide                     ║")
-  stdout.styledWriteLine(fgCyan, styleBright, "╚════════════════════════════════════════════════════════════╝")
-  echo ""
-  stdout.styledWrite(fgYellow, styleBright, "USAGE: ")
-  stdout.styledWriteLine(fgWhite, "usb_mounter.sh [mount|umount|list] [device]")
-  echo ""
-  stdout.styledWrite(fgGreen, "  • mount /dev/sdX  ")
-  stdout.styledWriteLine(fgWhite, ": Mounts the device at: " & MOUNT_POINT)
-  stdout.styledWrite(fgRed, "  • umount /dev/sdX ")
-  stdout.styledWriteLine(fgWhite, ": Unmounts the device")
-  stdout.styledWrite(fgCyan, "  • list           ")
-  stdout.styledWriteLine(fgWhite, " : List all removable devices")
-  stdout.styledWrite(fgMagenta, "  • NO ARGUMENTS    ")
-  stdout.styledWriteLine(fgWhite, ": Interactive mode")
-  echo ""
-  stdout.styledWriteLine(fgCyan, "TIP: Identify your USB device using: lsblk or sudo fdisk -l")
-  echo ""
-  quit(0)
-
-# Executes a shell command and returns its output and exit code
-# Assumes root privileges are already acquired.
 proc runCommand(cmd: string): tuple[output: string, exitCode: int] =
   execCmdEx(cmd)
 
-# Verify that the block device exists
 proc isBlockDevice(device: string): bool =
   let (_, exitCode) = runCommand("test -b " & quoteShell(device))
   if exitCode != 0:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, device & " does not exist or is not a valid block device!")
+    styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+        device & " does not exist or is not a valid block device!"
     return false
   return true
 
-# Give users permissions to modify usb contents
-proc givePermissions() =
-  var (err, code) = runCommand("chmod -R 775 " & quoteShell(MOUNT_POINT))
-  if code != 0:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "Failed to change permissions at mount point: " & err)
-    quit(1)
-
-  (err, code) = runCommand("chmod -R users " & quoteShell(MOUNT_POINT))
-  if code != 0:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "Failed to change group user at mount point: " & err)
-    quit(1)
-
-# Check if the mount point directory exists and create it if not
-proc checkMountPoint() =
-  if not dirExists(MOUNT_POINT):
-    stdout.styledWrite(fgBlue, styleBright, "[INFO]: ")
-    stdout.styledWriteLine(fgWhite, "Creating mount point: " & MOUNT_POINT)
-    let (output, code) = runCommand("mkdir -p " & quoteShell(MOUNT_POINT))
-    if code != 0:
-      stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-      stdout.styledWriteLine(fgWhite, "Failed to create mount point: " & output)
-      quit(1)
-    givePermissions()
-
-# Tries to detect the filesystem type of a block device
 proc getFileSystemType(device: string): string =
   let (fsType, _) = runCommand("blkid -o value -s TYPE " & quoteShell(device))
-  return fsType.strip()
+  result = fsType.strip()
 
-# Lists ALL removable block devices (for "List" option)
+proc checkMountPoint() =
+  ## Create the mount point directory if it does not exist and set permissions.
+  if not dirExists(MOUNT_POINT):
+    styledEcho fgBlue, styleBright, "[INFO]: ", fgWhite,
+        "Creating mount point: " & MOUNT_POINT
+
+    let (mkdirOut, mkdirCode) =
+      runCommand("mkdir -p " & quoteShell(MOUNT_POINT))
+    if mkdirCode != 0:
+      styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+          "Failed to create mount point: " & mkdirOut
+      quit(1)
+
+    var (permErr, chmodCode) =
+      runCommand("chmod -R 775 " & quoteShell(MOUNT_POINT))
+    if chmodCode != 0:
+      styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+          "Failed to change permissions at mount point: " & permErr
+      quit(1)
+
+    (permErr, chmodCode) =
+      runCommand("chmod -R users " & quoteShell(MOUNT_POINT))
+    if chmodCode != 0:
+      styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+          "Failed to change group user at mount point: " & permErr
+      quit(1)
+
+proc listDevices(): string =
+  ## Return removable block devices (RM=1, excluding CD-ROM).
+  let (outp, _) = runCommand(
+    "lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom'")
+  result = if outp.strip() == "": "No removable devices found." else: outp
+
 proc listAllRemovableDevices() =
-  # Filter for RM=1 (removable) AND exclude TYPE=rom (CD-ROM)
-  let (lsblkOut, _) = runCommand("lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom'")
-  echo lsblkOut
+  ## Print all removable devices (for CLI "list" command and menu option 3).
+  echo listDevices()
 
-# Lists only devices that are NOT already mounted at MOUNT_POINT
 proc listAvailableDevicesToMount() =
-  # Filter for RM=1 (removable) AND exclude TYPE=rom (CD-ROM)
-  # Then, filter out the default mount point.
-  let cmd = "lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom' | grep -v " & MOUNT_POINT
+  ## Print removable devices NOT already mounted at MOUNT_POINT.
+  let cmd = "lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom' | grep -v " &
+      MOUNT_POINT
   let (lsblkOut, _) = runCommand(cmd)
   echo lsblkOut
 
-# Provides troubleshooting suggestions on a failed mount
 proc troubleshootMountFailure(device: string) =
   let fs = getFileSystemType(device)
   if fs != "":
-    stdout.styledWrite(fgYellow, styleBright, "Detected filesystem: ")
-    stdout.styledWriteLine(fgCyan, styleBright, fs)
-    stdout.styledWrite(fgGreen, styleBright, "Suggestion: ")
+    styledEcho fgYellow, styleBright, "Detected filesystem: ",
+        fgCyan, styleBright, fs
+    styledEcho fgGreen, styleBright, "Suggestion: "
     if fs == "ntfs":
-      stdout.styledWriteLine(fgWhite, "Try: mount -t ntfs-3g " & device & " " & MOUNT_POINT)
+      styledEcho fgWhite, "Try: mount -t ntfs-3g " & device & " " & MOUNT_POINT
     elif fs == "exfat":
-      stdout.styledWriteLine(fgWhite, "Try: mount -t exfat " & device & " " & MOUNT_POINT)
+      styledEcho fgWhite, "Try: mount -t exfat " & device & " " & MOUNT_POINT
     elif fs == "ext4":
-      stdout.styledWriteLine(fgWhite, "Try: mount -t ext4 " & device & " " & MOUNT_POINT)
+      styledEcho fgWhite, "Try: mount -t ext4 " & device & " " & MOUNT_POINT
     else:
-      stdout.styledWriteLine(fgWhite, "Try specifying the filesystem type: mount -t <type> " &
-          device & " " & MOUNT_POINT)
+      styledEcho fgWhite, "Try specifying the filesystem type: mount -t <type> " &
+          device & " " & MOUNT_POINT
   else:
-    stdout.styledWriteLine(fgRed, "Could not detect filesystem type.")
-    stdout.styledWrite(fgGreen, styleBright, "Suggestion: ")
-    stdout.styledWriteLine(fgWhite, "Try specifying the filesystem type manually: mount -t <type> " &
-        device & " " & MOUNT_POINT)
+    styledEcho fgRed, "Could not detect filesystem type."
+    styledEcho fgGreen, styleBright, "Suggestion: ",
+        fgWhite, "Try specifying the filesystem type manually: mount -t <type> " &
+        device & " " & MOUNT_POINT
   quit(1)
 
-# --- Core Logic Procedures ---
-# Get the usb labels to unmount
+
+# --- Label management ------------------------------------------------------
+
 proc getDeviceLabel(target: string): string =
-  for item in LABELS:
+  for item in labels:
     if item.device == target:
       return item.label
   return ""
 
-# Ask for a Label before mounting the device
 proc setDeviceLabel(device: string) =
-  stdout.styledWrite(fgYellow, styleBright, "\n➜ Enter the device label to mount ")
+  stdout.styledWrite(fgYellow, styleBright,
+      "\n➜ Enter the device label to mount ")
   stdout.styledWrite(fgWhite, "(e.g., DATA, MY_USB): ")
   stdout.flushFile()
 
   let label = readLine(stdin).strip()
   if label != "":
-    LABELS.add((device: device, label: label))
-    let usbMountPoint = MOUNT_POINT/label
+    labels.add((device: device, label: label))
+    let usbMountPoint = MOUNT_POINT / label
     createDir(usbMountPoint)
 
-    stdout.styledWrite(fgBlue, styleBright, "[INFO]: ")
-    stdout.styledWriteLine(fgWhite, "Mounting " & device & " at " &
-        usbMountPoint & "...")
-    let cmd = "mount " &
-           quoteShell(device) &
-           " " &
-           quoteShell(usbMountPoint)
+    styledEcho fgBlue, styleBright, "[INFO]: ", fgWhite,
+        "Mounting " & device & " at " & usbMountPoint & "..."
 
+    let cmd = "mount " & quoteShell(device) & " " & quoteShell(usbMountPoint)
     let (_, exitCode) = runCommand(cmd)
 
     if exitCode == 0:
-      stdout.styledWrite(fgGreen, styleBright, "✓ [SUCCESS]: ")
-      stdout.styledWriteLine(fgWhite, "USB successfully mounted at " &
-          usbMountPoint & "!")
-      # Display status of the device
+      styledEcho fgGreen, styleBright, "✓ [SUCCESS]: ", fgWhite,
+          "USB successfully mounted at " & usbMountPoint & "!"
       let (lsOutput, _) = runCommand("stat " & quoteShell(usbMountPoint))
       echo lsOutput
     else:
-      stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-      stdout.styledWriteLine(fgWhite, "Mount command failed.")
+      styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+          "Mount command failed."
       troubleshootMountFailure(device)
   else:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "Mount point creation failed.")
+    styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+        "Mount point creation failed."
 
-# Mounts the specified block device to the default mount point
+
+# --- Forward declarations --------------------------------------------------
+
+proc showHelp()
+
+# --- Core operations -------------------------------------------------------
+
 proc doMount(device: string) =
   if device == "":
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "Please specify a device (e.g., /dev/sdb1)")
+    styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+        "Please specify a device (e.g., /dev/sdb1)"
     showHelp()
+    quit(1)
 
-  # Check if the device is a valid block device
   if not isBlockDevice(device):
-    stdout.styledWriteLine(fgCyan, styleBright, "\n[INFO]: Available removable devices to mount:")
+    styledEcho fgCyan, styleBright,
+        "\n[INFO]: Available removable devices to mount:"
     listAvailableDevicesToMount()
     quit(1)
 
-  # Ensure mount point exists
   checkMountPoint()
   setDeviceLabel(device)
 
-# Unmounts a device or the default mount point
 proc doUmount(device: string) =
   let label = getDeviceLabel(device).strip()
   let target =
     if label != "":
-      MOUNT_POINT / label # e.g., /media/nim_usb/PLATA
+      MOUNT_POINT / label
     else:
-      device              # e.g., /dev/sdd
+      device
 
   if label != "":
-    stdout.styledWrite(fgYellow, "Attempting to unmount labeled device at: ")
-    stdout.styledWriteLine(fgCyan, styleBright, target)
+    styledEcho fgYellow, "Attempting to unmount labeled device at: ",
+        fgCyan, styleBright, target
   else:
-    stdout.styledWrite(fgYellow, "Attempting to unmount raw device: ")
-    stdout.styledWriteLine(fgCyan, styleBright, device)
+    styledEcho fgYellow, "Attempting to unmount raw device: ",
+        fgCyan, styleBright, device
 
   let (output, exitCode) = execCmdEx("umount " & quoteShell(target))
   if exitCode == 0:
-    stdout.styledWrite(fgGreen, styleBright, "✓ [SUCCESS]: ")
-    stdout.styledWriteLine(fgWhite, "USB successfully unmounted!")
-    # ✅ Only try to remove if it's a labeled mount point (a directory)
+    styledEcho fgGreen, styleBright, "✓ [SUCCESS]: ", fgWhite,
+        "USB successfully unmounted!"
     if label != "":
       let (rmOut, rmCode) = execCmdEx("rmdir " & quoteShell(target))
       if rmCode != 0:
-        stdout.styledWrite(fgYellow, styleBright, "[WARNING]: ")
-        stdout.styledWriteLine(fgWhite, "Could not remove directory: " & target)
-        stdout.styledWriteLine(fgWhite, "  Reason: " & rmOut)
+        styledEcho fgYellow, styleBright, "[WARNING]: ", fgWhite,
+            "Could not remove directory: " & target
+        styledEcho fgWhite, "  Reason: " & rmOut
   else:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "Failed to unmount.")
+    styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+        "Failed to unmount."
     echo output
 
-# Runs an interactive menu for mounting/unmounting devices
+
+# --- UI helpers ------------------------------------------------------------
+
+proc showHeader(title: string) =
+  styledEcho fgCyan, styleBright, "\n╔══════════════════════════════════════╗"
+  styledEcho fgCyan, styleBright, "║  ", title, "  ║"
+  styledEcho fgCyan, styleBright, "╚══════════════════════════════════════╝"
+
+proc waitForKey() =
+  stdout.styledWrite(fgCyan, "\nPress Enter to continue...")
+  stdout.flushFile()
+  discard readLine(stdin)
+
+proc showHelp() =
+  styledEcho fgCyan, styleBright,
+      "\n╔════════════════════════════════════════════════════════════╗"
+  styledEcho fgCyan, styleBright,
+      "║              USB Mounter - Usage Guide                     ║"
+  styledEcho fgCyan, styleBright,
+      "╚════════════════════════════════════════════════════════════╝"
+  echo ""
+  styledEcho fgYellow, styleBright, "USAGE: ",
+      fgWhite, "usb_mounter.sh [mount|umount|list] [device]"
+  echo ""
+  styledEcho fgGreen, "  • mount /dev/sdX  ",
+      fgWhite, ": Mounts the device at: " & MOUNT_POINT
+  styledEcho fgRed, "  • umount /dev/sdX ",
+      fgWhite, ": Unmounts the device"
+  styledEcho fgCyan, "  • list           ",
+      fgWhite, " : List all removable devices"
+  styledEcho fgMagenta, "  • NO ARGUMENTS    ",
+      fgWhite, ": Interactive mode"
+  echo ""
+  styledEcho fgCyan,
+      "TIP: Identify your USB device using: lsblk or sudo fdisk -l"
+  echo ""
+
+
+# --- Interactive mode -----------------------------------------------------
+
 proc interactiveMode() =
   while true:
+    showHeader("USB Mounter")
+    styledEcho fgGreen, styleBright,  "  [1] ", fgWhite, "Mount a device"
+    styledEcho fgRed, styleBright,    "  [2] ", fgWhite, "Unmount a device"
+    styledEcho fgYellow, styleBright, "  [3] ", fgWhite, "List all removable devices"
+    styledEcho fgCyan, styleBright,   "  [4] ", fgWhite, "Help"
+    styledEcho fgMagenta, styleBright,"  [5] ", fgWhite, "Exit"
     echo ""
-    stdout.styledWriteLine(fgCyan, styleBright, "╔════════════════════════════════════════╗")
-    stdout.styledWriteLine(fgCyan, styleBright, "║     USB Mounter (Root Mode)            ║")
-    stdout.styledWriteLine(fgCyan, styleBright, "╚════════════════════════════════════════╝")
-    echo ""
-    stdout.styledWrite(fgGreen, styleBright, "  [1] ")
-    stdout.styledWriteLine(fgWhite, "Mount a device")
-    stdout.styledWrite(fgRed, styleBright, "  [2] ")
-    stdout.styledWriteLine(fgWhite, "Unmount a device")
-    stdout.styledWrite(fgYellow, styleBright, "  [3] ")
-    stdout.styledWriteLine(fgWhite, "List all removable devices")
-    stdout.styledWrite(fgMagenta, styleBright, "  [4] ")
-    stdout.styledWriteLine(fgWhite, "Exit")
-    echo ""
-    stdout.styledWrite(fgCyan, styleBright, "➜ Option: ")
+    stdout.styledWrite(fgCyan, styleBright, "Option: ")
     stdout.flushFile()
     let choice = readLine(stdin).strip()
 
     case choice
     of "1":
       echo ""
-      stdout.styledWriteLine(fgYellow, styleBright,
-          "Available devices to mount (excludes " & MOUNT_POINT & "):")
+      styledEcho fgYellow, styleBright,
+          "Available devices to mount (excludes ", MOUNT_POINT, "):"
       echo ""
-      # Call the new function that filters the list
       listAvailableDevicesToMount()
       echo ""
-      stdout.styledWrite(fgCyan, styleBright, "➜ Enter the device to mount ")
+      stdout.styledWrite(fgCyan, styleBright,
+          "Enter the device to mount ")
       stdout.styledWrite(fgWhite, "(e.g., /dev/sdb1): ")
       stdout.flushFile()
-
       let dev = readLine(stdin).strip()
       if dev != "":
         doMount(dev)
 
     of "2":
       echo ""
-      stdout.styledWriteLine(fgYellow, styleBright, "Currently mounted devices:")
+      styledEcho fgYellow, styleBright, "Currently mounted devices:"
       echo ""
-      let (mountedOut, _) = runCommand("lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom'")
+      let (mountedOut, _) = runCommand(
+        "lsblk -o NAME,RM,SIZE,TYPE,MOUNTPOINT | grep ' 1 ' | grep -v 'rom'")
       echo mountedOut
       echo ""
-      stdout.styledWrite(fgCyan, styleBright, "➜ Enter device or mount point to unmount ")
+      stdout.styledWrite(fgCyan, styleBright,
+          "Enter device or mount point to unmount ")
       stdout.styledWrite(fgWhite, "(e.g., /dev/sdb1): ")
       stdout.flushFile()
       let devToUnmount = readLine(stdin).strip()
@@ -272,25 +279,35 @@ proc interactiveMode() =
 
     of "3":
       echo ""
-      stdout.styledWriteLine(fgYellow, styleBright, "Listing ALL removable devices (excluding CD-ROM):")
+      styledEcho fgYellow, styleBright,
+          "Listing ALL removable devices (excluding CD-ROM):"
       echo ""
       listAllRemovableDevices()
 
     of "4":
+      showHelp()
+
+    of "5":
       echo ""
-      stdout.styledWriteLine(fgGreen, styleBright, "✓ Exiting... Goodbye!")
+      styledEcho fgGreen, styleBright, "Exiting... Goodbye!"
       echo ""
       quit(0)
-    else:
-      stdout.styledWriteLine(fgRed, styleBright, "✗ Invalid option. Please choose 1-4.")
 
-# --- Main Entry Point ---
+    else:
+      styledEcho fgRed, styleBright, "Invalid option. Choose 1-5."
+
+    waitForKey()
+
+
+# --- Main entry point ------------------------------------------------------
+
 when isMainModule:
-  # Check for root privileges first
-  if getEuid() != 0:
-    stdout.styledWrite(fgRed, styleBright, "[ERROR]: ")
-    stdout.styledWriteLine(fgWhite, "This script must be run as root.")
-    stdout.styledWriteLine(fgYellow, "Please run it with usb_mounter.sh")
+  # Check for root privileges
+  let (who, _) = runCommand("whoami")
+  if who.strip() != "root":
+    styledEcho fgRed, styleBright, "[ERROR]: ", fgWhite,
+        "This script must be run as root."
+    styledEcho fgYellow, "Please run it with usb_mounter.sh"
     quit(1)
 
   let args = commandLineParams()
@@ -304,3 +321,4 @@ when isMainModule:
     listAllRemovableDevices()
   else:
     showHelp()
+    quit(0)
