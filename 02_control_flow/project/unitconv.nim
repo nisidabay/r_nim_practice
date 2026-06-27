@@ -8,19 +8,25 @@ if paramCount() < 3:
   echo "  km/miles, kg/lbs, c/f"
   quit(1)
 
-let val = parseFloat(paramStr(1))
-let fromUnit = paramStr(2)
-let toUnit = paramStr(3)
+const
+  MilesPerKm = 0.621371
+  PoundsPerKg = 2.29462
+
+let
+  val = parseFloat(paramStr(1))
+  fromUnit = paramStr(2)
+  toUnit = paramStr(3)
 
 var result: float
+
 if fromUnit == "km" and toUnit == "miles":
-  result = val * 0.621371
+  result = val * MilesPerKm
 elif fromUnit == "miles" and toUnit == "km":
-  result = val / 0.621371
+  result = val / MilesPerKm
 elif fromUnit == "kg" and toUnit == "lbs":
-  result = val * 2.20462
+  result = val * PoundsPerKg
 elif fromUnit == "lbs" and toUnit == "kg":
-  result = val / 2.20462
+  result = val / PoundsPerKg
 elif fromUnit == "c" and toUnit == "f":
   result = val * 9.0 / 5.0 + 32.0
 elif fromUnit == "f" and toUnit == "c":
