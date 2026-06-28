@@ -1,7 +1,5 @@
 # array[N, T] — fixed-size, stack-allocated, compile-time bounds checked
-#   nim c -r concept/arrays.nim
-
-import std/algorithm
+#   nim c -r arrays.nim
 
 # ── Declaration ─────────────────────────────────────────────────────────
 
@@ -46,10 +44,13 @@ echo "full matrix: "
 for row in matrix:
   echo "  ", row
 
-# ── Working with algorithms ─────────────────────────────────────────────
+# ── Manual sort on arrays ───────────────────────────────────────────────
 
 var vals: array[6, int] = [9, 4, 7, 1, 5, 3]
-vals.sort()                                   # works on arrays too
+for i in 0 ..< vals.len:
+  for j in (i + 1) ..< vals.len:
+    if vals[j] < vals[i]:
+      swap(vals[i], vals[j])
 echo "sorted vals: ", vals                    # [1, 3, 4, 5, 7, 9]
 
 # Convert to seq when you need dynamic size

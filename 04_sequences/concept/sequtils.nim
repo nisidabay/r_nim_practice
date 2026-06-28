@@ -83,9 +83,7 @@ echo @[1, 1, 2, 2, 2, 3, 1].deduplicate() # @[1, 2, 3, 1]
 
 echo numbers.all(proc(x: int): bool = x > 0) # true
 echo numbers.any(proc(x: int): bool = x > 7) # true
-
-func isEven(x: int): bool = x mod 2 == 0
-echo numbers.any(isEven)
+echo numbers.any(proc(x: int): bool = x mod 2 == 0) # true
 
 var countEven = 0
 for n in numbers:

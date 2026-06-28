@@ -1,4 +1,4 @@
-# 12 Ecosystem & Tooling — Stdlib Modules, Pragmas, Nimble, OOP
+# 12 Ecosystem & Tooling — Stdlib Modules, Pragmas, Nimble
 
 ## Quick Start
 
@@ -8,7 +8,6 @@ nim c -r 12_ecosystem_tooling/concept/parsecfg.nim
 nim c -r 12_ecosystem_tooling/concept/parsecsv.nim
 nim c -r 12_ecosystem_tooling/concept/pragmas.nim
 nim c -r 12_ecosystem_tooling/concept/nimble.nim
-nim c -r 12_ecosystem_tooling/concept/oop.nim
 ```
 
 ## Learning Path
@@ -20,7 +19,6 @@ nim c -r 12_ecosystem_tooling/concept/oop.nim
 | `parsecsv.nim` | CSV file parsing with header support | `CsvParser`, `open`/`readRow`/`close`, `row["header"]` |
 | `pragmas.nim` | Compiler directives and optimization | `{.inline.}`, `{.compileTime.}`, `{.used.}` |
 | `nimble.nim` | Nimble packaging format reference | `.nimble` fields, `require`, `bin`, `task` |
-| `oop.nim` | Ref objects, inheritance, method dispatch | `ref object`, `of` inheritance, `method` vs `proc` |
 
 ## Common Patterns
 
@@ -39,15 +37,10 @@ let host = cfg.getSectionValue("server", "host")
 var p: CsvParser; p.open("data.csv", ',', '"')
 p.readHeaders()
 while p.readRow(): echo p.row["name"]
-
-# OOP: method dispatch
-method speak(a: Animal): string {.base.}
-method speak(d: Dog): string = "Woof!"
 ```
 
 ## Test it
 
-Run `test_it.nim` — it combines config (parsecfg), CSV data, structured
-logging, and OOP models. A config file defines colors, a CSV holds data,
-logging prints it out, OOP models the entries. Change the colors, add a
-new log level, add another entry type.
+Run `test_it.nim` — it combines config (parsecfg), CSV data, and
+structured logging. A config file defines colors, a CSV holds data,
+and logging prints it out. Change the colors, add a new log level.

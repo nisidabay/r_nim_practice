@@ -1,22 +1,20 @@
-# 04 Sequences — Dynamic Arrays and Tuples
+# 04 Sequences — seq[T], array[N,T], and sequtils
 
 ## Quick Start
 
 ```bash
 nim c -r 04_sequences/concept/sequences.nim
-nim c -r 04_sequences/concept/enums_tuples.nim
+nim c -r 04_sequences/concept/arrays.nim
 nim c -r 04_sequences/concept/sequtils.nim
-nim c -r 04_sequences/concept/stats.nim
 ```
 
 ## Learning Path
 
 | File | Concept | Key Pattern |
-|---|---|---|
+|------|---------|-------------|
 | `sequences.nim` | seq[T]: add, slice, insert, delete, multi-dimensional | `@[]` for empty, `@[1,2,3]` literal, `[^1]` from end |
-| `enums_tuples.nim` | Enums, tuples, unpacking | `Color = enum red, green, blue`; `let (x,y) = point` |
+| `arrays.nim` | array[N,T], compile-time bounds, vs seq, multi-dim, openArray | `array[5, int]`, `matrix[i][j]`; `openArray[T]` accepts both array and seq |
 | `sequtils.nim` | map, filter, fold, zip, concat | Functional programming in Nim: pure transforms, pipeline with UFCS |
-| `stats.nim` | std/stats | RunningStat, push, mean, variance, standardDeviation |
 
 ## Common Patterns
 
@@ -27,7 +25,13 @@ nums.delete(0)                  # @[2, 3, 4]
 echo nums[0..<2]                # @[2, 3]
 nums.setLen(1)                  # @[2]
 
-var named = (x: 5, y: 12)       # named tuple
+var arr: array[4, int] = [1, 2, 3, 4]
+
+# openArray accepts both
+proc sum(data: openArray[int]): int =
+  for x in data: result += x
+echo sum(arr)                    # 10
+echo sum(nums)                   # 2
 
 # Functional pipeline (sequtils + UFCS)
 @[1, 2, 3, 4, 5].filterIt(it mod 2 == 1).mapIt(it * it).foldl(a + b)
@@ -36,6 +40,6 @@ var named = (x: 5, y: 12)       # named tuple
 
 ## Test it
 
-Run `test_it.nim` — it creates a sequence of numbers, sorts with `sort`,
-and calculates the median. Change the numbers, change the size, use `map`
-to transform them. Add a `filter` before sorting. Experiment.
+Run `test_it.nim` — it creates a sequence of numbers, uses filter/map/fold
+from sequtils. Change the numbers, change the transforms, try with arrays.
+Experiment.

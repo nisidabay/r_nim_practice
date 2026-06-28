@@ -1,6 +1,6 @@
 # 12 Ecosystem & Tooling — Test It
-# Combine config (parsecfg), CSV data, structured logging, and OOP.
-# Uses ONLY: modules taught in ch12 concepts (parsecfg, parsecsv, logging, oop).
+# Combine config (parsecfg), CSV data, and structured logging.
+# Uses concepts from ch12: parsecfg, parsecsv, logging.
 
 import std/[parsecfg, parsecsv, logging, strformat, os]
 

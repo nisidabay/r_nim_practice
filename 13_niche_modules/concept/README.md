@@ -1,37 +1,14 @@
-# 13 Niche Modules — Stats, Times, and Specialized Stdlib
+# 13 Niche Modules — Exercises and Projects
 
-## Quick Start
+This module previously hosted concept files for `stats` and `times`.
+Those have moved to Module 11 (Stdlib Essentials) where they belong.
 
-```bash
-nim c -r 13_niche_modules/concept/stats.nim
-nim c -r 13_niche_modules/concept/times.nim
-```
+The exercise and project remain here until they find a permanent home.
 
-## Learning Path
+## Project
 
-| File | Concept | Key Pattern |
-|------|---------|-------------|
-| `stats.nim` | Online statistics (running mean, variance, stddev) | `RunningStat.push()`, `s.mean`, `s.standardDeviation` |
-| `times.nim` | Datetime, formatting, duration, Unix timestamps | `now()`, `format("yyyy-MM-dd HH:mm:ss")`, `parse()`, `initDuration(days=3)`, `toUnix`/`fromUnix` |
+- `project/data_analyzer.nim` — reads text data, computes stats, color-coded report
 
-## Common Patterns
+## Exercises
 
-```nim
-import std/times
-
-# Timestamp for logs
-echo now().format("yyyy-MM-dd HH:mm:ss")
-
-# File age check
-let age = now() - parse("2025-01-01", "yyyy-MM-dd")
-echo "Days since: ", age.inDays
-
-# Unix roundtrip
-let ts = now().toTime.toUnix
-assert now().format("yyyy-MM-dd") == fromUnix(ts).local.format("yyyy-MM-dd")
-```
-
-## Test it
-
-Run `test_it.nim` — it feeds numbers into `RunningStat` and shows how
-mean and standard deviation change when you add extreme values.
+- `exercises/ex03_stats_report.nim` — stats color-coded report with ANSI colors
