@@ -3,7 +3,9 @@
 # Uses ref object and sequences to fake a database
 
 import std/[strutils, strformat]
+{.push warning[Deprecated]: off.}
 import std/sha1
+{.pop.}
 import mask_entry
 
 # --- Data Structures ---
@@ -59,6 +61,13 @@ proc createAccount() =
   # Nim 2.2.6's stdlib provides std/sha1 but not std/sha2; SHA-1 is the only
   # built-in hashing option per the project's stdlib-only policy.
   # For production, install the `checksums` package via Nimble for SHA-2/SHA-3.
+  #
+  # Alternative without std/sha1 — simple string scrambling (not real crypto):
+  #   proc scramble(s: string): string =
+  #     result = ""
+  #     for i, c in s:
+  #       result.add(char(ord(c) xor 0xAA + i))
+  #   let altHash = scramble(password)  # XOR-based, no import needed
   let newUser = User(username: username, passwordHash: $sha1.secureHash(
       password), balance: 0.0)
   userDB.add(newUser)

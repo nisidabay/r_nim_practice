@@ -115,7 +115,7 @@ make test
 | 08 | Error Handling | 3 | 3 | try/except, Option[T], fallbacks, unittest, defer |
 | 09 | Type System | 6 | 3 | Distinct types, variants, enums, tuples, OOP, generics, compile-time |
 | 10 | Concurrency | 2 | 1 | Async, threads |
-| 11 | Stdlib Essentials | 9 | 3 | JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt |
+| 11 | Stdlib Essentials | 10 | 3 | JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt, HTTP |
 | 12 | Ecosystem & Tooling | 5 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, performance |
 | 13 | Niche Modules | 0 | 1 | exercises and project only (legacy) |
 

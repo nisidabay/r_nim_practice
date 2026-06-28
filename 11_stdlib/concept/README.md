@@ -1,4 +1,4 @@
-# 11 Stdlib Essentials — JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt
+# 11 Stdlib Essentials — JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt, HTTP
 
 ## Quick Start
 
@@ -12,6 +12,7 @@ nim c -r 11_stdlib/concept/times.nim
 nim c -r 11_stdlib/concept/math.nim
 nim c -r 11_stdlib/concept/uri.nim
 nim c -r 11_stdlib/concept/parseopt.nim
+nim c -r 11_stdlib/concept/httpclient.nim
 ```
 
 ## Learning Path
@@ -27,6 +28,7 @@ nim c -r 11_stdlib/concept/parseopt.nim
 | `math.nim` | sum, min, max, round, sqrt, PI, trig | `sum(vals)`, `round(PI, 2)`, `sqrt(144)`, `floorDiv`/`floorMod` |
 | `uri.nim` | parseUri, Uri fields, URL construction | `parseUri(url).hostname`, `initUri()`, `$u` |
 | `parseopt.nim` | CLI argument parsing with getopt | `initOptParser()`, `getopt()` template, `cmdLongOption`/`cmdShortOption` |
+| `httpclient.nim` | HTTP requests, URL fetching, downloads | `newHttpClient()`, `getContent(url)`, `get(url).status`, `timeout` |
 
 ## Common Patterns
 

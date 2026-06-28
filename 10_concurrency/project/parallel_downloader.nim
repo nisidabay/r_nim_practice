@@ -1,7 +1,7 @@
 # nim c -r --threads:on parallel_downloader.nim <url> <url> ...
 # Download multiple URLs concurrently using threads + channels.
-# std/httpclient is not covered in this course — it's a web API client.
 # Usage: newHttpClient(), getContent(url), close(). Requires internet.
+# std/httpclient — see 11_stdlib/concept/httpclient.nim
 import std/[httpclient, os, strutils, threadpool]
 
 type
