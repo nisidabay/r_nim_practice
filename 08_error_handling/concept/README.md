@@ -11,7 +11,7 @@ nim c -r 08_error_handling/concept/option.nim
 
 | File | Concept | Key Pattern |
 |---|---|---|
-| `try_except.nim` | try/except/finally, raise, custom exceptions | Multiple except branches, `as e` binding |
+| `try_except.nim` | try/except/finally, raise, custom exceptions, defer | Multiple except branches, `as e` binding; `defer` runs on scope exit (even on exception) |
 | `option.nim` | Option[T]: some/none pattern | Chain with `?.` or `get/unsafeGet` — no nil checks |
 
 ## Common Patterns

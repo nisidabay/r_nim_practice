@@ -12,7 +12,7 @@ nim c -r 03_procedures/concept/templates.nim
 
 | File | Concept | Key Pattern |
 |---|---|---|
-| `procedures.nim` | proc, func, return, result, defaults | Syntax diagram: `proc name(params): type = body`; `func` = no side effects; `result` is implicit return variable; `{.discardable.}` pragma |
+| `procedures.nim` | proc, func, return, result, defaults, varargs, discard | Syntax diagram: `proc name(params): type = body`; `func` = no side effects; `result` is implicit return variable; `{.discardable.}` pragma; `varargs[T]` for variable args; `discard` silences at call site |
 | `ufcs.nim` | Unified Function Call Syntax | `obj.method()` ≡ `method(obj)` — pipeline style |
 | `templates.nim` | template, lazy argument evaluation | Template defers argument evaluation until used; proc evaluates eagerly |
 

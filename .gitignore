@@ -3,6 +3,7 @@ nimcache/
 *.out
 .hermes/
 openspec/
+.atl/
 
 # Compiled Nim binaries (produced by `nim c -r <file>.nim`)
 procedures

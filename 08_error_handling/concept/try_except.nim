@@ -28,3 +28,31 @@ try:
   echo "Trying..."
 finally:
   echo "Cleaning up (always runs)"
+
+# ── defer ────────────────────────────────────────────────────────────
+# defer runs when its enclosing scope exits — even on exceptions.
+
+block:
+  defer: echo "cleanup"                     # runs after the block
+  echo "working..."                          # working...\ncleanup
+
+# Multiple defers run in reverse order (LIFO)
+block:
+  defer: echo "A"
+  defer: echo "B"
+  defer: echo "C"
+  echo "start"                               # start\nC\nB\nA
+
+# Defer runs BEFORE the exception propagates
+try:
+  block:
+    defer: echo "deferred cleanup"
+    raise newException(ValueError, "boom")
+except:
+  echo "caught it"                           # deferred cleanup\ncaught it
+
+# Common use: temp file cleanup
+when false:  # change to true to run
+  writeFile("tmp.txt", "data")
+  defer: discard tryRemoveFile("tmp.txt")   # runs even if exception
+  echo readFile("tmp.txt")

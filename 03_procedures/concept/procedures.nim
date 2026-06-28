@@ -50,6 +50,10 @@ proc maybe(): int {.discardable.} =
 maybe() # no error even though we ignore result
 echo maybe() # 42
 
+# ── discard statement ────────────────────────────────────────────────
+proc notify(msg: string): int = msg.len
+discard notify("hi")  # without `discard`, Nim warns "return value ignored"
+
 # ── func: a proc with NO side effects ─────────────────────────────────
 # `func` is like `proc` but the compiler ENFORCES purity at compile time.
 # A func CANNOT:
@@ -81,3 +85,29 @@ proc doubleAndPrint(n: int): int =
 
 echo double(21) # 42
 echo doubleAndPrint(21) # 42 (but also prints)
+
+# ── varargs[T] ────────────────────────────────────────────────────────
+# varargs[T] accepts zero or more arguments; inside the proc it
+# behaves like a seq[T]. Must be the LAST parameter.
+
+proc log(msgs: varargs[string]) =
+  echo "got ", msgs.len, " message(s)"
+  for m in msgs: echo "  ", m
+
+log()                    # got 0 message(s)
+log("hello")             # got 1 message(s)
+log("a", "b", "c")       # got 3 message(s)
+
+# varargs must be the LAST parameter (compiler-enforced)
+proc format(prefix: string, values: varargs[int]): string =
+  result = prefix & ": "
+  for v in values: result.add($v & " ")
+
+echo format("nums", 1, 2, 3)   # "nums: 1 2 3 "
+
+when false:  # change to true to see the compile error
+  proc bad(pos: varargs[int], label: string) = discard
+  # ❌ COMPILE ERROR: varargs must be the LAST parameter
+
+# Real-world usage: echo uses varargs[typed, `$`] internally to
+# accept any type and convert each argument via `$` to string.

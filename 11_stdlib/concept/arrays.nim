@@ -55,3 +55,37 @@ echo "sorted vals: ", vals                    # [1, 3, 4, 5, 7, 9]
 # Convert to seq when you need dynamic size
 let seqVals = @vals
 echo "as seq: ", seqVals
+
+# ── openArray[T] — bridge between array and seq ─────────────────────────
+# openArray[T] is a parameter-only type that accepts both array[N,T]
+# and seq[T]. Write one proc, handle both.
+
+proc printAll(data: openArray[int]) =
+  echo "len = ", data.len, "  items:"
+  for i, x in data: echo "  [", i, "] = ", x
+
+printAll([1, 2, 3])      # array[3, int]
+printAll(@[10, 20, 30])  # seq[int]
+
+proc avg(values: openArray[float]): float =
+  for v in values: result += v
+  result /= values.len.float
+
+echo avg([1.0, 2.0, 3.0])   # 2.0
+echo avg(@[4.0, 6.0])       # 5.0
+
+# Empty openArray is valid (len == 0)
+let emptySeq: seq[int] = @[]
+printAll(emptySeq)
+
+# ⚠ Parameter-only — cannot declare variables of this type
+# var x: openArray[int]  # ❌ COMPILE ERROR
+
+# openArray does NOT support add/delete/setLen (it's a view, not a seq)
+# data.add(4)     # ❌ COMPILE ERROR
+# data.delete(0)  # ❌ COMPILE ERROR
+# data.setLen(5)  # ❌ COMPILE ERROR
+
+# Indexing an empty openArray raises IndexError at runtime
+# echo printAll(@[])  # fine (len == 0, loop doesn't run)
+# echo @[][0]         # ❌ RUNTIME ERROR: index out of bounds

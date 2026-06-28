@@ -107,15 +107,15 @@ make test
 |---|---|---|---|---|
 | 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
-| 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates |
+| 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates, varargs, discard |
 | 04 | Sequences | 4 | 4 | seq[T], slicing, sequtils, enums, tuples, stats |
 | 05 | Strings | 4 | 2 | strutils, format, parsing, regex |
 | 06 | Collections | 2 | 4 | Table, HashSet, bit sets, CountTable |
 | 07 | Filesystem | 2 | 3 | File I/O, dir traversal, env vars, debugging |
-| 08 | Error Handling | 3 | 3 | try/except, Option[T], fallbacks, unittest |
+| 08 | Error Handling | 3 | 3 | try/except, Option[T], fallbacks, unittest, defer |
 | 09 | Type System | 4 | 3 | Distinct types, variants, generics, compile-time |
 | 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
-| 11 | Stdlib Essentials | 5 | 3 | JSON, Algorithm, Modules, Arrays, Random |
+| 11 | Stdlib Essentials | 5 | 3 | JSON, Algorithm, Modules, Arrays, openArray, Random |
 | 12 | Ecosystem & Tooling | 7 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, OOP, performance |
 | 13 | Niche Modules | 0 | 1 | no concept files (exercises and project only) |
 

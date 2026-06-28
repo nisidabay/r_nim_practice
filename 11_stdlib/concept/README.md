@@ -1,4 +1,4 @@
-# 11 Stdlib Essentials — JSON, Algorithm, Modules, Arrays, Random
+# 11 Stdlib Essentials — JSON, Algorithm, Modules, Arrays, Random, openArray
 
 ## Quick Start
 
@@ -17,7 +17,7 @@ nim c -r 11_stdlib/concept/random.nim
 | `algorithm.nim` | sort, reverse, binarySearch, fill, isSorted | `sort(Descending)`, `reversed()` iterator vs `reverse()` proc |
 | `json.nim` | parseJson, construct, serialize, roundtrip | `parseJson(raw)`, `%*[1,2,3]`, `pretty()` |
 | `modules.nim` | import, include, export mechanics | `import helper`, `export module_a` |
-| `arrays.nim` | array[N,T], compile-time bounds, vs seq, multi-dim | `array[5, int]`, `matrix[i][j]` |
+| `arrays.nim` | array[N,T], compile-time bounds, vs seq, multi-dim, openArray | `array[5, int]`, `matrix[i][j]`; `openArray[T]` accepts both array and seq |
 | `random.nim` | Random numbers, shuffle, sample | `rand(n)`, `sample(population)`, `shuffle(seq)` |
 
 ## Common Patterns
