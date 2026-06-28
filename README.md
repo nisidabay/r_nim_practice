@@ -111,11 +111,11 @@ make test
 | 04 | Sequences | 3 | 4 | seq[T], array[N,T], openArray, slices, sequtils |
 | 05 | Strings | 4 | 2 | strutils, format, parsing, regex |
 | 06 | Collections | 2 | 4 | Table, HashSet, bit sets, CountTable |
-| 07 | Filesystem | 2 | 3 | File I/O, dir traversal, env vars, debugging |
+| 07 | Filesystem | 3 | 3 | File I/O, dir traversal, process pipes, env vars, debugging |
 | 08 | Error Handling | 3 | 3 | try/except, Option[T], fallbacks, unittest, defer |
 | 09 | Type System | 6 | 3 | Distinct types, variants, enums, tuples, OOP, generics, compile-time |
-| 10 | Concurrency | 3 | 1 | Async, threads, process pipes |
-| 11 | Stdlib Essentials | 6 | 3 | JSON, Algorithm, Modules, Random, Stats, Times |
+| 10 | Concurrency | 2 | 1 | Async, threads |
+| 11 | Stdlib Essentials | 9 | 3 | JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt |
 | 12 | Ecosystem & Tooling | 5 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, performance |
 | 13 | Niche Modules | 0 | 1 | exercises and project only (legacy) |
 

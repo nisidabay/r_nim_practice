@@ -1,9 +1,10 @@
-# 07 Filesystem — Files, Directories, and System Calls
+# 07 Filesystem — Files, Directories, Processes, and Debugging
 
 ## Quick Start
 
 ```bash
 nim c -r 07_filesystem/concept/files.nim
+nim c -r 07_filesystem/concept/pipes.nim
 ```
 
 ## Learning Path
@@ -11,6 +12,7 @@ nim c -r 07_filesystem/concept/files.nim
 | File | Concept | Key Pattern |
 |---|---|---|
 | `files.nim` | File I/O, directory traversal, environment, shell | `readFile`/`writeFile`, `walkDir`/`walkDirRec`, `getEnv`, `execShellCmd` |
+| `pipes.nim` | Process pipes: spawn programs and pipe data | `startProcess`, stdin/stdout streams, `execCmdEx`, exit codes |
 
 ## Common Patterns
 
@@ -23,6 +25,13 @@ for kind, path in walkDir("."):
   echo kind, " ", path
 
 echo getEnv("PATH")
+
+# Process pipes
+import std/osproc
+let p = startProcess("sort", args = ["-r"])
+p.inputStream.writeLine("banana\napple\ncherry")
+p.inputStream.close()
+echo p.outputStream.readAll()
 ```
 
 ## Test it

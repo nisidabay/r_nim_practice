@@ -1,4 +1,4 @@
-# 11 Stdlib Essentials — JSON, Algorithm, Modules, Random, Stats, Times
+# 11 Stdlib Essentials — JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt
 
 ## Quick Start
 
@@ -9,6 +9,9 @@ nim c -r 11_stdlib/concept/modules.nim
 nim c -r 11_stdlib/concept/random.nim
 nim c -r 11_stdlib/concept/stats.nim
 nim c -r 11_stdlib/concept/times.nim
+nim c -r 11_stdlib/concept/math.nim
+nim c -r 11_stdlib/concept/uri.nim
+nim c -r 11_stdlib/concept/parseopt.nim
 ```
 
 ## Learning Path
@@ -21,16 +24,31 @@ nim c -r 11_stdlib/concept/times.nim
 | `random.nim` | Random numbers, shuffle, sample | `rand(n)`, `sample(population)`, `shuffle(seq)` |
 | `stats.nim` | Online statistics (running mean, variance, stddev) | `RunningStat.push()`, `s.mean`, `s.standardDeviation` |
 | `times.nim` | Datetime, formatting, duration, Unix timestamps | `now()`, `format("yyyy-MM-dd HH:mm:ss")`, `parse()`, `initDuration(days=3)`, `toUnix`/`fromUnix` |
+| `math.nim` | sum, min, max, round, sqrt, PI, trig | `sum(vals)`, `round(PI, 2)`, `sqrt(144)`, `floorDiv`/`floorMod` |
+| `uri.nim` | parseUri, Uri fields, URL construction | `parseUri(url).hostname`, `initUri()`, `$u` |
+| `parseopt.nim` | CLI argument parsing with getopt | `initOptParser()`, `getopt()` template, `cmdLongOption`/`cmdShortOption` |
 
 ## Common Patterns
 
 ```nim
-import std/[json, algorithm, random]
+import std/[json, algorithm, random, math, uri, parseopt]
 
 let data = parseJson(readFile("config.json"))
 sort(mySeq, Descending)
 import std/random; randomize()
 let pick = sample(@["a", "b", "c"])
+
+# Math
+echo sum(@[1.0, 2.0, 3.0])   # 6.0
+echo sqrt(144)                 # 12
+
+# URI
+let u = parseUri("https://nim-lang.org")
+echo u.hostname               # nim-lang.org
+
+# ParseOpt
+for kind, key, val in getopt():
+  discard
 
 # Stats
 var s: RunningStat
