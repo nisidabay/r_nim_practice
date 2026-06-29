@@ -1,5 +1,6 @@
 # nim c -r testing.nim
 # Testing with std/unittest: suite, test, check, setup, assert vs check.
+# Quick intro only — full chapter at 14_testing/concept/
 
 import std/unittest
 

@@ -1,5 +1,6 @@
 # nim c -r ex04_write_test.nim
 # Exercise 4: Write a unittest
+# Extension: see full exercise set → 14_testing/exercises/
 #
 # The function below is correct. Your job is to write a test suite
 # that verifies it handles all cases correctly.

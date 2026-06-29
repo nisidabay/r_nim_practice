@@ -64,7 +64,7 @@ cat README.md                   # see the map
 nim c -r hello.nim              # first concept
 ```
 
-Then keep going: `01_basics` → `02_control_flow` → `03_procedures` → `04_sequences` → `05_strings` → `06_collections` → `07_filesystem` → `08_error_handling` → `09_type_system` → `10_concurrency` → `11_stdlib` → `12_ecosystem_tooling` → `13_niche_modules`.
+Then keep going: `01_basics` → `02_control_flow` → `03_procedures` → `04_sequences` → `05_strings` → `06_collections` → `07_filesystem` → `08_error_handling` → `09_type_system` → `10_concurrency` → `11_stdlib` → `12_ecosystem_tooling` → `13_niche_modules` → `14_testing`.
 
 ## The Toolbox
 
@@ -97,7 +97,7 @@ nim c -d:release -r 01_basics/concept/hello.nim
 # With threads (required for concurrency)
 nim c -r --threads:on 10_concurrency/concept/async.nim
 
-# Run tests (see 08_error_handling/concept/testing.nim for unittest)
+# Run all test concept files from the testing module
 make test
 ```
 
@@ -118,6 +118,7 @@ make test
 | 11 | Stdlib Essentials | 10 | 3 | JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt, HTTP |
 | 12 | Ecosystem & Tooling | 5 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, performance |
 | 13 | Niche Modules | 0 | 1 | exercises and project only (legacy) |
+| 14 | Testing | 6 | 4 | suite/test/check, require vs expect, fixtures, test organization |
 
 ## Scripts
 

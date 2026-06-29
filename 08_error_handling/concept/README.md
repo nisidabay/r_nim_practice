@@ -13,6 +13,7 @@ nim c -r 08_error_handling/concept/option.nim
 |---|---|---|
 | `try_except.nim` | try/except/finally, raise, custom exceptions, defer | Multiple except branches, `as e` binding; `defer` runs on scope exit (even on exception) |
 | `option.nim` | Option[T]: some/none pattern | Chain with `?.` or `get/unsafeGet` — no nil checks |
+| `testing.nim` | unittest basics: suite/test/check | (brief intro — see Module 14 for full chapter) |
 
 ## Common Patterns
 
