@@ -26,7 +26,28 @@ proc maxValue(values: seq[float]): float =
       result = v
 
 # ── Tests ───────────────────────────────────────────────────────────────
-# Uncomment when you've made your changes:
-# assert abs(average(@[1.0, 2.0, 3.0]) - 2.0) < 1e-10
-# assert abs(maxValue(@[1.0, 5.0, 3.0]) - 5.0) < 1e-10
-# echo "All checks passed (if you uncommented the tests)"
+var nums: array[5, int] = [42, 17, 88, 3, 65]
+var nums1: seq[int] = @[42, 17, 88, 3, 65]
+
+func average(values: openArray[int]): float =
+  if values.len == 0:
+    return 0.0
+  var sum = 0
+  for v in values:
+    sum += v
+  result = sum / values.len
+
+func maxValue(values: openArray[int]): int =
+  if values.len == 0:
+    return 0
+
+  var max = values[0]
+  for i in 1..<values.len:
+    if values[i] > max:
+      max = values[i]
+  result = max
+
+echo average(nums)
+echo average(nums1)
+echo maxValue(nums)
+echo maxValue(nums1)
