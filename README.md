@@ -108,7 +108,7 @@ make test
 | 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
 | 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates, varargs, discard |
-| 04 | Sequences | 3 | 4 | seq[T], array[N,T], openArray, slices, sequtils |
+| 04 | Sequences | 4 | 4 | seq[T], array[N,T], openArray, slices, sequtils |
 | 05 | Strings | 4 | 2 | strutils, format, parsing, regex |
 | 06 | Collections | 2 | 4 | Table, HashSet, bit sets, CountTable |
 | 07 | Filesystem | 3 | 3 | File I/O, dir traversal, process pipes, env vars, debugging |

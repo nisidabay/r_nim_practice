@@ -1,10 +1,11 @@
-# 04 Sequences — seq[T], array[N,T], and sequtils
+# 04 Sequences — seq[T], array[N,T], openArray, and sequtils
 
 ## Quick Start
 
 ```bash
 nim c -r 04_sequences/concept/sequences.nim
 nim c -r 04_sequences/concept/arrays.nim
+nim c -r 04_sequences/concept/openarray.nim
 nim c -r 04_sequences/concept/sequtils.nim
 ```
 
@@ -13,7 +14,8 @@ nim c -r 04_sequences/concept/sequtils.nim
 | File | Concept | Key Pattern |
 |------|---------|-------------|
 | `sequences.nim` | seq[T]: add, slice, insert, delete, multi-dimensional | `@[]` for empty, `@[1,2,3]` literal, `[^1]` from end |
-| `arrays.nim` | array[N,T], compile-time bounds, vs seq, multi-dim, openArray | `array[5, int]`, `matrix[i][j]`; `openArray[T]` accepts both array and seq |
+| `arrays.nim` | array[N,T], compile-time bounds, vs seq, multi-dim | `array[5, int]`, `matrix[i][j]` |
+| `openarray.nim` | openArray[T]: parameter-only bridge, view semantics, constraints | `len`, `items`, `pairs`; `[lo..hi]` slice; no add/delete/setLen |
 | `sequtils.nim` | map, filter, fold, zip, concat | Functional programming in Nim: pure transforms, pipeline with UFCS |
 
 ## Common Patterns
