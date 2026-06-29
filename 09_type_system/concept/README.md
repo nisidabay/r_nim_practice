@@ -5,7 +5,8 @@
 ```bash
 nim c -r 09_type_system/concept/distinct.nim
 nim c -r 09_type_system/concept/variants.nim
-nim c -r 09_type_system/concept/enums_tuples.nim
+nim c -r 09_type_system/concept/tuples.nim
+nim c -r 09_type_system/concept/enums.nim
 nim c -r 09_type_system/concept/oop.nim
 nim c -r 09_type_system/concept/compiletime.nim
 ```
@@ -16,7 +17,8 @@ nim c -r 09_type_system/concept/compiletime.nim
 |------|---------|-------------|
 | `distinct.nim` | Distinct types: compiler-enforced type safety | `Euros = distinct float64` — can't mix with `Dollars` |
 | `variants.nim` | Variant objects: value is one of several shapes | `case kind` inside an object — tagged unions |
-| `enums_tuples.nim` | Enums and tuples | `Color = enum red, green, blue`; `let (x,y) = point`; unpacking |
+| `enums.nim` | Enums: basic syntax, ordinal values, iteration, explicit values | `Color = enum red, green, blue`; `ord(red)`; `for s in red..blue` |
+| `tuples.nim` | Tuples: positional, named, unpacking | `var point = (10, 20)`; `let (a,b) = point` |
 | `oop.nim` | Ref objects, inheritance, method dispatch | `ref object`, `of` inheritance, `method` vs `proc` dispatch |
 | `compiletime.nim` | Compile-time execution: `when`, `const` | Run code DURING compilation, not at runtime |
 | `generics.nim` | Generics and type constraints | `proc foo[T](x: T): T`; `[T: SomeNumber]` restricts T to numeric types |

@@ -1,14 +1,5 @@
-# nim c -r enums_tuples.nim
-
-type
-  Color = enum
-    red, green, blue
-
-var c: Color = red
-echo c                            # red
-
-# Ordinal values
-echo ord(red)                     # 0
+# nim c -r tuples.nim
+# Enums are now covered in enums.nim
 
 # Tuples: positional, unnamed or named
 var point = (10, 20)
