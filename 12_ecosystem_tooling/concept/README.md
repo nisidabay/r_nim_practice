@@ -7,6 +7,7 @@ nim c -r 12_ecosystem_tooling/concept/logging.nim
 nim c -r 12_ecosystem_tooling/concept/parsecfg.nim
 nim c -r 12_ecosystem_tooling/concept/parsecsv.nim
 nim c -r 12_ecosystem_tooling/concept/pragmas.nim
+nim c -r 12_ecosystem_tooling/concept/performance.nim
 nim c -r 12_ecosystem_tooling/concept/nimble.nim
 ```
 
@@ -18,6 +19,7 @@ nim c -r 12_ecosystem_tooling/concept/nimble.nim
 | `parsecfg.nim` | INI-style config file parsing | `loadConfig`, `getSectionValue`, `sections` |
 | `parsecsv.nim` | CSV file parsing with header support | `CsvParser`, `open`/`readRow`/`close`, `row["header"]` |
 | `pragmas.nim` | Compiler directives and optimization | `{.inline.}`, `{.compileTime.}`, `{.used.}` |
+| `performance.nim` | Debug vs release, optimization flags, compile-time evaluation | `nim c -d:release`, `--opt:size`, `const x = compileTimeFunc()` |
 | `nimble.nim` | Nimble packaging format reference | `.nimble` fields, `require`, `bin`, `task` |
 
 ## Common Patterns

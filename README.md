@@ -84,6 +84,7 @@ Each group has a `project/` directory with a real CLI tool built from that group
 | 11 | `sysinfo.nim` | JSON-config-driven system info reporter — OS, CPU, math stats |
 | 12 | `log_analyzer.nim` | Log analyzer — CSV logs with colored severity levels, config-driven themes |
 | 13 | `data_analyzer.nim` | Text file stats — reads numbers, computes stats, color report (legacy) |
+| 15 | `linked_list.nim` | Singly-linked list with ref object nodes — append, traverse |
 
 ## Running a File
 
@@ -105,7 +106,7 @@ make test
 
 | # | Group | Concept files | Exercises | What you learn |
 |---|---|---|---|---|---|
-| 01 | Basics | 3 | 2 | Compilation, types, input, CLI args |
+| 01 | Basics | 4 | 2 | Compilation, types, input, CLI args |
 | 02 | Control Flow | 3 | 3 | if/case, for/while, iterators |
 | 03 | Procedures | 3 | 3 | proc, func, result, UFCS, templates, varargs, discard |
 | 04 | Sequences | 4 | 4 | seq[T], array[N,T], openArray, slices, sequtils |
@@ -116,9 +117,10 @@ make test
 | 09 | Type System | 7 | 4 | Distinct types, variants, enums, tuples, OOP, generics, compile-time |
 | 10 | Concurrency | 2 | 1 | Async, threads |
 | 11 | Stdlib Essentials | 10 | 3 | JSON, Algorithm, Modules, Random, Stats, Times, Math, URI, ParseOpt, HTTP |
-| 12 | Ecosystem & Tooling | 5 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, performance |
+| 12 | Ecosystem & Tooling | 6 | 3 | Logging, parsecfg, parsecsv, pragmas, Nimble, performance |
 | 13 | Niche Modules | 0 | 1 | exercises and project only (legacy) |
-| 14 | Testing | 6 | 4 | suite/test/check, require vs expect, fixtures, test organization |
+| 14 | Testing | 5 | 4 | suite/test/check, require vs expect, fixtures, test organization |
+| 15 | Memory Management | 4 | 1 | ref vs ptr, raw allocators, ownership/GC, casting |
 
 ## Scripts
 
@@ -161,3 +163,49 @@ App     → multi-file or > 60 lines, interactive (menus/TUI), persistent state,
 
 See [`REFERENCES.md`](REFERENCES.md) for books, official docs, and community resources.
 
+
+## Fibonacci Study System
+
+This repo includes a spaced-repetition schedule based on the Fibonacci sequence
+(1-2-3-5-8 days) to keep each unit fresh without cramming. Each of the 14 units
+is introduced on day 1 and reviewed on days +2, +3, +5 and +8.
+
+### Start studying
+
+```bash
+# Generate the session queue (idempotent — safe to re-run anytime)
+./regenerate_crons.sh
+```
+
+### What's next?
+
+```bash
+# See the next session to tackle
+ls .fibonacci/queue/ | head -1
+
+# How many sessions remain
+ls .fibonacci/queue/ | wc -l
+```
+
+Each generated session is a small markdown file describing the day's activity,
+e.g. `.fibonacci/queue/session_001.md`.
+
+### Mark a session complete
+
+When you finish a session, delete its queue file — it drops off the list:
+
+```bash
+rm .fibonacci/queue/session_001.md
+```
+
+### The rhythm
+
+| Fibonacci day | What you do |
+|---------------|-------------|
+| +0 (intro)    | Learn the unit — read the concept files, run the examples |
+| +2            | Review — re-read one concept file and re-run it |
+| +3            | Review — attempt the exercises without help |
+| +5            | Review — re-implement a concept from memory |
+| +8            | Review — build a small variant of the project |
+
+See `learning_schedule.md` for the full plan (day-by-day, unit-by-unit).

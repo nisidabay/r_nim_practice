@@ -5,6 +5,7 @@
 ```bash
 nim c -r 07_filesystem/concept/files.nim
 nim c -r 07_filesystem/concept/pipes.nim
+nim c -r 07_filesystem/concept/debugging.nim
 ```
 
 ## Learning Path
@@ -13,6 +14,7 @@ nim c -r 07_filesystem/concept/pipes.nim
 |---|---|---|
 | `files.nim` | File I/O, directory traversal, environment, shell | `readFile`/`writeFile`, `walkDir`/`walkDirRec`, `getEnv`, `execShellCmd` |
 | `pipes.nim` | Process pipes: spawn programs and pipe data | `startProcess`, stdin/stdout streams, `execCmdEx`, exit codes |
+| `debugging.nim` | Debugging tools: assert, echo, stacktraces, instantiationInfo, quit vs raise | `assert cond`, `raise newException(valueError, ...)`, `e.getStackTrace()`, `quit(1)` |
 
 ## Common Patterns
 
