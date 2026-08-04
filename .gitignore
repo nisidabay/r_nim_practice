@@ -25,3 +25,12 @@ quotes
 times
 ex04_write_test
 ex04_pure_func
+
+# 15_memory_management concept/exercise/project binaries
+ref_vs_ptr
+raw_memory
+ownership
+casting
+ex01_ptr_swap
+ex01_ptr_swap_solution
+linked_list
