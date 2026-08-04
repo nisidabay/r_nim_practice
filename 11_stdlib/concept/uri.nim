@@ -47,3 +47,8 @@ assert u3.port == "8080"
 assert u3.path == "/docs"
 
 echo "All URI assertions passed."
+
+# ── Thinking in Nim ────────────────────────────
+# parseUri() splits any URL into typed fields (scheme, hostname, path,
+# query, anchor, port), and initUri() lets you build one by setting those
+# fields. Round-trip with `$` to reassemble a normalized URL string.

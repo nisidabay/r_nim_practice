@@ -34,3 +34,9 @@ echo items
 
 # concat with &
 echo @[1, 2] & @[3, 4]            # @[1, 2, 3, 4]
+
+# ── Thinking in Nim ────────────────────────────
+# seq[T] is Nim's single dynamic array — the @ literal, ^1 end-indexing,
+# and ..< slicing are sugar baked into the language, not library calls.
+# A seq is a value type with value semantics; copy or pass it and the
+# memory is handled for you, but growth can reallocate the backing buffer.

@@ -56,3 +56,9 @@ echo "sorted vals: ", vals # [1, 3, 4, 5, 7, 9]
 # Convert to seq when you need dynamic size
 let seqVals = @vals
 echo "as seq: ", seqVals
+
+# ── Thinking in Nim ────────────────────────────
+# array[N, T] gives compile-time bounds — because N is part of the type,
+# the compiler rejects out-of-range indices at build time, unlike seq's
+# runtime IndexError. Zero allocation, stack-resident, and the size is
+# known from the type itself; reach for a seq when the length must vary.

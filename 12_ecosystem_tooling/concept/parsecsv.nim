@@ -68,3 +68,9 @@ parser3.close()
 removeFile(csvPath)
 removeFile(csvPath2)
 removeFile(csvPath3)
+
+# ── Thinking in Nim ────────────────────────────
+# std/parsecsv gives you a streaming row parser built into the stdlib —
+# no CSV library to fetch. Headers become named lookups via rowEntry, and
+# values arrive as raw strings you parse with parseInt yourself, keeping
+# the conversion under your control rather than hidden in the parser.

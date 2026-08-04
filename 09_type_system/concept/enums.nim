@@ -35,3 +35,9 @@ echo notFound, " = ", ord(notFound) # 404
 # In C++, Rust, and other languages, enum symbols are scoped inside the
 # type name. In Nim, they become direct values in the current scope —
 # you write `red`, not `Color.red`. Clean and simple.
+
+# ── Thinking in Nim ────────────────────────────
+# Nim enum symbols live directly in the surrounding scope — you write
+# `red`, not `Color.red`. They iterate cleanly (`for s in red..blue`) and
+# behave as ordinals, so enums stay simple and readable while still being
+# fully type-checked against accidental integer confusion.

@@ -66,3 +66,9 @@ check @[1, 2, 3].len == 3
 #   - Rename the suite and see how output changes.
 #   - Add a deliberately failing test and see if other tests still run.
 #   - Test with a seq of strings instead of ints.
+
+# ── Thinking in Nim ────────────────────────────
+# In Nim a test suite is just an ordinary program: suite/test are calls
+# that register blocks, and checks run at module top level. Because Nim
+# is generic, you write one proc with [T] and test it once against many
+# inputs — the type system multiplies your coverage for free.

@@ -63,3 +63,9 @@ echo "Shell exit code: ", exitCode
 echo "Sleeping for 10 ms..."
 sleep(10)
 echo "Done."
+
+# ── Thinking in Nim ────────────────────────────
+# Nim makes file I/O a stdlib import away — `readFile`, `walkDir` and
+# `walkDirRec` come built-in, no third-party dependency. Path handling,
+# env vars and even process calls all share one module (`std/os`), so the
+# OS feels like part of the language rather than a separate API.

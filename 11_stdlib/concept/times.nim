@@ -46,3 +46,9 @@ assert rightNow < later
 assert diff.inDays >= 2366  # 2020-01-01 to now is at least this many days
 
 echo "All times assertions passed."
+
+# ── Thinking in Nim ────────────────────────────
+# std/times separates the DateTime (calendar wall-clock) from Time
+# (Unix seconds) and Duration (elapsed spans). Format and parse with
+# strftime-style patterns, add/subtract Durations, compare directly, and
+# cross to Unix timestamps via toTime/toUnix when you need epoch seconds.

@@ -115,3 +115,8 @@ var grid: Table[Point, string]
 grid[Point(x: 0, y: 0)] = "origin"
 grid[Point(x: 5, y: 3)] = "target"
 echo grid[Point(x: 5, y: 3)]      # "target"
+
+# ── Thinking in Nim ────────────────────────────
+# Tables is a rich family: hash Table, insertion-ordered OrderedTable,
+# and CountTable as a ready-made histogram. {..}.toTable() builds from
+# literals, keys()/pairs() iterate, and mgetOrPut returns a mutable ref.

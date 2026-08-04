@@ -71,3 +71,9 @@ check halveEven(10) == 5                     # check: use in tests
 # Rule of thumb:
 #   assert  → inside your library/program code (preconditions, invariants)
 #   check   → inside test/test blocks (behavior verification)
+
+# ── Thinking in Nim ────────────────────────────
+# Testing is in the stdlib (`std/unittest`) — no separate framework to
+# install. `check` reports a failure and keeps running the rest of the
+# suite, unlike `assert` which aborts the whole program. Write tests,
+# run with `nim c -r`, and get a dot-per-test report with zero setup.

@@ -53,3 +53,9 @@ when false:  # set to true to test with: nim c -r parseopt.nim -v --file data.tx
 
 echo "\nRun with: nim c -r concept/parseopt.nim --os --math"
 echo "Or:       nim c -r concept/parseopt.nim -v --file test.txt"
+
+# ── Thinking in Nim ────────────────────────────
+# std/parseopt is Nim's idiomatic CLI parser. Drive it manually with
+# next() + a case on cmdShortOption/cmdLongOption/cmdArgument, or let the
+# getopt template wrap that loop for the common tool pattern. Far more
+# flexible than paramStr() for real command-line tools.

@@ -52,3 +52,8 @@ iterator evenNumbers(limit: int): int {.inline.} =
 for number in evenNumbers(20):
   echo number
 
+# ── Thinking in Nim ────────────────────────────
+# Iterators in Nim share the proc syntax but `yield` one value at a time, so they
+# stream without materializing the whole sequence in memory.
+# A range is the zero-effort built-in; a custom iterator is when you need control,
+# pragmas, or state between emitted values.

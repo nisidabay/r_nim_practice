@@ -79,3 +79,9 @@ for pet in animals:
     echo pet.name, " is a Dog"
   elif pet of Cat:
     echo pet.name, " is a Cat"
+
+# ── Thinking in Nim ────────────────────────────
+# Nim splits OOP in two you can mix freely: `proc` for static dispatch
+# and `method` for runtime virtual dispatch — you choose per function,
+# not per class. `ref object` gives GC-managed reference semantics, and
+# the `of` operator does runtime type checks without forced casting.

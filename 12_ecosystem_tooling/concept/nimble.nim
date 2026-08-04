@@ -54,3 +54,8 @@ echo ""
 echo "See ../project/log_analyzer.nimble for a real example."
 echo ""
 echo "Tip: nimble init creates a scaffold .nimble file in the current dir."
+
+# ── Thinking in Nim ────────────────────────────
+# A Nimble package file is itself Nim code — plain NimScript — so your
+# build tasks, version checks, and dependencies are expressed in the same
+# language you write your program in, not a separate DSL with its own rules.

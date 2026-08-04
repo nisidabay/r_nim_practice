@@ -51,3 +51,9 @@ proc newFunction() = echo "This is new"
 
 newFunction()
 # oldFunction()  # would produce a deprecation warning
+
+# ── Thinking in Nim ────────────────────────────
+# Pragmas are the primary way Nim talks to its own compiler — written as
+# {.name.} blocks right next to the code they affect. With push/pop you
+# batch pragmas over a whole region, and compileTime lets you evaluate
+# procs at build time and fold the results into consts, not just hints.

@@ -27,3 +27,11 @@ log(false, expensiveCalculation())
 
 echo "--- proc ---"
 logProc(false, expensiveCalculation())
+
+# ── Thinking in Nim ────────────────────────────
+# A Nim template is hygiene sugar that defers argument evaluation: arguments are
+# only evaluated if the body actually uses them.
+# That enables laziness an eager proc can't match — like skipping an expensive
+# call inside an untaken branch.
+# Procs evaluate up front; templates re-run at the call site. Reach for templates
+# when you need that lazy or code-generating behavior.

@@ -60,3 +60,8 @@ echo fruits.toHashSet()          # {"banana", "apple", "cherry"}
 # ── When to use which ─────────────────────────────────────────────────
 # set[T]:   flags, chars, enums — zero allocation, compile-time capable
 # HashSet:  strings, objects, dynamic size — heap-allocated, any type
+
+# ── Thinking in Nim ────────────────────────────
+# Nim has two: set[T] is a compile-time-capable bitset (max 2^16 elems,
+# perfect for char/enum flags), while HashSet[T] is dynamic and holds any
+# hashable type. Both share the same + * - membership algebra.

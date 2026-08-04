@@ -71,3 +71,10 @@ suite "counter test (mutable state pitfall)":
 #   - Move `var path` into setup — why does that NOT work?
 #   - Add a test that runs without setup writing the file — what happens?
 #   - Replace `getTempDir()` with a fixed path like "/tmp/demo.txt".
+
+# ── Thinking in Nim ────────────────────────────
+# setup/teardown are first-class blocks in std/unittest, so test resources
+# are a feature, not a convention you have to hand-roll. Combined with
+# Nim's mutable/immutable distinction — `var` for per-test state, `let`
+# for shared constants — the suite makes it obvious which state leaks
+# between tests and which does not.

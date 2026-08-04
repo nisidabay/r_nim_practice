@@ -76,3 +76,10 @@ suite "gradeFromScore":
 #   - Add a minimum maxScore test: gradeFromScore(50, 1) → ValueError.
 #   - Test the exact score=60 boundary against both sides.
 #   - Write a similar suite for a `temperatureAlert` proc.
+
+# ── Thinking in Nim ────────────────────────────
+# A Nim test for logic like grading stays inside the language: exceptions
+# (±ValueError) are declared with the proc and verified with expect, while
+# boundary edges are plain check comparisons. Nim's `div` integer division
+# and float-to-char results compute the grade inline, so the test reads
+# exactly like the logic it proves.

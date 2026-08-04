@@ -43,3 +43,8 @@ let original = %*{"x": 10, "y": 20}
 let serial = $original
 let back = parseJson(serial)
 echo "roundtrip matches: ", original == back           # true
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's JSON support is first-class: %* builds nodes with Nim-native
+# syntax, %() wraps any value, and `$` serializes back. The same JsonNode
+# tree parses, builds, and roundtrips — no separate writer declaration.

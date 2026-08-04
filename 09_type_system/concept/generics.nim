@@ -69,3 +69,9 @@ doAssert flex(1.5) == 3.0
 #
 # For constraints, Nim provides: SomeNumber, SomeInteger, SomeOrdinal,
 # SomeFloat, and more in std/typeinfo.
+
+# ── Thinking in Nim ────────────────────────────
+# Generics are compiled per concrete type (monomorphization), so you get
+# zero runtime overhead. Constraints like `SomeNumber` or a plain `int or
+# float` give the compiler grip to report exactly WHY a type was rejected
+# — and you've been using them all along with `seq[T]` and `Option[T]`.

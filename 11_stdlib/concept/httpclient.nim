@@ -48,3 +48,9 @@ except:
 # Change the URL, try different endpoints.
 # Add error handling for network failures.
 # See the parallel_downloader.nim and fallback.nim projects for real usage.
+
+# ── Thinking in Nim ────────────────────────────
+# std/httpclient turns HTTP into a typed API: newHttpClient() with a
+# configurable timeout, getContent() for the body as a string, get() for
+# the full response incl. status and headers. Always close the client to
+# release the connection after your requests.

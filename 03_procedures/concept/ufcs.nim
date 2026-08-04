@@ -40,3 +40,10 @@ proc truncate(s: string, maxLen: int): string =
 let desc = "A very long description of a Nim feature"
 echo desc.truncate(20) # "A very long descrip"
 echo truncate(desc, 20) # same thing
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's Unique Command Call Syntax means `a.b(c)` is literally `b(a, c)` — not
+# method dispatch, just syntax sugar that lets every free function become a
+# pipeline receiver.
+# The result is readable left-to-right chains like `x.strip().parseInt()` with a
+# standard-library-centric, no-OOP design.

@@ -54,3 +54,9 @@ let fail = HttpResult(success: false, statusCode: 404, errorMessage: "Not found"
 echo ok.statusCode      # 200 — shared field, always accessible
 echo fail.statusCode    # 404 — shared field works on any variant
 # echo ok.errorMessage   # compile ERROR — ok variant has no errorMessage
+
+# ── Thinking in Nim ────────────────────────────
+# Object variants enforce exhaustiveness: add an enum case and every
+# matching `case` must handle it before the code compiles. Accessing a
+# field that doesn't exist for the current variant is a compile-time
+# error — Nim gives you sealed, checked unions without a separate syntax.

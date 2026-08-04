@@ -48,3 +48,9 @@ error("This WILL appear — above threshold")
 # Reset filter to show everything
 setLogFilter(lvlDebug)
 info("Filter reset — all messages visible again")
+
+# ── Thinking in Nim ────────────────────────────
+# Logging in Nim is part of the stdlib (std/logging), so you get levels,
+# formatters, and handlers without third-party deps. Levels, formatters,
+# and filtering live in plain Nim code, and you can add multiple handlers
+# (console, file) to the same logger — composition over configuration.

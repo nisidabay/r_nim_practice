@@ -19,3 +19,9 @@ echo fmt"count={count}, big={big}, price={price}"
 # String concatenation and interpolation
 echo name & " owes $" & $price    # & for concat, $ to stringify
 echo fmt"{name} owes ${price}"    # strformat (requires import std/strformat)
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's type system is explicit when you want it and invisible when you don't,
+# inferring int/string/bool while still letting you pick exact widths (int16, int64).
+# char is ASCII-only in Nim, and float is always float64 by default.
+# Everything stringifies via $ and concatenates with &, so types stay strict, not sloppy.

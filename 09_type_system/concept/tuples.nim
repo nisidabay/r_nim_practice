@@ -11,3 +11,9 @@ echo named.x, ", ", named.y       # 5, 12
 # Unpacking
 let (a, b) = point
 echo a, ", ", b
+
+# ── Thinking in Nim ────────────────────────────
+# Tuples are first-class and lightweight: `(x: 5, y: 12)` needs no type
+# declaration, and destructuring with `let (a, b) = point` reads like the
+# natural thing to do. They're the go-to for returning multiple values
+# without reaching for a full object type.

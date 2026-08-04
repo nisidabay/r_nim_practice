@@ -87,3 +87,8 @@ showOpenArray(@["a", "b", "c"])
 let empty: seq[int] = @[]
 if empty.len > 0:
   echo empty[0]
+
+# ── Thinking in Nim ────────────────────────────
+# openArray[T] dissolves the array/seq split: one proc accepts both. It
+# is a borrowed, non-owning view — no copy and no ownership transfer —
+# so pass array, seq, string, or a slice and the compiler adapts.

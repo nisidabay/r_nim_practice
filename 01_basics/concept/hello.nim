@@ -32,3 +32,9 @@ echo "price=", price, " buffer.len=", buffer.len
 # ── Release build: optimized, standalone binary ───────────────────────
 #   nim c -d:release -r hello_world.nim
 #   ls -lh hello_world        # no runtime, no pip install, just ship it
+
+# ── Thinking in Nim ────────────────────────────
+# Nim is a compiled language, yet read-modify-write loops feel dynamic,
+# thanks to type inference and the var/let/const trio.
+# const is baked in at compile time; let is set once; var is truly mutable.
+# The result: C-level speed and safety with a syntax that reads like a script.

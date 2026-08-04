@@ -122,3 +122,10 @@ except ValueError as e:
 # Rule of thumb:
 #   quit(1)  — the program cannot continue at all
 #   raise    — the caller might want to handle it and try again
+
+# ── Thinking in Nim ────────────────────────────
+# Debugging is built into the language: assert with built-in line/expr,
+# stacktraces attached to every exception, and instantiationInfo() inside
+# templates to log the exact call site. Prefer raising with a message over
+# echoing — exceptions carry a stacktrace and are catchable; quit(1) should
+# be reserved for unrecoverable startup failures.

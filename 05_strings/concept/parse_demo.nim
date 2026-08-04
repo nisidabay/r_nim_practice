@@ -25,3 +25,8 @@ echo parseHexInt("FF")             # 255 — hex to int
 type Animal = enum
   cat, dog, bird
 echo parseEnum[Animal]("dog")    # dog
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's parse* family returns typed values and raises ValueError on bad
+# input — pair them with try/except instead of checking error codes.
+# parseEnum even turns a string into an enum member at runtime.

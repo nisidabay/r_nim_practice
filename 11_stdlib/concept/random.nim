@@ -30,3 +30,8 @@ var deck = @[1, 2, 3, 4, 5]
 deck.shuffle()
 doAssert deck.len == 5
 doAssert 1 in deck and 5 in deck
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's random module is deliberately small: call randomize() once, then
+# rand(1..6) gives a die roll, rand(1.0) a float, sample picks an element,
+# and shuffle permutes in place. Ranges make the API type-safe and readable.

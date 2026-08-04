@@ -99,3 +99,9 @@ echo "\nCPU info: ", countProcessors(), " logical processors"
 #
 #   This is the "communicate by sharing memory" vs "share memory by communicating"
 #   distinction. Channels enforce the safer pattern.
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's threads don't share mutable state by default — you communicate
+# through typed Channels instead of mutexes. `spawn` rides Nim's thread pool
+# (one OS thread per core), so you describe tasks, not threads. This is
+# "share memory by communicating," the safe pattern that avoids data races.

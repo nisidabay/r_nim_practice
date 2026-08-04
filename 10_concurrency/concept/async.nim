@@ -73,3 +73,9 @@ when isMainModule:
 #   curl localhost:8080/
 #   curl -X POST localhost:8080/echo -d "nim is fast"
 #   curl localhost:8080/info
+
+# ── Thinking in Nim ────────────────────────────
+# async is not threads. {.async.} rewrites your proc into a state machine:
+# every `await` suspends, and asyncdispatch's loop resumes it when I/O is ready.
+# One OS thread serves thousands of connections — concurrency without the
+# overhead of threads. Nim's event loop is the same model as Go goroutines.

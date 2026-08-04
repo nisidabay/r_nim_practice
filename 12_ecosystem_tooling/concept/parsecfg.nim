@@ -66,3 +66,9 @@ echo $cfg
 
 # Cleanup
 removeFile(iniPath)
+
+# ── Thinking in Nim ────────────────────────────
+# Config loading is a live stdlib parser (std/parsecfg), not a library
+# you add on. Sections and keys become easy named lookups, and a missing
+# key quietly returns a default instead of crashing — so you handle the
+# "exists but empty vs missing" distinction with a sentinel, all in Nim.

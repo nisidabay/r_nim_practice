@@ -57,3 +57,9 @@ discard post
 #   - Fetching a post with a user ID (wrong row, right type)
 #   - Passing raw values between security contexts
 # The compiler becomes your guardrail.
+
+# ── Thinking in Nim ────────────────────────────
+# `distinct` catches category errors the type system usually misses: euros
+# and dollars share `float64` bits but are NOT interchangeable to the
+# compiler. You opt into the specific operations you allow, so the mixup
+# fails at compile time instead of in your test suite.

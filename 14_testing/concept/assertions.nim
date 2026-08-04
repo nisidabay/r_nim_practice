@@ -80,3 +80,10 @@ suite "divide — expect":
 #   - Add a test where divide(-1, 0) also raises — does it?
 #   - Move `assert false` into a test and compare with `check false`.
 #   - Test for `ValueError` instead of `DivByZeroDefect` on divide by zero.
+
+# ── Thinking in Nim ────────────────────────────
+# Nim gives you four assertion tools with deliberately different failure
+# semantics — check reports and continues, require aborts the test, expect
+# catches exceptions, and assert crashes the program. Inside tests the
+# unittest variants (check/require/expect) keep the whole suite alive, so
+# one bad case does not hide the rest of your results.

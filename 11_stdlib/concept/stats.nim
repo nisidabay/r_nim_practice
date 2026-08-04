@@ -48,3 +48,8 @@ assert sv.n == 8
 assert abs(sv.standardDeviation - 2.0) < 1e-10
 
 echo "All stats assertions passed."
+
+# ── Thinking in Nim ────────────────────────────
+# RunningStat computes mean, variance, and stddev in a single pass — no
+# need to hold the whole dataset. Push values as they arrive and the stats
+# stay current, which fits streaming and online-processing data flows.

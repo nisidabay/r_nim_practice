@@ -35,3 +35,9 @@ echo greet("UFCS style")                    # also works (UFCS)
 # Then `import module_b` also makes `foo()` available.
 
 echo "Modules demo complete."
+
+# ── Thinking in Nim ────────────────────────────
+# A Nim source file IS a module: symbols are private until marked `*`.
+# `import` pulls exported symbols from a separately compiled module, while
+# `include` pastes text directly. `export` re-exports another module for
+# facades. UFCS lets a module's procs read as methods on your types.

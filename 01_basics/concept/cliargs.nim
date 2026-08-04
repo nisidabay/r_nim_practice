@@ -19,3 +19,9 @@ echo "Hello, ", name, "!"
 # Loop over all arguments
 for i in 1 .. paramCount():
   echo "  arg ", i, ": ", paramStr(i)
+
+# ── Thinking in Nim ────────────────────────────
+# Command-line access lives in std/os: paramCount() and paramStr(i) read args
+# directly, with the program name at index 0.
+# Combined with the `quit(code)` exit call and `case`/`for` over the args,
+# Nim gives you the whole argv dance with no framework, just the standard library.

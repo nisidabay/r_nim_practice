@@ -61,3 +61,9 @@ suite "isEven":
 #   - Replace a `check` with `assert` and compare failure behavior.
 #   - Add a test for very large numbers (> 2^31).
 #   - Move tests outside `suite` — what happens?
+
+# ── Thinking in Nim ────────────────────────────
+# Testing ships inside the language: std/unittest turns your checks into
+# a self-verifying program with no extra framework. A single `nim c -r`
+# both compiles and runs the tests, and the built-in suite/test/check
+# structure gives you a score-free, eye-free way to prove behavior.

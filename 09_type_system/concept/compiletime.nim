@@ -26,3 +26,9 @@ else:
 when hostOS == "linux":
   echo "Linux-specific code compiled in"
   # Mac/Windows branches don't exist in this binary at all.
+
+# ── Thinking in Nim ────────────────────────────
+# Code runs during compilation: `const` bakes results into the binary and
+# `when` strips dead branches so they never even compile. What the
+# compiler already computed costs runtime zero — metaprogramming isn't a
+# bolted-on feature here, it's how the language itself works.

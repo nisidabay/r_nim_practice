@@ -104,3 +104,8 @@ echo "na".repeat(4) & " Batman!"  # "nananana Batman!"
 
 let code = "line1\nline2\nline3"
 echo code.indent(4)               # "    line1\n    line2\n    line3"
+
+# ── Thinking in Nim ────────────────────────────
+# strutils is Nim's standard batteries for text: case, strip, split,
+# join, find, replace, parse. Nim strings are mutable, UTF-8 aware
+# (byte-indexed), and overloads for char vs string keep calls terse.

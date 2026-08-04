@@ -56,3 +56,9 @@ when false:  # change to true to run
   writeFile("tmp.txt", "data")
   defer: discard tryRemoveFile("tmp.txt")   # runs even if exception
   echo readFile("tmp.txt")
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's `defer` is the standout: it always runs when its scope exits,
+# even across exceptions, giving you RAII-style cleanup without bloated
+# destructor ceremony. `raise newException(...)` and typed `except`
+# branches keep error flow explicit while `defer` clears up after itself.

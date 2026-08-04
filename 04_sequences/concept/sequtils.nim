@@ -100,3 +100,8 @@ for n in numbers:
     result += n * n # square and accumulate
 
 echo result # 84
+
+# ── Thinking in Nim ────────────────────────────
+# sequtils brings map/filter/fold/zip — pure, composable transforms —
+# and UFCS lets you chain them naturally. Procs are first-class values,
+# so anonymous inline procs pass straight into these combinators.

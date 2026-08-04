@@ -111,3 +111,9 @@ when false:  # change to true to see the compile error
 
 # Real-world usage: echo uses varargs[typed, `$`] internally to
 # accept any type and convert each argument via `$` to string.
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's proc grammar is clean — optional parens, inferred trailing expression,
+# and the implicit `result` variable that removes most `return` noise.
+# The `func` keyword turns purity into a compile-time guarantee, not a lifestyle.
+# `varargs[T]` plus the `discard` statement handle side-effect calls without ceremony.

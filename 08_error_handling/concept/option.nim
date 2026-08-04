@@ -53,3 +53,9 @@ echo findUser(1).flatMap(getPermissions)   # some("full_access")
 #   Option[T] — use when "no value" is a normal possibility (e.g., not found, empty)
 #   try/except — use when failure is exceptional (e.g., network error, invalid data)
 # Both are valid; prefer Option for expected absences, exceptions for surprises.
+
+# ── Thinking in Nim ────────────────────────────
+# `Option[T]` forces correctness: you can't read `.get()` without first
+# checking `isSome`, and the compiler stops you cold. Nim also chains
+# `map` / `filter` / `flatMap` so a possibly-absent value stays typed
+# end to end — no nulls, no unchecked dereferences, ever.

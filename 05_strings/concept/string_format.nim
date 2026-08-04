@@ -28,3 +28,8 @@ echo html
 # Unicode
 let msg = "你好 Nim"
 echo msg, " (length: ", msg.len, " chars)"
+
+# ── Thinking in Nim ────────────────────────────
+# strformat's fmt"..." interpolates directly with typed, checked
+# expressions, and {pi:.2f} gives precise float control — Nim offers
+# both runtime strutils alignment and a compile-time text template.

@@ -78,3 +78,9 @@ echo "That value is baked into the binary — no runtime loop needed."
 #
 # "First make it work, then make it fast."
 # The compiler does the heavy lifting — you focus on correct code.
+
+# ── Thinking in Nim ────────────────────────────
+# Performance is controlled by compiler flags, not code: the same source
+# runs slow in debug (bounds checks, no optimization) and fast in release
+# (-d:release). Nim can even evaluate functions at compile time into a
+# const, baking results straight into the binary at zero runtime cost.

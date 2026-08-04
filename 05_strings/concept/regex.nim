@@ -63,3 +63,8 @@ echo "Smith, John".replace(re"(\w+),\s*(\w+)", "$2 $1")  # "John Smith"
 
 echo "HELLO".match(re"(?i)hello")      # true — (?i) = ignore case
 echo "NIM\nrocks".contains(re"(?m)^rocks")  # true — (?m) = multiline
+
+# ── Thinking in Nim ────────────────────────────
+# std/re wraps PCRE: re"..." is compiled once and reused, find returns
+# slice bounds you can index strings with, and captures land in an
+# array by position. Match is anchored; contains scans anywhere.

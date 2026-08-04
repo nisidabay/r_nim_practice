@@ -49,3 +49,9 @@ assert abs(round(PI, 2) - 3.14) < 1e-10
 assert sqrt(144.0) == 12.0
 
 echo "All math assertions passed."
+
+# ── Thinking in Nim ────────────────────────────
+# std/math is compact but complete: sum/min/max take whole collections,
+# round(n, places) controls decimals, floorDiv/floorMod give floor
+# semantics for negatives, and trig works in radians. Explicitness rules —
+# cast ints to float before sqrt.

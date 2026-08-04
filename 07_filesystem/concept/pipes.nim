@@ -108,3 +108,9 @@ if execCmd("which fzf") == 0:
   echo "fzf is installed"
 else:
   echo "fzf not found — install with: sudo pacman -S fzf"
+
+# ── Thinking in Nim ────────────────────────────
+# Nim treats subprocess stdin/stdout as first-class stream objects, not
+# raw file descriptors — no `subprocess.PIPE`, no manual fd juggling.
+# `execCmdEx` even returns (output, exitCode) as a tuple, so shelling out
+# reads like ordinary Nim instead of gluing string buffers together.

@@ -98,3 +98,9 @@ when isMainModule:
 #   - Add a test where `countWords` is called with numbers mixed in.
 #   - Try testing `when isMainModule` directly (hint: you can't easily).
 #   - Run this file directly with a text file as argument.
+
+# ── Thinking in Nim ────────────────────────────
+# Nim's `when isMainModule` block lets tests and CLI code coexist in one
+# file that runs tests on import and only enters the CLI when run directly.
+# Testing pure procs — no I/O, no args, just data in/out — is the same
+# principle, and Nim's `*` export markers make the testable core importable.

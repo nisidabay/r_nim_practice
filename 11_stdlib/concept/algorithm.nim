@@ -48,3 +48,9 @@ echo "fill(42): ", zeros                  # @[42, 42, 42, 42, 42]
 
 echo "isSorted(@[1,2,3]) = ", @[1, 2, 3].isSorted()       # true
 echo "isSorted(@[3,2,1]) = ", @[3, 2, 1].isSorted()       # false
+
+# ── Thinking in Nim ────────────────────────────
+# std/algorithm gives one uniform vocabulary — sort, reverse, fill,
+# binarySearch, isSorted — that reads as method calls via UFCS.
+# In-place mutators (sort, reverse) and non-mutating iterators (reversed)
+# coexist; pick the one that matches whether you want to modify or copy.
